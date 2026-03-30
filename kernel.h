@@ -7,7 +7,6 @@
 // Fila de aptos
 extern ready_queue_t r_queue;
 
-
 // Chamadas de sistema
 void os_delay(uint8_t time);
 void os_create_task(uint8_t id, f_ptr func, uint8_t prior);
@@ -16,6 +15,9 @@ void os_config();
 void os_start();
 
 TASK idle();
+
+#define DISABLE_ALL_INTERRUPTS() INTCONbits.GIE = 0;
+#define ENABLE_ALL_INTERRUPTS() INTCONbits.GIE = 1;
 
 #define SAVE_CONTEXT(state) \
 do { \
@@ -40,9 +42,9 @@ do { \
         r_queue.task_running->STATUS_REG            = STATUS; \
         r_queue.task_running->task_stack.stack_size = 0; \
         while (STKPTR) { \
-            r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG       = TOSL; \
-            r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG       = TOSH; \
-            r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG     = TOSU; \
+            r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG   = TOSL; \
+            r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG   = TOSH; \
+            r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG   = TOSU; \
             r_queue.task_running->task_stack.stack_size += 1; \
             asm("POP"); \
         } \
@@ -83,13 +85,12 @@ do { \
         } \
         else { \
             asm("PUSH"); \
-            TOSL = (uint8_t)(r_queue.task_running->task_ptr & 0xFF); \
-            TOSH = (uint8_t)((r_queue.task_running->task_ptr >> 8) & 0xFF); \
-            TOSU = (uint8_t)((r_queue.task_running->task_ptr >> 16) & 0xFF); \
+            TOSL = (uint8_t)((uint24_t)r_queue.task_running->task_ptr & 0xFF); \
+            TOSH = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 8) & 0xFF); \
+            TOSU = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 16) & 0xFF); \
         } \
     } \
 } while (0); \
-
 
 #endif	/* KERNEL_H */
 

@@ -27,7 +27,8 @@ typedef struct sw_stack {
 typedef struct tcb {
     uint8_t task_id;
     state_t task_state;
-    f_ptr   task_ptr;
+    //f_ptr   task_ptr;
+    f_ptr task_ptr;
     uint8_t task_delay;
     uint8_t task_priority;
     // Registradores
@@ -58,6 +59,7 @@ typedef struct ready_queue {
     tcb_t TASKS[MAX_USER_TASKS+1];
     uint8_t size;
     tcb_t *task_running;
+    uint8_t pos_task_running;
 } ready_queue_t;
 
 #endif	/* TYPES_H */

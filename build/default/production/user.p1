@@ -1,1 +1,67 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"3 user.c
+[; ;user.c: 3: TASK acionaMotor()
+[v _acionaMotor `(v ~T0 @X0 1 ef ]
+"4
+[; ;user.c: 4: {
+{
+[e :U _acionaMotor ]
+[f ]
+"5
+[; ;user.c: 5:     while (1) {
+[e :U 7 ]
+{
+"7
+[; ;user.c: 7:     }
+}
+[e :U 6 ]
+[e $U 7  ]
+[e :U 8 ]
+"8
+[; ;user.c: 8: }
+[e :UE 5 ]
+}
+"10
+[; ;user.c: 10: TASK ligaLed()
+[v _ligaLed `(v ~T0 @X0 1 ef ]
+"11
+[; ;user.c: 11: {
+{
+[e :U _ligaLed ]
+[f ]
+"12
+[; ;user.c: 12:     while (1) {
+[e :U 11 ]
+{
+"14
+[; ;user.c: 14:     }
+}
+[e :U 10 ]
+[e $U 11  ]
+[e :U 12 ]
+"15
+[; ;user.c: 15: }
+[e :UE 9 ]
+}
+"17
+[; ;user.c: 17: TASK apagaLed()
+[v _apagaLed `(v ~T0 @X0 1 ef ]
+"18
+[; ;user.c: 18: {
+{
+[e :U _apagaLed ]
+[f ]
+"19
+[; ;user.c: 19:     while (1) {
+[e :U 15 ]
+{
+"21
+[; ;user.c: 21:     }
+}
+[e :U 14 ]
+[e $U 15  ]
+[e :U 16 ]
+"22
+[; ;user.c: 22: }
+[e :UE 13 ]
+}

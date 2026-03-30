@@ -1,4 +1,5 @@
 #include "kernel.h"
+#include "scheduler.h"
 
 // Fila de aptos
 ready_queue_t r_queue;
@@ -6,7 +7,14 @@ ready_queue_t r_queue;
 // Chamadas de sistema
 void os_delay(uint8_t time)
 {
+    DISABLE_ALL_INTERRUPTS();
     
+    SAVE_CONTEXT(WAITING);
+    r_queue.TASKS[r_queue.pos_task_running].task_delay = time;
+    scheduler();
+    RESTORE_CONTEXT();
+    
+    ENABLE_ALL_INTERRUPTS();
 }
 
 void os_create_task(uint8_t id, f_ptr func, uint8_t prior)
@@ -44,13 +52,20 @@ void os_create_task(uint8_t id, f_ptr func, uint8_t prior)
 
 void os_yield()
 {
+    DISABLE_ALL_INTERRUPTS();
     
+    SAVE_CONTEXT(READY);
+    scheduler();
+    RESTORE_CONTEXT();            
+    
+    ENABLE_ALL_INTERRUPTS();
 }
 
 void os_config()
 {
-    r_queue.size            = 0;
-    r_queue.task_running    = &r_queue.TASKS[0];
+    r_queue.size                = 0;
+    r_queue.task_running        = &r_queue.TASKS[0];
+    r_queue.pos_task_running    = 0;
     
     // Criar a tarefa idle
     os_create_task(1, idle, 0);
@@ -58,7 +73,7 @@ void os_config()
 
 void os_start()
 {
-    
+    ENABLE_ALL_INTERRUPTS();
 }
 
 

@@ -1,2 +1,5 @@
 build/default/production/user.p1:  \
-user.c 
+user.c  \
+user.h  \
+types.h  \
+os_config.h 

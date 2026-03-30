@@ -147,6 +147,7 @@ typedef struct sw_stack {
 typedef struct tcb {
     uint8_t task_id;
     state_t task_state;
+
     f_ptr task_ptr;
     uint8_t task_delay;
     uint8_t task_priority;
@@ -178,6 +179,7 @@ typedef struct ready_queue {
     tcb_t TASKS[3 +1];
     uint8_t size;
     tcb_t *task_running;
+    uint8_t pos_task_running;
 } ready_queue_t;
 # 5 "./kernel.h" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 1 3
@@ -9902,7 +9904,6 @@ unsigned char __t3rd16on(void);
 extern ready_queue_t r_queue;
 
 
-
 void os_delay(uint8_t time);
 void os_create_task(uint8_t id, f_ptr func, uint8_t prior);
 void os_yield();
@@ -9911,6 +9912,15 @@ void os_start();
 
 TASK idle();
 # 2 "kernel.c" 2
+# 1 "./scheduler.h" 1
+
+
+
+
+
+void scheduler();
+uint8_t RR_scheduler();
+# 3 "kernel.c" 2
 
 
 ready_queue_t r_queue;
@@ -9918,7 +9928,14 @@ ready_queue_t r_queue;
 
 void os_delay(uint8_t time)
 {
+    INTCONbits.GIE = 0;;
 
+    do { if (r_queue.task_running->task_state == RUNNING) { r_queue.task_running->task_state = WAITING; r_queue.task_running->BSR_REG = BSR; r_queue.task_running->FSR0H_REG = FSR0H; r_queue.task_running->FSR0L_REG = FSR0L; r_queue.task_running->FSR1H_REG = FSR1H; r_queue.task_running->FSR1L_REG = FSR1L; r_queue.task_running->FSR2H_REG = FSR2H; r_queue.task_running->FSR2L_REG = FSR2L; r_queue.task_running->PCLATH_REG = PCLATH; r_queue.task_running->PCLATU_REG = PCLATU; r_queue.task_running->PRODH_REG = PRODH; r_queue.task_running->PRODL_REG = PRODL; r_queue.task_running->TABLAT_REG = TABLAT; r_queue.task_running->TBLPTRH_REG = TBLPTRH; r_queue.task_running->TBLPTRL_REG = TBLPTRL; r_queue.task_running->TBLPTRU_REG = TBLPTRU; r_queue.task_running->W_REG = WREG; r_queue.task_running->STATUS_REG = STATUS; r_queue.task_running->task_stack.stack_size = 0; while (STKPTR) { r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG = TOSL; r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG = TOSH; r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG = TOSU; r_queue.task_running->task_stack.stack_size += 1; __asm("POP"); } } } while (0);;
+    r_queue.TASKS[r_queue.pos_task_running].task_delay = time;
+    scheduler();
+    do { if (r_queue.task_running->task_state == READY) { r_queue.task_running->task_state = RUNNING; BSR = r_queue.task_running->BSR_REG; FSR0H = r_queue.task_running->FSR0H_REG; FSR0L = r_queue.task_running->FSR0L_REG; FSR1H = r_queue.task_running->FSR1H_REG; FSR1L = r_queue.task_running->FSR1L_REG; FSR2H = r_queue.task_running->FSR2H_REG; FSR2L = r_queue.task_running->FSR2L_REG; PCLATH = r_queue.task_running->PCLATH_REG; PCLATU = r_queue.task_running->PCLATU_REG; PRODH = r_queue.task_running->PRODH_REG; PRODL = r_queue.task_running->PRODL_REG; TABLAT = r_queue.task_running->TABLAT_REG; TBLPTRH = r_queue.task_running->TBLPTRH_REG; TBLPTRL = r_queue.task_running->TBLPTRL_REG; TBLPTRU = r_queue.task_running->TBLPTRU_REG; STATUS = r_queue.task_running->STATUS_REG; WREG = r_queue.task_running->W_REG; STKPTR = 0; if (r_queue.task_running->task_stack.stack_size > 0) { do { __asm("PUSH"); r_queue.task_running->task_stack.stack_size -= 1; TOSL = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG; TOSH = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG; TOSU = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG; } while (r_queue.task_running->task_stack.stack_size); } else { __asm("PUSH"); TOSL = (uint8_t)((uint24_t)r_queue.task_running->task_ptr & 0xFF); TOSH = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 8) & 0xFF); TOSU = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 16) & 0xFF); } } } while (0);;
+
+    INTCONbits.GIE = 1;;
 }
 
 void os_create_task(uint8_t id, f_ptr func, uint8_t prior)
@@ -9956,13 +9973,20 @@ void os_create_task(uint8_t id, f_ptr func, uint8_t prior)
 
 void os_yield()
 {
+    INTCONbits.GIE = 0;;
 
+    do { if (r_queue.task_running->task_state == RUNNING) { r_queue.task_running->task_state = READY; r_queue.task_running->BSR_REG = BSR; r_queue.task_running->FSR0H_REG = FSR0H; r_queue.task_running->FSR0L_REG = FSR0L; r_queue.task_running->FSR1H_REG = FSR1H; r_queue.task_running->FSR1L_REG = FSR1L; r_queue.task_running->FSR2H_REG = FSR2H; r_queue.task_running->FSR2L_REG = FSR2L; r_queue.task_running->PCLATH_REG = PCLATH; r_queue.task_running->PCLATU_REG = PCLATU; r_queue.task_running->PRODH_REG = PRODH; r_queue.task_running->PRODL_REG = PRODL; r_queue.task_running->TABLAT_REG = TABLAT; r_queue.task_running->TBLPTRH_REG = TBLPTRH; r_queue.task_running->TBLPTRL_REG = TBLPTRL; r_queue.task_running->TBLPTRU_REG = TBLPTRU; r_queue.task_running->W_REG = WREG; r_queue.task_running->STATUS_REG = STATUS; r_queue.task_running->task_stack.stack_size = 0; while (STKPTR) { r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG = TOSL; r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG = TOSH; r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG = TOSU; r_queue.task_running->task_stack.stack_size += 1; __asm("POP"); } } } while (0);;
+    scheduler();
+    do { if (r_queue.task_running->task_state == READY) { r_queue.task_running->task_state = RUNNING; BSR = r_queue.task_running->BSR_REG; FSR0H = r_queue.task_running->FSR0H_REG; FSR0L = r_queue.task_running->FSR0L_REG; FSR1H = r_queue.task_running->FSR1H_REG; FSR1L = r_queue.task_running->FSR1L_REG; FSR2H = r_queue.task_running->FSR2H_REG; FSR2L = r_queue.task_running->FSR2L_REG; PCLATH = r_queue.task_running->PCLATH_REG; PCLATU = r_queue.task_running->PCLATU_REG; PRODH = r_queue.task_running->PRODH_REG; PRODL = r_queue.task_running->PRODL_REG; TABLAT = r_queue.task_running->TABLAT_REG; TBLPTRH = r_queue.task_running->TBLPTRH_REG; TBLPTRL = r_queue.task_running->TBLPTRL_REG; TBLPTRU = r_queue.task_running->TBLPTRU_REG; STATUS = r_queue.task_running->STATUS_REG; WREG = r_queue.task_running->W_REG; STKPTR = 0; if (r_queue.task_running->task_stack.stack_size > 0) { do { __asm("PUSH"); r_queue.task_running->task_stack.stack_size -= 1; TOSL = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG; TOSH = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG; TOSU = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG; } while (r_queue.task_running->task_stack.stack_size); } else { __asm("PUSH"); TOSL = (uint8_t)((uint24_t)r_queue.task_running->task_ptr & 0xFF); TOSH = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 8) & 0xFF); TOSU = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 16) & 0xFF); } } } while (0);;
+
+    INTCONbits.GIE = 1;;
 }
 
 void os_config()
 {
     r_queue.size = 0;
     r_queue.task_running = &r_queue.TASKS[0];
+    r_queue.pos_task_running = 0;
 
 
     os_create_task(1, idle, 0);
@@ -9970,7 +9994,7 @@ void os_config()
 
 void os_start()
 {
-
+    INTCONbits.GIE = 1;;
 }
 
 
