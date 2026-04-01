@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-void scheduler();
-uint8_t RR_scheduler();
+void scheduler(void);
+uint8_t RR_scheduler(void);
 
 
 #endif	/* SCHEDULER_H */

@@ -1,5 +1,7 @@
 #include "kernel.h"
 #include "scheduler.h"
+#include "user.h"
+#include "hw.h"
 
 // Fila de aptos
 ready_queue_t r_queue;
@@ -69,10 +71,13 @@ void os_config()
     
     // Criar a tarefa idle
     os_create_task(1, idle, 0);
+    
+    config_user();
 }
 
 void os_start()
-{
+{  
+    setup_hardware(); 
     ENABLE_ALL_INTERRUPTS();
 }
 

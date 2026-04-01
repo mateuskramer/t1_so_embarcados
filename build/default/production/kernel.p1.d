@@ -3,4 +3,6 @@ kernel.c  \
 kernel.h  \
 types.h  \
 os_config.h  \
-scheduler.h 
+scheduler.h  \
+user.h  \
+hw.h 

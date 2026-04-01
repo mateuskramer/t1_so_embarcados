@@ -13,6 +13,7 @@
       <itemPath>mem.h</itemPath>
       <itemPath>os_config.h</itemPath>
       <itemPath>scheduler.h</itemPath>
+      <itemPath>hw.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -34,6 +35,7 @@
       <itemPath>user.c</itemPath>
       <itemPath>mem.c</itemPath>
       <itemPath>scheduler.c</itemPath>
+      <itemPath>hw.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

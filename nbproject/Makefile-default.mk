@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c kernel.c sync.c com.c io.c user.c mem.c scheduler.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c kernel.c sync.c com.c io.c user.c mem.c scheduler.c hw.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/kernel.p1 ${OBJECTDIR}/sync.p1 ${OBJECTDIR}/com.p1 ${OBJECTDIR}/io.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/mem.p1 ${OBJECTDIR}/scheduler.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/kernel.p1.d ${OBJECTDIR}/sync.p1.d ${OBJECTDIR}/com.p1.d ${OBJECTDIR}/io.p1.d ${OBJECTDIR}/user.p1.d ${OBJECTDIR}/mem.p1.d ${OBJECTDIR}/scheduler.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/kernel.p1 ${OBJECTDIR}/sync.p1 ${OBJECTDIR}/com.p1 ${OBJECTDIR}/io.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/mem.p1 ${OBJECTDIR}/scheduler.p1 ${OBJECTDIR}/hw.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/kernel.p1.d ${OBJECTDIR}/sync.p1.d ${OBJECTDIR}/com.p1.d ${OBJECTDIR}/io.p1.d ${OBJECTDIR}/user.p1.d ${OBJECTDIR}/mem.p1.d ${OBJECTDIR}/scheduler.p1.d ${OBJECTDIR}/hw.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/kernel.p1 ${OBJECTDIR}/sync.p1 ${OBJECTDIR}/com.p1 ${OBJECTDIR}/io.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/mem.p1 ${OBJECTDIR}/scheduler.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/kernel.p1 ${OBJECTDIR}/sync.p1 ${OBJECTDIR}/com.p1 ${OBJECTDIR}/io.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/mem.p1 ${OBJECTDIR}/scheduler.p1 ${OBJECTDIR}/hw.p1
 
 # Source Files
-SOURCEFILES=main.c kernel.c sync.c com.c io.c user.c mem.c scheduler.c
+SOURCEFILES=main.c kernel.c sync.c com.c io.c user.c mem.c scheduler.c hw.c
 
 
 
@@ -152,6 +152,14 @@ ${OBJECTDIR}/scheduler.p1: scheduler.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/scheduler.d ${OBJECTDIR}/scheduler.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/scheduler.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/hw.p1: hw.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/hw.p1.d 
+	@${RM} ${OBJECTDIR}/hw.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/hw.p1 hw.c 
+	@-${MV} ${OBJECTDIR}/hw.d ${OBJECTDIR}/hw.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/hw.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
@@ -216,6 +224,14 @@ ${OBJECTDIR}/scheduler.p1: scheduler.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/scheduler.p1 scheduler.c 
 	@-${MV} ${OBJECTDIR}/scheduler.d ${OBJECTDIR}/scheduler.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/scheduler.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/hw.p1: hw.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/hw.p1.d 
+	@${RM} ${OBJECTDIR}/hw.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/hw.p1 hw.c 
+	@-${MV} ${OBJECTDIR}/hw.d ${OBJECTDIR}/hw.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/hw.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
