@@ -71,8 +71,9 @@ void os_config()
     
     // Criar a tarefa idle
     os_create_task(1, idle, 0);
+    asm("global _idle");
     
-    config_user();
+    config_user();   
 }
 
 void os_start()
@@ -84,7 +85,9 @@ void os_start()
 
 TASK idle()
 {
+    TRISCbits.RC0 = 0;
     while (1) {
-        asm("NOP");
+        //asm("NOP");
+        PORTCbits.RC0 = ~PORTCbits.RC0;
     }
 }

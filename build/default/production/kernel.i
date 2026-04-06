@@ -9906,9 +9906,9 @@ extern ready_queue_t r_queue;
 
 void os_delay(uint8_t time);
 void os_create_task(uint8_t id, f_ptr func, uint8_t prior);
-void os_yield();
-void os_config();
-void os_start();
+void os_yield(void);
+void os_config(void);
+void os_start(void);
 
 TASK idle();
 # 2 "kernel.c" 2
@@ -9918,8 +9918,8 @@ TASK idle();
 
 
 
-void scheduler();
-uint8_t RR_scheduler();
+void scheduler(void);
+uint8_t RR_scheduler(void);
 # 3 "kernel.c" 2
 # 1 "./user.h" 1
 
@@ -9927,16 +9927,16 @@ uint8_t RR_scheduler();
 
 
 
-void config_user();
+void config_user(void);
 
-TASK acionaMotor();
-TASK ligaLed();
-TASK apagaLed();
+TASK acionaMotor(void);
+TASK ligaLed(void);
+TASK apagaLed(void);
 
 
-TASK LED_1();
-TASK LED_2();
-TASK LED_3();
+TASK LED_1(void);
+TASK LED_2(void);
+TASK LED_3(void);
 # 4 "kernel.c" 2
 # 1 "./hw.h" 1
 
@@ -10016,6 +10016,7 @@ void os_config()
 
 
     os_create_task(1, idle, 0);
+    __asm("global _idle");
 
     config_user();
 }
@@ -10029,7 +10030,9 @@ void os_start()
 
 TASK idle()
 {
+    TRISCbits.RC0 = 0;
     while (1) {
-        __asm("NOP");
+
+        PORTCbits.RC0 = ~PORTCbits.RC0;
     }
 }

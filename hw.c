@@ -1,6 +1,11 @@
 #include "hw.h"
 #include "kernel.h"
 #include "scheduler.h"
+#include "os_config.h"
+
+// Quantum do algoritmo Round-Robin
+uint8_t rr_quantum = QUANTUM;
+
 
 void setup_hardware(void)
 {
@@ -19,8 +24,27 @@ void __interrupt() ISR(void)
 {
     if (INTCONbits.TMR0IF) {
         INTCONbits.TMR0IF = 0;
-        SAVE_CONTEXT(READY);
-        scheduler();
-        RESTORE_CONTEXT();
+        
+        // Verifica se tem tarefa com delay > 0
+        for (int i = 0; i < r_queue.size; i++) {
+            if (r_queue.TASKS[i].task_delay > 0) {
+                r_queue.TASKS[i].task_delay--;
+                if (r_queue.TASKS[i].task_delay == 0) {
+                    r_queue.TASKS[i].task_state = READY;
+                }                
+            }
+        }
+        
+        // Verifica o quantum para saber se há necessidade de 
+        // mudar a tarefa que está em execução.
+        if (rr_quantum == 0) {
+            rr_quantum = QUANTUM;
+            SAVE_CONTEXT(READY);
+            scheduler();
+            RESTORE_CONTEXT();
+        } 
+        else {
+            rr_quantum--;
+        }
     }
 }

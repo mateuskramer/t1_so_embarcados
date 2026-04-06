@@ -9,13 +9,13 @@ READY 0
 WAITING 1
 RUNNING 2
 ]
-"10 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
+"11 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
 [e E39 . `uc
 READY 0
 WAITING 1
 RUNNING 2
 ]
-"22 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
+"30 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
 [e E6143 . `uc
 READY 0
 WAITING 1
@@ -39,6 +39,7 @@ RUNNING 2
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 "7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
+[v i2___awmod __awmod `(i  1 e 2 0 ]
 "4 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\fleq.c
 [v ___fleq __fleq `(b  1 e 0 0 ]
 "62 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\float.c
@@ -81,33 +82,37 @@ RUNNING 2
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"5 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
+"10 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
 [v _setup_hardware setup_hardware `(v  1 e 1 0 ]
-"18
+"23
 [v _ISR ISR `IIH(v  1 e 1 0 ]
-"22 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
+"10 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
+[v _os_delay os_delay `(v  1 e 1 0 ]
+"22
 [v _os_create_task os_create_task `(v  1 e 1 0 ]
 "66
 [v _os_config os_config `(v  1 e 1 0 ]
-"78
+"79
 [v _os_start os_start `(v  1 e 1 0 ]
-"85
+"86
 [v _idle idle `(v  1 e 1 0 ]
 "8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\main.c
 [v _main main `(i  1 e 2 0 ]
-"8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
+"9 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
 [v _scheduler scheduler `(v  1 e 1 0 ]
-"14
+[v i2_scheduler scheduler `(v  1 e 1 0 ]
+"15
 [v _RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
-"4 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+[v i2_RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
+"5 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _config_user config_user `(v  1 e 1 0 ]
-"37
+"38
 [v _LED_1 LED_1 `(v  1 e 1 0 ]
-"44
+"45
 [v _LED_2 LED_2 `(v  1 e 1 0 ]
-"51
+"53
 [v _LED_3 LED_3 `(v  1 e 1 0 ]
-[s S403 . 1 `uc 1 . 1 0 :2:0 
+[s S563 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 ANSC2 1 0 :1:2 
 `uc 1 ANSC3 1 0 :1:3 
 `uc 1 ANSC4 1 0 :1:4 
@@ -116,9 +121,9 @@ RUNNING 2
 `uc 1 ANSC7 1 0 :1:7 
 ]
 "161 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
-[u S411 . 1 `S403 1 . 1 0 ]
-[v _ANSELCbits ANSELCbits `VES411  1 e 1 @3898 ]
-[s S382 . 1 `uc 1 ANSD0 1 0 :1:0 
+[u S571 . 1 `S563 1 . 1 0 ]
+[v _ANSELCbits ANSELCbits `VES571  1 e 1 @3898 ]
+[s S542 . 1 `uc 1 ANSD0 1 0 :1:0 
 `uc 1 ANSD1 1 0 :1:1 
 `uc 1 ANSD2 1 0 :1:2 
 `uc 1 ANSD3 1 0 :1:3 
@@ -128,9 +133,9 @@ RUNNING 2
 `uc 1 ANSD7 1 0 :1:7 
 ]
 "213
-[u S391 . 1 `S382 1 . 1 0 ]
-[v _ANSELDbits ANSELDbits `VES391  1 e 1 @3899 ]
-[s S311 . 1 `uc 1 RC0 1 0 :1:0 
+[u S551 . 1 `S542 1 . 1 0 ]
+[v _ANSELDbits ANSELDbits `VES551  1 e 1 @3899 ]
+[s S196 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -140,7 +145,7 @@ RUNNING 2
 `uc 1 RC7 1 0 :1:7 
 ]
 "6905
-[s S431 . 1 `uc 1 T1OSO 1 0 :1:0 
+[s S236 . 1 `uc 1 T1OSO 1 0 :1:0 
 `uc 1 T1OSI 1 0 :1:1 
 `uc 1 T5CKI 1 0 :1:2 
 `uc 1 SCK 1 0 :1:3 
@@ -149,7 +154,7 @@ RUNNING 2
 `uc 1 TX 1 0 :1:6 
 `uc 1 RX 1 0 :1:7 
 ]
-[s S440 . 1 `uc 1 P2B 1 0 :1:0 
+[s S245 . 1 `uc 1 P2B 1 0 :1:0 
 `uc 1 P2A 1 0 :1:1 
 `uc 1 P1A 1 0 :1:2 
 `uc 1 SCL 1 0 :1:3 
@@ -158,7 +163,7 @@ RUNNING 2
 `uc 1 CK 1 0 :1:6 
 `uc 1 DT 1 0 :1:7 
 ]
-[s S449 . 1 `uc 1 T1CKI 1 0 :1:0 
+[s S254 . 1 `uc 1 T1CKI 1 0 :1:0 
 `uc 1 CCP2 1 0 :1:1 
 `uc 1 CCP1 1 0 :1:2 
 `uc 1 SCK1 1 0 :1:3 
@@ -167,7 +172,7 @@ RUNNING 2
 `uc 1 TX1 1 0 :1:6 
 `uc 1 RX1 1 0 :1:7 
 ]
-[s S458 . 1 `uc 1 T3CKI 1 0 :1:0 
+[s S263 . 1 `uc 1 T3CKI 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 CTPLS 1 0 :1:2 
 `uc 1 SCL1 1 0 :1:3 
@@ -176,7 +181,7 @@ RUNNING 2
 `uc 1 CK1 1 0 :1:6 
 `uc 1 DT1 1 0 :1:7 
 ]
-[s S467 . 1 `uc 1 T3G 1 0 :1:0 
+[s S272 . 1 `uc 1 T3G 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 AN14 1 0 :1:2 
 `uc 1 AN15 1 0 :1:3 
@@ -185,13 +190,13 @@ RUNNING 2
 `uc 1 AN18 1 0 :1:6 
 `uc 1 AN19 1 0 :1:7 
 ]
-[s S476 . 1 `uc 1 . 1 0 :1:0 
+[s S281 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 PA2 1 0 :1:1 
 `uc 1 PA1 1 0 :1:2 
 ]
-[u S480 . 1 `S311 1 . 1 0 `S431 1 . 1 0 `S440 1 . 1 0 `S449 1 . 1 0 `S458 1 . 1 0 `S467 1 . 1 0 `S476 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES480  1 e 1 @3970 ]
-[s S351 . 1 `uc 1 RD0 1 0 :1:0 
+[u S285 . 1 `S196 1 . 1 0 `S236 1 . 1 0 `S245 1 . 1 0 `S254 1 . 1 0 `S263 1 . 1 0 `S272 1 . 1 0 `S281 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES285  1 e 1 @3970 ]
+[s S511 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -201,7 +206,7 @@ RUNNING 2
 `uc 1 RD7 1 0 :1:7 
 ]
 "7203
-[s S556 . 1 `uc 1 . 1 0 :2:0 
+[s S659 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 P2B 1 0 :1:2 
 `uc 1 P2C 1 0 :1:3 
 `uc 1 P2D 1 0 :1:4 
@@ -209,16 +214,16 @@ RUNNING 2
 `uc 1 P1C 1 0 :1:6 
 `uc 1 P1D 1 0 :1:7 
 ]
-[s S564 . 1 `uc 1 . 1 0 :1:0 
+[s S667 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 CCP4 1 0 :1:1 
 `uc 1 . 1 0 :4:2 
 `uc 1 TX2 1 0 :1:6 
 `uc 1 RX2 1 0 :1:7 
 ]
-[s S570 . 1 `uc 1 . 1 0 :3:0 
+[s S673 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOT_SS2 1 0 :1:3 
 ]
-[s S573 . 1 `uc 1 SCK2 1 0 :1:0 
+[s S676 . 1 `uc 1 SCK2 1 0 :1:0 
 `uc 1 SDI2 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 nSS2 1 0 :1:3 
@@ -227,12 +232,12 @@ RUNNING 2
 `uc 1 CK2 1 0 :1:6 
 `uc 1 DT2 1 0 :1:7 
 ]
-[s S582 . 1 `uc 1 SCL2 1 0 :1:0 
+[s S685 . 1 `uc 1 SCL2 1 0 :1:0 
 `uc 1 SDA2 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 SS2 1 0 :1:3 
 ]
-[s S587 . 1 `uc 1 AN20 1 0 :1:0 
+[s S690 . 1 `uc 1 AN20 1 0 :1:0 
 `uc 1 AN21 1 0 :1:1 
 `uc 1 AN22 1 0 :1:2 
 `uc 1 AN23 1 0 :1:3 
@@ -241,9 +246,9 @@ RUNNING 2
 `uc 1 AN26 1 0 :1:6 
 `uc 1 AN27 1 0 :1:7 
 ]
-[u S596 . 1 `S351 1 . 1 0 `S556 1 . 1 0 `S564 1 . 1 0 `S570 1 . 1 0 `S573 1 . 1 0 `S582 1 . 1 0 `S587 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES596  1 e 1 @3971 ]
-[s S302 . 1 `uc 1 TRISC0 1 0 :1:0 
+[u S699 . 1 `S511 1 . 1 0 `S659 1 . 1 0 `S667 1 . 1 0 `S673 1 . 1 0 `S676 1 . 1 0 `S685 1 . 1 0 `S690 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES699  1 e 1 @3971 ]
+[s S187 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -253,9 +258,9 @@ RUNNING 2
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "8534
-[u S320 . 1 `S302 1 . 1 0 `S311 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES320  1 e 1 @3988 ]
-[s S342 . 1 `uc 1 TRISD0 1 0 :1:0 
+[u S205 . 1 `S187 1 . 1 0 `S196 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES205  1 e 1 @3988 ]
+[s S502 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -265,9 +270,9 @@ RUNNING 2
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "8756
-[u S360 . 1 `S342 1 . 1 0 `S351 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES360  1 e 1 @3989 ]
-[s S784 . 1 `uc 1 T0PS 1 0 :3:0 
+[u S520 . 1 `S502 1 . 1 0 `S511 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES520  1 e 1 @3989 ]
+[s S874 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -275,12 +280,12 @@ RUNNING 2
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "16147
-[s S791 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S881 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S795 . 1 `S784 1 . 1 0 `S791 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES795  1 e 1 @4053 ]
+[u S885 . 1 `S874 1 . 1 0 `S881 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES885  1 e 1 @4053 ]
 "16197
 [v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
 "16244
@@ -301,7 +306,7 @@ RUNNING 2
 [v _FSR0L FSR0L `VEuc  1 e 1 @4073 ]
 "16655
 [v _FSR0H FSR0H `VEuc  1 e 1 @4074 ]
-[s S101 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S98 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -311,7 +316,7 @@ RUNNING 2
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "16956
-[s S110 . 1 `uc 1 . 1 0 :1:0 
+[s S107 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -320,12 +325,12 @@ RUNNING 2
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S119 . 1 `uc 1 . 1 0 :6:0 
+[s S116 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S123 . 1 `S101 1 . 1 0 `S110 1 . 1 0 `S119 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES123  1 e 1 @4082 ]
+[u S120 . 1 `S98 1 . 1 0 `S107 1 . 1 0 `S116 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES120  1 e 1 @4082 ]
 "17048
 [v _PRODL PRODL `VEuc  1 e 1 @4083 ]
 "17068
@@ -350,83 +355,135 @@ RUNNING 2
 [v _TOSH TOSH `VEuc  1 e 1 @4094 ]
 "17402
 [v _TOSU TOSU `VEuc  1 e 1 @4095 ]
-[s S65 hw_stack 3 `uc 1 TOSL_REG 1 0 `uc 1 TOSH_REG 1 1 `uc 1 TOSU_REG 1 2 ]
+"7 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
+[v _rr_quantum rr_quantum `uc  1 e 1 0 ]
+[s S62 hw_stack 3 `uc 1 TOSL_REG 1 0 `uc 1 TOSH_REG 1 1 `uc 1 TOSU_REG 1 2 ]
 "7 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
-[s S69 sw_stack 94 `[31]S65 1 stack 93 0 `uc 1 stack_size 1 93 ]
-[s S72 tcb 117 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S69 1 task_stack 94 23 ]
-[s S96 ready_queue 472 `[4]S72 1 TASKS 468 0 `uc 1 size 1 468 `*.39S72 1 task_running 2 469 `uc 1 pos_task_running 1 471 ]
-[v _r_queue r_queue `S96  1 e 472 0 ]
+[s S66 sw_stack 94 `[31]S62 1 stack 93 0 `uc 1 stack_size 1 93 ]
+[s S69 tcb 117 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S66 1 task_stack 94 23 ]
+[s S93 ready_queue 472 `[4]S69 1 TASKS 468 0 `uc 1 size 1 468 `*.39S69 1 task_running 2 469 `uc 1 pos_task_running 1 471 ]
+[v _r_queue r_queue `S93  1 e 472 0 ]
 "8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\main.c
 [v _main main `(i  1 e 2 0 ]
 {
 "27
 } 0
-"78 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
+"79 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
 [v _os_start os_start `(v  1 e 1 0 ]
 {
-"82
+"83
 } 0
-"5 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
+"10 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
 [v _setup_hardware setup_hardware `(v  1 e 1 0 ]
 {
-"16
+"21
 } 0
 "66 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
 [v _os_config os_config `(v  1 e 1 0 ]
 {
-"76
+"77
 } 0
 "22
 [v _os_create_task os_create_task `(v  1 e 1 0 ]
 {
 [v os_create_task@id id `uc  1 p 1 wreg ]
-[s S65 hw_stack 3 `uc 1 TOSL_REG 1 0 `uc 1 TOSH_REG 1 1 `uc 1 TOSU_REG 1 2 ]
+[s S62 hw_stack 3 `uc 1 TOSL_REG 1 0 `uc 1 TOSH_REG 1 1 `uc 1 TOSU_REG 1 2 ]
 "24
-[s S69 sw_stack 94 `[31]S65 1 stack 93 0 `uc 1 stack_size 1 93 ]
-[s S72 tcb 117 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S69 1 task_stack 94 23 ]
-[v os_create_task@new_task new_task `S72  1 a 117 1 ]
+[s S66 sw_stack 94 `[31]S62 1 stack 93 0 `uc 1 stack_size 1 93 ]
+[s S69 tcb 117 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S66 1 task_stack 94 23 ]
+[v os_create_task@new_task new_task `S69  1 a 117 5 ]
 "22
 [v os_create_task@id id `uc  1 p 1 wreg ]
-[v os_create_task@func func `*.37(v  1 p 2 23 ]
-[v os_create_task@prior prior `uc  1 p 1 25 ]
+[v os_create_task@func func `*.37(v  1 p 2 0 ]
+[v os_create_task@prior prior `uc  1 p 1 2 ]
 "26
-[v os_create_task@id id `uc  1 p 1 0 ]
+[v os_create_task@id id `uc  1 p 1 4 ]
 "53
 } 1
-"4 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+"5 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _config_user config_user `(v  1 e 1 0 ]
 {
-"14
+"15
 } 0
-"37
+"86 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
+[v _idle idle `(v  1 e 1 0 ]
+{
+"93
+} 0
+"38 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _LED_1 LED_1 `(v  1 e 1 0 ]
 {
-"42
+"43
 } 0
-"44
+"45
 [v _LED_2 LED_2 `(v  1 e 1 0 ]
 {
-"49
-} 0
 "51
-[v _LED_3 LED_3 `(v  1 e 1 0 ]
-{
-"56
 } 0
-"18 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
-[v _ISR ISR `IIH(v  1 e 1 0 ]
+"10 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
+[v _os_delay os_delay `(v  1 e 1 0 ]
 {
-"26
-} 0
-"8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
+[v os_delay@time time `uc  1 p 1 wreg ]
+[v os_delay@time time `uc  1 p 1 wreg ]
+"12
+[v os_delay@time time `uc  1 p 1 44 ]
+"20
+} 1
+"9 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
 [v _scheduler scheduler `(v  1 e 1 0 ]
 {
-"12
+"13
 } 0
-"14
+"15
 [v _RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
 {
-"16
-[v RR_scheduler@prox prox `uc  1 a 1 0 ]
-"23
+"17
+[v RR_scheduler@prox prox `uc  1 a 1 33 ]
+"25
+} 0
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 30 ]
+[v ___awmod@counter counter `uc  1 a 1 29 ]
+"7
+[v ___awmod@dividend dividend `i  1 p 2 25 ]
+[v ___awmod@divisor divisor `i  1 p 2 27 ]
+"34
+} 0
+"53 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+[v _LED_3 LED_3 `(v  1 e 1 0 ]
+{
+"58
+} 0
+"23 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
+[v _ISR ISR `IIH(v  1 e 1 0 ]
+{
+"29
+[v ISR@i i `i  1 a 2 25 ]
+"50
+} 0
+"9 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
+[v i2_scheduler scheduler `(v  1 e 1 0 ]
+{
+"13
+} 0
+"15
+[v i2_RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
+{
+"17
+[v i2RR_scheduler@prox prox `uc  1 a 1 8 ]
+"25
+} 0
+"7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\awmod.c
+[v i2___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v i2___awmod@sign sign `uc  1 a 1 5 ]
+[v i2___awmod@counter counter `uc  1 a 1 4 ]
+"7
+[v i2___awmod@dividend dividend `i  1 p 2 0 ]
+[v i2___awmod@divisor divisor `i  1 p 2 2 ]
+"34
 } 0

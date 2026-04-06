@@ -1,5 +1,6 @@
 #include "scheduler.h"
 #include "types.h"
+#include "kernel.h"
 
 // Fila de aptos
 extern ready_queue_t r_queue;
@@ -16,8 +17,9 @@ uint8_t RR_scheduler()
     uint8_t prox = r_queue.pos_task_running;
     
     do {
-        prox = (prox+1) % (MAX_USER_TASKS+1);                
-    } while (r_queue.TASKS[prox].task_state != READY);
+        prox = (prox+1) % r_queue.size;                
+    } while (r_queue.TASKS[prox].task_state != READY ||
+             r_queue.TASKS[prox].task_ptr == idle);
     
     return prox;
 }

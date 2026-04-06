@@ -183,16 +183,16 @@ typedef struct ready_queue {
 } ready_queue_t;
 # 5 "./user.h" 2
 
-void config_user();
+void config_user(void);
 
-TASK acionaMotor();
-TASK ligaLed();
-TASK apagaLed();
+TASK acionaMotor(void);
+TASK ligaLed(void);
+TASK apagaLed(void);
 
 
-TASK LED_1();
-TASK LED_2();
-TASK LED_3();
+TASK LED_1(void);
+TASK LED_2(void);
+TASK LED_3(void);
 # 2 "user.c" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 3
@@ -9911,6 +9911,25 @@ unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 2 3
 # 3 "user.c" 2
+# 1 "./kernel.h" 1
+
+
+
+
+
+
+
+extern ready_queue_t r_queue;
+
+
+void os_delay(uint8_t time);
+void os_create_task(uint8_t id, f_ptr func, uint8_t prior);
+void os_yield(void);
+void os_config(void);
+void os_start(void);
+
+TASK idle();
+# 4 "user.c" 2
 
 void config_user()
 {
@@ -9956,6 +9975,7 @@ TASK LED_2()
 {
     while (1) {
         PORTCbits.RC7 = ~PORTCbits.RC7;
+        os_delay(100);
     }
 }
 

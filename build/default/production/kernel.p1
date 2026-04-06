@@ -103,8 +103,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 17249: extern volatile unsigned char STKPTR __attribute__((address(0xFFC)));
 [v _STKPTR `Vuc ~T0 @X0 0 e@4092 ]
 "6 ./scheduler.h
-[; ;./scheduler.h: 6: void scheduler();
-[v _scheduler `(v ~T0 @X0 0 e? ]
+[; ;./scheduler.h: 6: void scheduler(void);
+[v _scheduler `(v ~T0 @X0 0 ef ]
 [v F6220 `(v ~T0 @X0 0 tf ]
 [v F6223 `(v ~T0 @X0 0 tf ]
 "17 ./kernel.h
@@ -112,11 +112,61 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _idle `(v ~T0 @X0 0 e? ]
 [v F6233 `(v ~T0 @X0 0 tf ]
 "6 ./user.h
-[; ;./user.h: 6: void config_user();
-[v _config_user `(v ~T0 @X0 0 e? ]
+[; ;./user.h: 6: void config_user(void);
+[v _config_user `(v ~T0 @X0 0 ef ]
 "6 ./hw.h
 [; ;./hw.h: 6: void setup_hardware(void);
 [v _setup_hardware `(v ~T0 @X0 0 ef ]
+"8513 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8513:     struct {
+[s S411 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S411 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
+"8523
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8523:     struct {
+[s S412 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S412 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"8512
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8512: typedef union {
+[u S410 `S411 1 `S412 1 ]
+[n S410 . . . ]
+"8534
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8534: extern volatile TRISCbits_t TRISCbits __attribute__((address(0xF94)));
+[v _TRISCbits `VS410 ~T0 @X0 0 e@3988 ]
+"6839
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6839:     struct {
+[s S359 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S359 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"6849
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6849:     struct {
+[s S360 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S360 . T1OSO T1OSI T5CKI SCK SDI SDO TX RX ]
+"6859
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6859:     struct {
+[s S361 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S361 . P2B P2A P1A SCL SDA . CK DT ]
+"6869
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6869:     struct {
+[s S362 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S362 . T1CKI CCP2 CCP1 SCK1 SDI1 SDO1 TX1 RX1 ]
+"6879
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6879:     struct {
+[s S363 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S363 . T3CKI . CTPLS SCL1 SDA1 . CK1 DT1 ]
+"6889
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6889:     struct {
+[s S364 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S364 . T3G . AN14 AN15 AN16 AN17 AN18 AN19 ]
+"6899
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6899:     struct {
+[s S365 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S365 . . PA2 PA1 ]
+"6838
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6838: typedef union {
+[u S358 `S359 1 `S360 1 `S361 1 `S362 1 `S363 1 `S364 1 `S365 1 ]
+[n S358 . . . . . . . . ]
+"6905
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6905: extern volatile PORTCbits_t PORTCbits __attribute__((address(0xF82)));
+[v _PORTCbits `VS358 ~T0 @X0 0 e@3970 ]
 "52 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 52: __asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
@@ -1227,53 +1277,59 @@ Version 4.0 HI-TECH Software Intermediate Code
 "73
 [; ;kernel.c: 73:     os_create_task(1, idle, 0);
 [e ( _os_create_task (3 , , -> -> 1 `i `uc -> &U _idle `*F6233 -> -> 0 `i `uc ]
-"75
-[; ;kernel.c: 75:     config_user();
-[e ( _config_user ..  ]
+"74
+[; ;kernel.c: 74:     __asm("global _idle");
+[; <" global _idle ;# ">
 "76
-[; ;kernel.c: 76: }
+[; ;kernel.c: 76:     config_user();
+[e ( _config_user ..  ]
+"77
+[; ;kernel.c: 77: }
 [e :UE 915 ]
 }
-"78
-[; ;kernel.c: 78: void os_start()
-[v _os_start `(v ~T0 @X0 1 ef ]
 "79
-[; ;kernel.c: 79: {
+[; ;kernel.c: 79: void os_start()
+[v _os_start `(v ~T0 @X0 1 ef ]
+"80
+[; ;kernel.c: 80: {
 {
 [e :U _os_start ]
 [f ]
-"80
-[; ;kernel.c: 80:     setup_hardware();
-[e ( _setup_hardware ..  ]
 "81
-[; ;kernel.c: 81:     INTCONbits.GIE = 1;;
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;kernel.c: 81:     setup_hardware();
+[e ( _setup_hardware ..  ]
 "82
-[; ;kernel.c: 82: }
+[; ;kernel.c: 82:     INTCONbits.GIE = 1;;
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+"83
+[; ;kernel.c: 83: }
 [e :UE 916 ]
 }
-"85
-[; ;kernel.c: 85: TASK idle()
-[v _idle `(v ~T0 @X0 1 ef ]
 "86
-[; ;kernel.c: 86: {
+[; ;kernel.c: 86: TASK idle()
+[v _idle `(v ~T0 @X0 1 ef ]
+"87
+[; ;kernel.c: 87: {
 {
 [e :U _idle ]
 [f ]
-"87
-[; ;kernel.c: 87:     while (1) {
+"88
+[; ;kernel.c: 88:     TRISCbits.RC0 = 0;
+[e = . . _TRISCbits 1 0 -> -> 0 `i `uc ]
+"89
+[; ;kernel.c: 89:     while (1) {
 [e :U 919 ]
 {
-"88
-[; ;kernel.c: 88:         __asm("NOP");
-[; <" NOP ;# ">
-"89
-[; ;kernel.c: 89:     }
+"91
+[; ;kernel.c: 91:         PORTCbits.RC0 = ~PORTCbits.RC0;
+[e = . . _PORTCbits 0 0 -> ~ -> . . _PORTCbits 0 0 `i `uc ]
+"92
+[; ;kernel.c: 92:     }
 }
 [e :U 918 ]
 [e $U 919  ]
 [e :U 920 ]
-"90
-[; ;kernel.c: 90: }
+"93
+[; ;kernel.c: 93: }
 [e :UE 917 ]
 }

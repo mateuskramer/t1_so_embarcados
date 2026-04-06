@@ -3,15 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/mem.h</file>
             <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/kernel.h</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/io.h</file>
             <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/os_config.h</file>
             <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/scheduler.h</file>
-            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/scheduler.c</file>
-            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/main.c</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/hw.c</file>
             <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/user.h</file>
-            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/types.h</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/hw.h</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/sync.h</file>
             <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/kernel.c</file>
             <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/user.c</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/scheduler.c</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/main.c</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/types.h</file>
+            <file>file:/C:/Anderson/Aulas/Ensino/Graduação/Sistemas%20Operacionais%20Embarcados/Atividades%20Aulas/2026-1/RTOS26.X/com.h</file>
         </group>
     </open-files>
 </project-private>

@@ -16,7 +16,7 @@ int main()
     os_create_task(2, LED_1, 5);
     os_create_task(3, LED_2, 5);
     os_create_task(4, LED_3, 5);
-    
+   
     os_start();
     
     while (1) {

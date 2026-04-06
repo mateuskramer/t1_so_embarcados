@@ -1,5 +1,6 @@
 #include "user.h"
 #include <xc.h>
+#include "kernel.h"
 
 void config_user()
 {
@@ -45,6 +46,7 @@ TASK LED_2()
 {
     while (1) {
         PORTCbits.RC7 = ~PORTCbits.RC7;
+        os_delay(100);
     }    
 }
 
