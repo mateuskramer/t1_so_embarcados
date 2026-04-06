@@ -82,6 +82,17 @@ void os_start()
     ENABLE_ALL_INTERRUPTS();
 }
 
+void os_task_change_state(state_t new_state)
+{
+    DISABLE_ALL_INTERRUPTS();
+    
+    SAVE_CONTEXT(new_state);
+    scheduler();
+    RESTORE_CONTEXT();
+    
+    ENABLE_ALL_INTERRUPTS();
+}
+
 
 TASK idle()
 {

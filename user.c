@@ -39,6 +39,7 @@ TASK LED_1()
 {
     while (1) {
         PORTCbits.RC6 = ~PORTCbits.RC6;
+        os_delay(5);
     }    
 }
 
@@ -46,7 +47,7 @@ TASK LED_2()
 {
     while (1) {
         PORTCbits.RC7 = ~PORTCbits.RC7;
-        os_delay(100);
+        os_task_change_state(WAITING);
     }    
 }
 
@@ -54,6 +55,7 @@ TASK LED_3()
 {
     while (1) {
         PORTDbits.RD0 = ~PORTDbits.RD0;
+        os_delay(5);
     }    
 }
        

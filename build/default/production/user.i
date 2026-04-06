@@ -9922,11 +9922,16 @@ unsigned char __t3rd16on(void);
 extern ready_queue_t r_queue;
 
 
+extern uint8_t rr_quantum;
+
+
+
 void os_delay(uint8_t time);
 void os_create_task(uint8_t id, f_ptr func, uint8_t prior);
 void os_yield(void);
 void os_config(void);
 void os_start(void);
+void os_task_change_state(state_t new_state);
 
 TASK idle();
 # 4 "user.c" 2
@@ -9968,6 +9973,7 @@ TASK LED_1()
 {
     while (1) {
         PORTCbits.RC6 = ~PORTCbits.RC6;
+        os_delay(5);
     }
 }
 
@@ -9975,7 +9981,7 @@ TASK LED_2()
 {
     while (1) {
         PORTCbits.RC7 = ~PORTCbits.RC7;
-        os_delay(100);
+        os_task_change_state(WAITING);
     }
 }
 
@@ -9983,5 +9989,6 @@ TASK LED_3()
 {
     while (1) {
         PORTDbits.RD0 = ~PORTDbits.RD0;
+        os_delay(5);
     }
 }

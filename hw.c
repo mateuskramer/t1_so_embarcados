@@ -37,14 +37,12 @@ void __interrupt() ISR(void)
         
         // Verifica o quantum para saber se há necessidade de 
         // mudar a tarefa que está em execução.
+        rr_quantum--;
         if (rr_quantum == 0) {
             rr_quantum = QUANTUM;
             SAVE_CONTEXT(READY);
             scheduler();
             RESTORE_CONTEXT();
-        } 
-        else {
-            rr_quantum--;
         }
     }
 }

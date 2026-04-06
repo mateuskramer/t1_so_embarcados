@@ -14,10 +14,12 @@ void scheduler()
 
 uint8_t RR_scheduler()
 {
-    uint8_t prox = r_queue.pos_task_running;
+    uint8_t prox = r_queue.pos_task_running, tentativas = 0;
     
     do {
-        prox = (prox+1) % r_queue.size;                
+        prox = (prox+1) % r_queue.size;
+        tentativas++;
+        if (tentativas >= (MAX_USER_TASKS+1)) return 0;
     } while (r_queue.TASKS[prox].task_state != READY ||
              r_queue.TASKS[prox].task_ptr == idle);
     

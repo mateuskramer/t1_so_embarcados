@@ -26,10 +26,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7 ./scheduler.h
 [; ;./scheduler.h: 7: uint8_t RR_scheduler(void);
 [v _RR_scheduler `(uc ~T0 @X0 0 ef ]
-"17 ./kernel.h
-[; ;./kernel.h: 17: TASK idle();
+"22 ./kernel.h
+[; ;./kernel.h: 22: TASK idle();
 [v _idle `(v ~T0 @X0 0 e? ]
-[v F6209 `(v ~T0 @X0 0 tf ]
+[v F6213 `(v ~T0 @X0 0 tf ]
 "52 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 52: __asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
@@ -816,9 +816,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _RR_scheduler ]
 [f ]
 "17
-[; ;scheduler.c: 17:     uint8_t prox = r_queue.pos_task_running;
+[; ;scheduler.c: 17:     uint8_t prox = r_queue.pos_task_running, tentativas = 0;
 [v _prox `uc ~T0 @X0 1 a ]
 [e = _prox . _r_queue 3 ]
+[v _tentativas `uc ~T0 @X0 1 a ]
+[e = _tentativas -> -> 0 `i `uc ]
 "19
 [; ;scheduler.c: 19:     do {
 [e :U 884 ]
@@ -827,15 +829,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;scheduler.c: 20:         prox = (prox+1) % r_queue.size;
 [e = _prox -> % + -> _prox `i -> 1 `i -> . _r_queue 1 `i `uc ]
 "21
-[; ;scheduler.c: 21:     } while (r_queue.TASKS[prox].task_state != READY ||
+[; ;scheduler.c: 21:         tentativas++;
+[e ++ _tentativas -> -> 1 `i `uc ]
+"22
+[; ;scheduler.c: 22:         if (tentativas >= (3 +1)) return 0;
+[e $ ! >= -> _tentativas `i + -> 3 `i -> 1 `i 885  ]
+[e ) -> -> 0 `i `uc ]
+[e $UE 881  ]
+[e :U 885 ]
+"23
+[; ;scheduler.c: 23:     } while (r_queue.TASKS[prox].task_state != READY ||
 }
-[e $ || != -> . *U + &U . _r_queue 0 * -> _prox `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 `ui -> . `E39 0 `ui == . *U + &U . _r_queue 0 * -> _prox `ux -> -> # *U &U . _r_queue 0 `ui `ux 2 -> &U _idle `*F6209 884  ]
+[e $ || != -> . *U + &U . _r_queue 0 * -> _prox `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 `ui -> . `E39 0 `ui == . *U + &U . _r_queue 0 * -> _prox `ux -> -> # *U &U . _r_queue 0 `ui `ux 2 -> &U _idle `*F6213 884  ]
 [e :U 883 ]
-"24
-[; ;scheduler.c: 24:     return prox;
+"26
+[; ;scheduler.c: 26:     return prox;
 [e ) _prox ]
 [e $UE 881  ]
-"25
-[; ;scheduler.c: 25: }
+"27
+[; ;scheduler.c: 27: }
 [e :UE 881 ]
 }

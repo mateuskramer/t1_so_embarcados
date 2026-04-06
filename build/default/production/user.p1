@@ -86,9 +86,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6905
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6905: extern volatile PORTCbits_t PORTCbits __attribute__((address(0xF82)));
 [v _PORTCbits `VS358 ~T0 @X0 0 e@3970 ]
-"11 ./kernel.h
-[; ;./kernel.h: 11: void os_delay(uint8_t time);
+"15 ./kernel.h
+[; ;./kernel.h: 15: void os_delay(uint8_t time);
 [v _os_delay `(v ~T0 @X0 0 ef1`uc ]
+"50 user.c
+[; ;user.c: 50:         os_task_change_state(WAITING);
+[c E37 0 1 2 .. ]
+[n E37 . READY WAITING RUNNING  ]
+"20 ./kernel.h
+[; ;./kernel.h: 20: void os_task_change_state(state_t new_state);
+[v _os_task_change_state `(v ~T0 @X0 0 ef1`E37 ]
 "7146 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7146:     struct {
 [s S367 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -998,65 +1005,71 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user.c: 41:         PORTCbits.RC6 = ~PORTCbits.RC6;
 [e = . . _PORTCbits 0 6 -> ~ -> . . _PORTCbits 0 6 `i `uc ]
 "42
-[; ;user.c: 42:     }
+[; ;user.c: 42:         os_delay(5);
+[e ( _os_delay (1 -> -> 5 `i `uc ]
+"43
+[; ;user.c: 43:     }
 }
 [e :U 894 ]
 [e $U 895  ]
 [e :U 896 ]
-"43
-[; ;user.c: 43: }
+"44
+[; ;user.c: 44: }
 [e :UE 893 ]
 }
-"45
-[; ;user.c: 45: TASK LED_2()
-[v _LED_2 `(v ~T0 @X0 1 ef ]
 "46
-[; ;user.c: 46: {
+[; ;user.c: 46: TASK LED_2()
+[v _LED_2 `(v ~T0 @X0 1 ef ]
+"47
+[; ;user.c: 47: {
 {
 [e :U _LED_2 ]
 [f ]
-"47
-[; ;user.c: 47:     while (1) {
+"48
+[; ;user.c: 48:     while (1) {
 [e :U 899 ]
 {
-"48
-[; ;user.c: 48:         PORTCbits.RC7 = ~PORTCbits.RC7;
-[e = . . _PORTCbits 0 7 -> ~ -> . . _PORTCbits 0 7 `i `uc ]
 "49
-[; ;user.c: 49:         os_delay(100);
-[e ( _os_delay (1 -> -> 100 `i `uc ]
+[; ;user.c: 49:         PORTCbits.RC7 = ~PORTCbits.RC7;
+[e = . . _PORTCbits 0 7 -> ~ -> . . _PORTCbits 0 7 `i `uc ]
 "50
-[; ;user.c: 50:     }
+[; ;user.c: 50:         os_task_change_state(WAITING);
+[e ( _os_task_change_state (1 . `E37 1 ]
+"51
+[; ;user.c: 51:     }
 }
 [e :U 898 ]
 [e $U 899  ]
 [e :U 900 ]
-"51
-[; ;user.c: 51: }
+"52
+[; ;user.c: 52: }
 [e :UE 897 ]
 }
-"53
-[; ;user.c: 53: TASK LED_3()
-[v _LED_3 `(v ~T0 @X0 1 ef ]
 "54
-[; ;user.c: 54: {
+[; ;user.c: 54: TASK LED_3()
+[v _LED_3 `(v ~T0 @X0 1 ef ]
+"55
+[; ;user.c: 55: {
 {
 [e :U _LED_3 ]
 [f ]
-"55
-[; ;user.c: 55:     while (1) {
+"56
+[; ;user.c: 56:     while (1) {
 [e :U 903 ]
 {
-"56
-[; ;user.c: 56:         PORTDbits.RD0 = ~PORTDbits.RD0;
-[e = . . _PORTDbits 0 0 -> ~ -> . . _PORTDbits 0 0 `i `uc ]
 "57
-[; ;user.c: 57:     }
+[; ;user.c: 57:         PORTDbits.RD0 = ~PORTDbits.RD0;
+[e = . . _PORTDbits 0 0 -> ~ -> . . _PORTDbits 0 0 `i `uc ]
+"58
+[; ;user.c: 58:         os_delay(5);
+[e ( _os_delay (1 -> -> 5 `i `uc ]
+"59
+[; ;user.c: 59:     }
 }
 [e :U 902 ]
 [e $U 903  ]
 [e :U 904 ]
-"58
-[; ;user.c: 58: }
+"60
+[; ;user.c: 60: }
 [e :UE 901 ]
 }
