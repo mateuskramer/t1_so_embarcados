@@ -8,7 +8,8 @@ typedef void TASK;
 
 typedef enum {READY = 0,
               WAITING,
-              RUNNING
+              RUNNING,
+              WAITING_SEM
              } state_t;
 
 typedef void (*f_ptr)(void);
