@@ -9936,6 +9936,29 @@ void os_task_change_state(state_t new_state, tcb_t *task_handle);
 
 TASK idle();
 # 4 "user.c" 2
+# 1 "./sync.h" 1
+
+
+
+
+
+
+
+typedef struct sem {
+    int contador;
+    uint8_t fila[3];
+    uint8_t qtd_tasks_fila;
+    uint8_t pos_input;
+    uint8_t pos_output;
+} sem_t;
+
+
+void sem_init(sem_t *sem, uint8_t valor);
+void sem_wait(sem_t *sem);
+void sem_post(sem_t *sem);
+# 5 "user.c" 2
+
+sem_t s;
 
 void config_user()
 {
@@ -9947,6 +9970,8 @@ void config_user()
     ANSELCbits.ANSC7 = 0;
 
     __asm("global _LED_1, _LED_2, _LED_3");
+
+    sem_init(&s, 0);
 
 }
 
@@ -9975,7 +10000,7 @@ TASK LED_1()
 {
     while (1) {
         PORTCbits.RC6 = ~PORTCbits.RC6;
-        os_delay(5);
+        sem_wait(&s);
     }
 }
 
@@ -9983,7 +10008,8 @@ TASK LED_2()
 {
     while (1) {
         PORTCbits.RC7 = ~PORTCbits.RC7;
-        os_task_change_state(WAITING, ((void*)0));
+        sem_post(&s);
+
     }
 }
 
@@ -9991,6 +10017,7 @@ TASK LED_3()
 {
     while (1) {
         PORTDbits.RD0 = ~PORTDbits.RD0;
-        os_delay(1);
+
+
     }
 }

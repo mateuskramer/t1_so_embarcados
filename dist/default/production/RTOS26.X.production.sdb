@@ -17,13 +17,6 @@ WAITING 1
 RUNNING 2
 WAITING_SEM 3
 ]
-"51 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
-[e E37 . `uc
-READY 0
-WAITING 1
-RUNNING 2
-WAITING_SEM 3
-]
 "11 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
 [e E40 . `uc
 READY 0
@@ -104,16 +97,12 @@ WAITING_SEM 3
 [v _setup_hardware setup_hardware `(v  1 e 1 0 ]
 "23
 [v _ISR ISR `IIH(v  1 e 1 0 ]
-"10 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
-[v _os_delay os_delay `(v  1 e 1 0 ]
-"22
+"22 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
 [v _os_create_task os_create_task `(v  1 e 1 0 ]
 "66
 [v _os_config os_config `(v  1 e 1 0 ]
 "79
 [v _os_start os_start `(v  1 e 1 0 ]
-"87
-[v _os_task_change_state os_task_change_state `(v  1 e 1 0 ]
 "104
 [v _idle idle `(v  1 e 1 0 ]
 "8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\main.c
@@ -126,15 +115,21 @@ WAITING_SEM 3
 [v _RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
 [v i1_RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
 [v i2_RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
-"5 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+"9 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\sync.c
+[v _sem_init sem_init `(v  1 e 1 0 ]
+"17
+[v _sem_wait sem_wait `(v  1 e 1 0 ]
+"35
+[v _sem_post sem_post `(v  1 e 1 0 ]
+"8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _config_user config_user `(v  1 e 1 0 ]
-"39
+"44
 [v _LED_1 LED_1 `(v  1 e 1 0 ]
-"47
+"52
 [v _LED_2 LED_2 `(v  1 e 1 0 ]
-"55
+"61
 [v _LED_3 LED_3 `(v  1 e 1 0 ]
-[s S715 . 1 `uc 1 . 1 0 :2:0 
+[s S721 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 ANSC2 1 0 :1:2 
 `uc 1 ANSC3 1 0 :1:3 
 `uc 1 ANSC4 1 0 :1:4 
@@ -143,9 +138,9 @@ WAITING_SEM 3
 `uc 1 ANSC7 1 0 :1:7 
 ]
 "161 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
-[u S723 . 1 `S715 1 . 1 0 ]
-[v _ANSELCbits ANSELCbits `VES723  1 e 1 @3898 ]
-[s S694 . 1 `uc 1 ANSD0 1 0 :1:0 
+[u S729 . 1 `S721 1 . 1 0 ]
+[v _ANSELCbits ANSELCbits `VES729  1 e 1 @3898 ]
+[s S700 . 1 `uc 1 ANSD0 1 0 :1:0 
 `uc 1 ANSD1 1 0 :1:1 
 `uc 1 ANSD2 1 0 :1:2 
 `uc 1 ANSD3 1 0 :1:3 
@@ -155,8 +150,8 @@ WAITING_SEM 3
 `uc 1 ANSD7 1 0 :1:7 
 ]
 "213
-[u S703 . 1 `S694 1 . 1 0 ]
-[v _ANSELDbits ANSELDbits `VES703  1 e 1 @3899 ]
+[u S709 . 1 `S700 1 . 1 0 ]
+[v _ANSELDbits ANSELDbits `VES709  1 e 1 @3899 ]
 [s S198 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
@@ -218,7 +213,7 @@ WAITING_SEM 3
 ]
 [u S287 . 1 `S198 1 . 1 0 `S238 1 . 1 0 `S247 1 . 1 0 `S256 1 . 1 0 `S265 1 . 1 0 `S274 1 . 1 0 `S283 1 . 1 0 ]
 [v _PORTCbits PORTCbits `VES287  1 e 1 @3970 ]
-[s S663 . 1 `uc 1 RD0 1 0 :1:0 
+[s S669 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -228,7 +223,7 @@ WAITING_SEM 3
 `uc 1 RD7 1 0 :1:7 
 ]
 "7203
-[s S849 . 1 `uc 1 . 1 0 :2:0 
+[s S819 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 P2B 1 0 :1:2 
 `uc 1 P2C 1 0 :1:3 
 `uc 1 P2D 1 0 :1:4 
@@ -236,16 +231,16 @@ WAITING_SEM 3
 `uc 1 P1C 1 0 :1:6 
 `uc 1 P1D 1 0 :1:7 
 ]
-[s S857 . 1 `uc 1 . 1 0 :1:0 
+[s S827 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 CCP4 1 0 :1:1 
 `uc 1 . 1 0 :4:2 
 `uc 1 TX2 1 0 :1:6 
 `uc 1 RX2 1 0 :1:7 
 ]
-[s S863 . 1 `uc 1 . 1 0 :3:0 
+[s S833 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOT_SS2 1 0 :1:3 
 ]
-[s S866 . 1 `uc 1 SCK2 1 0 :1:0 
+[s S836 . 1 `uc 1 SCK2 1 0 :1:0 
 `uc 1 SDI2 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 nSS2 1 0 :1:3 
@@ -254,12 +249,12 @@ WAITING_SEM 3
 `uc 1 CK2 1 0 :1:6 
 `uc 1 DT2 1 0 :1:7 
 ]
-[s S875 . 1 `uc 1 SCL2 1 0 :1:0 
+[s S845 . 1 `uc 1 SCL2 1 0 :1:0 
 `uc 1 SDA2 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 SS2 1 0 :1:3 
 ]
-[s S880 . 1 `uc 1 AN20 1 0 :1:0 
+[s S850 . 1 `uc 1 AN20 1 0 :1:0 
 `uc 1 AN21 1 0 :1:1 
 `uc 1 AN22 1 0 :1:2 
 `uc 1 AN23 1 0 :1:3 
@@ -268,8 +263,8 @@ WAITING_SEM 3
 `uc 1 AN26 1 0 :1:6 
 `uc 1 AN27 1 0 :1:7 
 ]
-[u S889 . 1 `S663 1 . 1 0 `S849 1 . 1 0 `S857 1 . 1 0 `S863 1 . 1 0 `S866 1 . 1 0 `S875 1 . 1 0 `S880 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES889  1 e 1 @3971 ]
+[u S859 . 1 `S669 1 . 1 0 `S819 1 . 1 0 `S827 1 . 1 0 `S833 1 . 1 0 `S836 1 . 1 0 `S845 1 . 1 0 `S850 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES859  1 e 1 @3971 ]
 [s S189 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
@@ -282,7 +277,7 @@ WAITING_SEM 3
 "8534
 [u S207 . 1 `S189 1 . 1 0 `S198 1 . 1 0 ]
 [v _TRISCbits TRISCbits `VES207  1 e 1 @3988 ]
-[s S654 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S660 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -292,9 +287,9 @@ WAITING_SEM 3
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "8756
-[u S672 . 1 `S654 1 . 1 0 `S663 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES672  1 e 1 @3989 ]
-[s S1069 . 1 `uc 1 T0PS 1 0 :3:0 
+[u S678 . 1 `S660 1 . 1 0 `S669 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES678  1 e 1 @3989 ]
+[s S1046 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -302,12 +297,12 @@ WAITING_SEM 3
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "16147
-[s S1076 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S1053 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S1080 . 1 `S1069 1 . 1 0 `S1076 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES1080  1 e 1 @4053 ]
+[u S1057 . 1 `S1046 1 . 1 0 `S1053 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES1057  1 e 1 @4053 ]
 "16197
 [v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
 "16244
@@ -385,6 +380,9 @@ WAITING_SEM 3
 [s S70 tcb 117 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S67 1 task_stack 94 23 ]
 [s S94 ready_queue 472 `[4]S70 1 TASKS 468 0 `uc 1 size 1 468 `*.39S70 1 task_running 2 469 `uc 1 pos_task_running 1 471 ]
 [v _r_queue r_queue `S94  1 e 472 0 ]
+[s S511 sem 8 `i 1 contador 2 0 `[3]uc 1 fila 3 2 `uc 1 qtd_tasks_fila 1 5 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
+"6 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+[v _s s `S511  1 e 8 0 ]
 "8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\main.c
 [v _main main `(i  1 e 2 0 ]
 {
@@ -409,19 +407,19 @@ WAITING_SEM 3
 [v _RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
 {
 "17
-[v RR_scheduler@prox prox `uc  1 a 1 9 ]
-[v RR_scheduler@tentativas tentativas `uc  1 a 1 8 ]
+[v RR_scheduler@prox prox `uc  1 a 1 43 ]
+[v RR_scheduler@tentativas tentativas `uc  1 a 1 42 ]
 "27
 } 0
 "7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v ___awmod@sign sign `uc  1 a 1 5 ]
-[v ___awmod@counter counter `uc  1 a 1 4 ]
+[v ___awmod@sign sign `uc  1 a 1 39 ]
+[v ___awmod@counter counter `uc  1 a 1 38 ]
 "7
-[v ___awmod@dividend dividend `i  1 p 2 0 ]
-[v ___awmod@divisor divisor `i  1 p 2 2 ]
+[v ___awmod@dividend dividend `i  1 p 2 34 ]
+[v ___awmod@divisor divisor `i  1 p 2 36 ]
 "34
 } 0
 "66 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
@@ -437,39 +435,45 @@ WAITING_SEM 3
 "24
 [s S67 sw_stack 94 `[31]S63 1 stack 93 0 `uc 1 stack_size 1 93 ]
 [s S70 tcb 117 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S67 1 task_stack 94 23 ]
-[v os_create_task@new_task new_task `S70  1 a 117 5 ]
+[v os_create_task@new_task new_task `S70  1 a 117 1 ]
 "22
 [v os_create_task@id id `uc  1 p 1 wreg ]
-[v os_create_task@func func `*.37(v  1 p 2 0 ]
-[v os_create_task@prior prior `uc  1 p 1 2 ]
+[v os_create_task@func func `*.37(v  1 p 2 34 ]
+[v os_create_task@prior prior `uc  1 p 1 36 ]
 "26
-[v os_create_task@id id `uc  1 p 1 4 ]
+[v os_create_task@id id `uc  1 p 1 0 ]
 "53
 } 1
-"5 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+"8 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _config_user config_user `(v  1 e 1 0 ]
 {
-"16
+"21
+} 0
+"9 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\sync.c
+[v _sem_init sem_init `(v  1 e 1 0 ]
+{
+[s S511 sem 8 `i 1 contador 2 0 `[3]uc 1 fila 3 2 `uc 1 qtd_tasks_fila 1 5 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
+[v sem_init@sem sem `*.30S511  1 p 1 34 ]
+[v sem_init@valor valor `uc  1 p 1 35 ]
+"15
 } 0
 "104 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
 [v _idle idle `(v  1 e 1 0 ]
 {
 "111
 } 0
-"39 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+"44 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _LED_1 LED_1 `(v  1 e 1 0 ]
 {
-"45
+"50
 } 0
-"10 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
-[v _os_delay os_delay `(v  1 e 1 0 ]
+"17 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\sync.c
+[v _sem_wait sem_wait `(v  1 e 1 0 ]
 {
-[v os_delay@time time `uc  1 p 1 wreg ]
-[v os_delay@time time `uc  1 p 1 wreg ]
-"12
-[v os_delay@time time `uc  1 p 1 132 ]
-"20
-} 1
+[s S511 sem 8 `i 1 contador 2 0 `[3]uc 1 fila 3 2 `uc 1 qtd_tasks_fila 1 5 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
+[v sem_wait@sem sem `*.30S511  1 p 1 24 ]
+"33
+} 0
 "9 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\scheduler.c
 [v i1_scheduler scheduler `(v  1 e 1 0 ]
 {
@@ -479,43 +483,37 @@ WAITING_SEM 3
 [v i1_RR_scheduler RR_scheduler `(uc  1 e 1 0 ]
 {
 "17
-[v i1RR_scheduler@prox prox `uc  1 a 1 121 ]
-[v i1RR_scheduler@tentativas tentativas `uc  1 a 1 120 ]
+[v i1RR_scheduler@prox prox `uc  1 a 1 20 ]
+[v i1RR_scheduler@tentativas tentativas `uc  1 a 1 19 ]
 "27
 } 0
 "7 C:\Program Files\Microchip\xc8\v3.10\pic\sources\c99\common\awmod.c
 [v i1___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v i1___awmod@sign sign `uc  1 a 1 117 ]
-[v i1___awmod@counter counter `uc  1 a 1 116 ]
+[v i1___awmod@sign sign `uc  1 a 1 28 ]
+[v i1___awmod@counter counter `uc  1 a 1 27 ]
 "7
-[v i1___awmod@dividend dividend `i  1 p 2 112 ]
-[v i1___awmod@divisor divisor `i  1 p 2 114 ]
+[v i1___awmod@dividend dividend `i  1 p 2 23 ]
+[v i1___awmod@divisor divisor `i  1 p 2 25 ]
 "34
 } 0
-"47 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+"52 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _LED_2 LED_2 `(v  1 e 1 0 ]
 {
-"53
+"59
 } 0
-"87 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\kernel.c
-[v _os_task_change_state os_task_change_state `(v  1 e 1 0 ]
+"35 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\sync.c
+[v _sem_post sem_post `(v  1 e 1 0 ]
 {
-[v os_task_change_state@new_state new_state `E37  1 p 1 wreg ]
-[v os_task_change_state@new_state new_state `E37  1 p 1 wreg ]
-[s S63 hw_stack 3 `uc 1 TOSL_REG 1 0 `uc 1 TOSH_REG 1 1 `uc 1 TOSU_REG 1 2 ]
-[s S67 sw_stack 94 `[31]S63 1 stack 93 0 `uc 1 stack_size 1 93 ]
-[s S70 tcb 117 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S67 1 task_stack 94 23 ]
-[v os_task_change_state@task_handle task_handle `*.39S70  1 p 2 101 ]
-"89
-[v os_task_change_state@new_state new_state `E37  1 p 1 110 ]
-"101
-} 1
-"55 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
+[s S511 sem 8 `i 1 contador 2 0 `[3]uc 1 fila 3 2 `uc 1 qtd_tasks_fila 1 5 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
+[v sem_post@sem sem `*.30S511  1 p 1 29 ]
+"48
+} 0
+"61 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\user.c
 [v _LED_3 LED_3 `(v  1 e 1 0 ]
 {
-"61
+"68
 } 0
 "23 C:\Anderson\Aulas\Ensino\Graduação\Sistemas Operacionais Embarcados\Atividades Aulas\2026-1\RTOS26.X\hw.c
 [v _ISR ISR `IIH(v  1 e 1 0 ]

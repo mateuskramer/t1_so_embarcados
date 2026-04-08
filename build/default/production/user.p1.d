@@ -3,4 +3,5 @@ user.c  \
 user.h  \
 types.h  \
 os_config.h  \
-kernel.h 
+kernel.h  \
+sync.h 

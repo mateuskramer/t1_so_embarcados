@@ -1,6 +1,13 @@
 #include "user.h"
 #include <xc.h>
 #include "kernel.h"
+#include "sync.h"
+
+sem_t s;
+
+sem_t controle_leitura, controle_tomada_decisao;
+
+uint8_t dados;
 
 void config_user()
 {
@@ -12,6 +19,10 @@ void config_user()
     ANSELCbits.ANSC7    = 0;
     
     asm("global _LED_1, _LED_2, _LED_3");
+    
+    sem_init(&s, 0);
+    sem_init(&controle_leitura, 1);
+    sem_init(&controle_tomada_decisao, 0);
     
 }
 
@@ -39,16 +50,25 @@ TASK apagaLed()
 TASK LED_1()
 {
     while (1) {
+        sem_wait(&controle_leitura);
+        dados = ler_sensor_temperatura();
+        //sem_post(&controle_tomada_decisao);
         PORTCbits.RC6 = ~PORTCbits.RC6;
-        os_delay(5);
+        sem_wait(&s);
     }    
 }
 
 TASK LED_2()
 {
     while (1) {
+        
+        sem_wait(&controle_tomada_decisao);
+        if (dados > 100) {}
+        
+        //sem_post(&controle_leitura);
         PORTCbits.RC7 = ~PORTCbits.RC7;
-        os_task_change_state(WAITING, NULL);
+        sem_post(&s);
+        //os_delay(5);
     }    
 }
 
@@ -56,7 +76,7 @@ TASK LED_3()
 {
     while (1) {
         PORTDbits.RD0 = ~PORTDbits.RD0;
-        os_delay(1);
-        os_task_change_state(WAITING, NULL);
+        //os_delay(1);
+        //os_task_change_state(WAITING, NULL);
     }    
 }
