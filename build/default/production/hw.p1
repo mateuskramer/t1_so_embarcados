@@ -40,23 +40,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [t T2 __interrupt ]
 "30 hw.c
 [; ;hw.c: 30:             if (r_queue.TASKS[i].task_delay > 0) {
-[c E6143 0 1 2 .. ]
-[n E6143 . READY WAITING RUNNING  ]
-[v F6163 `(v ~T0 @X0 0 tf ]
-"16 ./types.h
-[; ;./types.h: 16: typedef struct hw_stack {
+[c E6143 0 1 2 3 .. ]
+[n E6143 . READY WAITING RUNNING WAITING_SEM  ]
+[v F6164 `(v ~T0 @X0 0 tf ]
+"17 ./types.h
+[; ;./types.h: 17: typedef struct hw_stack {
 [s S876 `uc 1 `uc 1 `uc 1 ]
 [n S876 hw_stack TOSL_REG TOSH_REG TOSU_REG ]
-"22
-[; ;./types.h: 22: typedef struct sw_stack {
+"23
+[; ;./types.h: 23: typedef struct sw_stack {
 [s S877 `S876 -> 31 `i `uc 1 ]
 [n S877 sw_stack stack stack_size ]
-"27
-[; ;./types.h: 27: typedef struct tcb {
-[s S878 `uc 1 `E6143 1 `*F6163 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `S877 1 ]
+"28
+[; ;./types.h: 28: typedef struct tcb {
+[s S878 `uc 1 `E6143 1 `*F6164 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `S877 1 ]
 [n S878 tcb task_id task_state task_ptr task_delay task_priority W_REG STATUS_REG BSR_REG PRODL_REG PRODH_REG FSR0L_REG FSR0H_REG FSR1L_REG FSR1H_REG FSR2L_REG FSR2H_REG TABLAT_REG TBLPTRL_REG TBLPTRH_REG TBLPTRU_REG PCLATH_REG PCLATU_REG task_stack ]
-"58
-[; ;./types.h: 58: typedef struct ready_queue {
+"59
+[; ;./types.h: 59: typedef struct ready_queue {
 [s S879 `S878 -> 4 `i `uc 1 `*S878 1 `uc 1 ]
 [n S879 ready_queue TASKS size task_running pos_task_running ]
 "8 ./kernel.h

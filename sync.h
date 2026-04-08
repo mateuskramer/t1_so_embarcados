@@ -2,7 +2,7 @@
 #define	SYNC_H
 
 #include <stdint.h>
-#include <os_config.h>
+#include "os_config.h"
 
 // Padrão POSIX
 typedef struct sem {

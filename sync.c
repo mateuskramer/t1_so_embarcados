@@ -36,6 +36,13 @@ void sem_post(sem_t *sem)
 {
     DISABLE_ALL_INTERRUPTS();
     
+    sem->contador++;
+    if (sem->contador <= 0) {
+        // Libera o processo bloqueado a mais tempo
+        r_queue.TASKS[sem->fila[sem->pos_output]].task_state = READY;
+        sem->pos_output = (sem->pos_output + 1) % MAX_USER_TASKS;
+        sem->qtd_tasks_fila--;
+    }
+    
     ENABLE_ALL_INTERRUPTS();    
 }
-

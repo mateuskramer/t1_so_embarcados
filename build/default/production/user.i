@@ -128,7 +128,8 @@ typedef void TASK;
 
 typedef enum {READY = 0,
               WAITING,
-              RUNNING
+              RUNNING,
+              WAITING_SEM
              } state_t;
 
 typedef void (*f_ptr)(void);
@@ -9931,7 +9932,7 @@ void os_create_task(uint8_t id, f_ptr func, uint8_t prior);
 void os_yield(void);
 void os_config(void);
 void os_start(void);
-void os_task_change_state(state_t new_state);
+void os_task_change_state(state_t new_state, tcb_t *task_handle);
 
 TASK idle();
 # 4 "user.c" 2
@@ -9946,6 +9947,7 @@ void config_user()
     ANSELCbits.ANSC7 = 0;
 
     __asm("global _LED_1, _LED_2, _LED_3");
+
 }
 
 TASK acionaMotor()
@@ -9981,7 +9983,7 @@ TASK LED_2()
 {
     while (1) {
         PORTCbits.RC7 = ~PORTCbits.RC7;
-        os_task_change_state(WAITING);
+        os_task_change_state(WAITING, ((void*)0));
     }
 }
 
@@ -9989,6 +9991,6 @@ TASK LED_3()
 {
     while (1) {
         PORTDbits.RD0 = ~PORTDbits.RD0;
-        os_delay(5);
+        os_delay(1);
     }
 }

@@ -12,6 +12,7 @@ void config_user()
     ANSELCbits.ANSC7    = 0;
     
     asm("global _LED_1, _LED_2, _LED_3");
+    
 }
 
 TASK acionaMotor()
@@ -47,7 +48,7 @@ TASK LED_2()
 {
     while (1) {
         PORTCbits.RC7 = ~PORTCbits.RC7;
-        os_task_change_state(WAITING);
+        os_task_change_state(WAITING, NULL);
     }    
 }
 
@@ -55,9 +56,7 @@ TASK LED_3()
 {
     while (1) {
         PORTDbits.RD0 = ~PORTDbits.RD0;
-        os_delay(5);
+        os_delay(1);
+        os_task_change_state(WAITING, NULL);
     }    
 }
-       
-
-

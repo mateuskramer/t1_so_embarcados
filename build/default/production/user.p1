@@ -89,13 +89,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 "15 ./kernel.h
 [; ;./kernel.h: 15: void os_delay(uint8_t time);
 [v _os_delay `(v ~T0 @X0 0 ef1`uc ]
-"50 user.c
-[; ;user.c: 50:         os_task_change_state(WAITING);
-[c E37 0 1 2 .. ]
-[n E37 . READY WAITING RUNNING  ]
+"51 user.c
+[; ;user.c: 51:         os_task_change_state(WAITING, ((void*)0));
+[c E37 0 1 2 3 .. ]
+[n E37 . READY WAITING RUNNING WAITING_SEM  ]
+[v F58 `(v ~T0 @X0 0 tf ]
+"17 ./types.h
+[; ;./types.h: 17: typedef struct hw_stack {
+[s S1 `uc 1 `uc 1 `uc 1 ]
+[n S1 hw_stack TOSL_REG TOSH_REG TOSU_REG ]
+"23
+[; ;./types.h: 23: typedef struct sw_stack {
+[s S2 `S1 -> 31 `i `uc 1 ]
+[n S2 sw_stack stack stack_size ]
+"28
+[; ;./types.h: 28: typedef struct tcb {
+[s S3 `uc 1 `E37 1 `*F58 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `S2 1 ]
+[n S3 tcb task_id task_state task_ptr task_delay task_priority W_REG STATUS_REG BSR_REG PRODL_REG PRODH_REG FSR0L_REG FSR0H_REG FSR1L_REG FSR1H_REG FSR2L_REG FSR2H_REG TABLAT_REG TBLPTRL_REG TBLPTRH_REG TBLPTRU_REG PCLATH_REG PCLATU_REG task_stack ]
 "20 ./kernel.h
-[; ;./kernel.h: 20: void os_task_change_state(state_t new_state);
-[v _os_task_change_state `(v ~T0 @X0 0 ef1`E37 ]
+[; ;./kernel.h: 20: void os_task_change_state(state_t new_state, tcb_t *task_handle);
+[v _os_task_change_state `(v ~T0 @X0 0 ef2`E37`*S3 ]
 "7146 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7146:     struct {
 [s S367 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -919,157 +932,157 @@ Version 4.0 HI-TECH Software Intermediate Code
 "14
 [; ;user.c: 14:     __asm("global _LED_1, _LED_2, _LED_3");
 [; <" global _LED_1, _LED_2, _LED_3 ;# ">
-"15
-[; ;user.c: 15: }
+"16
+[; ;user.c: 16: }
 [e :UE 880 ]
 }
-"17
-[; ;user.c: 17: TASK acionaMotor()
-[v _acionaMotor `(v ~T0 @X0 1 ef ]
 "18
-[; ;user.c: 18: {
+[; ;user.c: 18: TASK acionaMotor()
+[v _acionaMotor `(v ~T0 @X0 1 ef ]
+"19
+[; ;user.c: 19: {
 {
 [e :U _acionaMotor ]
 [f ]
-"19
-[; ;user.c: 19:     while (1) {
+"20
+[; ;user.c: 20:     while (1) {
 [e :U 883 ]
 {
-"21
-[; ;user.c: 21:     }
+"22
+[; ;user.c: 22:     }
 }
 [e :U 882 ]
 [e $U 883  ]
 [e :U 884 ]
-"22
-[; ;user.c: 22: }
+"23
+[; ;user.c: 23: }
 [e :UE 881 ]
 }
-"24
-[; ;user.c: 24: TASK ligaLed()
-[v _ligaLed `(v ~T0 @X0 1 ef ]
 "25
-[; ;user.c: 25: {
+[; ;user.c: 25: TASK ligaLed()
+[v _ligaLed `(v ~T0 @X0 1 ef ]
+"26
+[; ;user.c: 26: {
 {
 [e :U _ligaLed ]
 [f ]
-"26
-[; ;user.c: 26:     while (1) {
+"27
+[; ;user.c: 27:     while (1) {
 [e :U 887 ]
 {
-"28
-[; ;user.c: 28:     }
+"29
+[; ;user.c: 29:     }
 }
 [e :U 886 ]
 [e $U 887  ]
 [e :U 888 ]
-"29
-[; ;user.c: 29: }
+"30
+[; ;user.c: 30: }
 [e :UE 885 ]
 }
-"31
-[; ;user.c: 31: TASK apagaLed()
-[v _apagaLed `(v ~T0 @X0 1 ef ]
 "32
-[; ;user.c: 32: {
+[; ;user.c: 32: TASK apagaLed()
+[v _apagaLed `(v ~T0 @X0 1 ef ]
+"33
+[; ;user.c: 33: {
 {
 [e :U _apagaLed ]
 [f ]
-"33
-[; ;user.c: 33:     while (1) {
+"34
+[; ;user.c: 34:     while (1) {
 [e :U 891 ]
 {
-"35
-[; ;user.c: 35:     }
+"36
+[; ;user.c: 36:     }
 }
 [e :U 890 ]
 [e $U 891  ]
 [e :U 892 ]
-"36
-[; ;user.c: 36: }
+"37
+[; ;user.c: 37: }
 [e :UE 889 ]
 }
-"38
-[; ;user.c: 38: TASK LED_1()
-[v _LED_1 `(v ~T0 @X0 1 ef ]
 "39
-[; ;user.c: 39: {
+[; ;user.c: 39: TASK LED_1()
+[v _LED_1 `(v ~T0 @X0 1 ef ]
+"40
+[; ;user.c: 40: {
 {
 [e :U _LED_1 ]
 [f ]
-"40
-[; ;user.c: 40:     while (1) {
+"41
+[; ;user.c: 41:     while (1) {
 [e :U 895 ]
 {
-"41
-[; ;user.c: 41:         PORTCbits.RC6 = ~PORTCbits.RC6;
-[e = . . _PORTCbits 0 6 -> ~ -> . . _PORTCbits 0 6 `i `uc ]
 "42
-[; ;user.c: 42:         os_delay(5);
-[e ( _os_delay (1 -> -> 5 `i `uc ]
+[; ;user.c: 42:         PORTCbits.RC6 = ~PORTCbits.RC6;
+[e = . . _PORTCbits 0 6 -> ~ -> . . _PORTCbits 0 6 `i `uc ]
 "43
-[; ;user.c: 43:     }
+[; ;user.c: 43:         os_delay(5);
+[e ( _os_delay (1 -> -> 5 `i `uc ]
+"44
+[; ;user.c: 44:     }
 }
 [e :U 894 ]
 [e $U 895  ]
 [e :U 896 ]
-"44
-[; ;user.c: 44: }
+"45
+[; ;user.c: 45: }
 [e :UE 893 ]
 }
-"46
-[; ;user.c: 46: TASK LED_2()
-[v _LED_2 `(v ~T0 @X0 1 ef ]
 "47
-[; ;user.c: 47: {
+[; ;user.c: 47: TASK LED_2()
+[v _LED_2 `(v ~T0 @X0 1 ef ]
+"48
+[; ;user.c: 48: {
 {
 [e :U _LED_2 ]
 [f ]
-"48
-[; ;user.c: 48:     while (1) {
+"49
+[; ;user.c: 49:     while (1) {
 [e :U 899 ]
 {
-"49
-[; ;user.c: 49:         PORTCbits.RC7 = ~PORTCbits.RC7;
-[e = . . _PORTCbits 0 7 -> ~ -> . . _PORTCbits 0 7 `i `uc ]
 "50
-[; ;user.c: 50:         os_task_change_state(WAITING);
-[e ( _os_task_change_state (1 . `E37 1 ]
+[; ;user.c: 50:         PORTCbits.RC7 = ~PORTCbits.RC7;
+[e = . . _PORTCbits 0 7 -> ~ -> . . _PORTCbits 0 7 `i `uc ]
 "51
-[; ;user.c: 51:     }
+[; ;user.c: 51:         os_task_change_state(WAITING, ((void*)0));
+[e ( _os_task_change_state (2 , . `E37 1 -> -> -> 0 `i `*v `*S3 ]
+"52
+[; ;user.c: 52:     }
 }
 [e :U 898 ]
 [e $U 899  ]
 [e :U 900 ]
-"52
-[; ;user.c: 52: }
+"53
+[; ;user.c: 53: }
 [e :UE 897 ]
 }
-"54
-[; ;user.c: 54: TASK LED_3()
-[v _LED_3 `(v ~T0 @X0 1 ef ]
 "55
-[; ;user.c: 55: {
+[; ;user.c: 55: TASK LED_3()
+[v _LED_3 `(v ~T0 @X0 1 ef ]
+"56
+[; ;user.c: 56: {
 {
 [e :U _LED_3 ]
 [f ]
-"56
-[; ;user.c: 56:     while (1) {
+"57
+[; ;user.c: 57:     while (1) {
 [e :U 903 ]
 {
-"57
-[; ;user.c: 57:         PORTDbits.RD0 = ~PORTDbits.RD0;
-[e = . . _PORTDbits 0 0 -> ~ -> . . _PORTDbits 0 0 `i `uc ]
 "58
-[; ;user.c: 58:         os_delay(5);
-[e ( _os_delay (1 -> -> 5 `i `uc ]
+[; ;user.c: 58:         PORTDbits.RD0 = ~PORTDbits.RD0;
+[e = . . _PORTDbits 0 0 -> ~ -> . . _PORTDbits 0 0 `i `uc ]
 "59
-[; ;user.c: 59:     }
+[; ;user.c: 59:         os_delay(1);
+[e ( _os_delay (1 -> -> 1 `i `uc ]
+"60
+[; ;user.c: 60:     }
 }
 [e :U 902 ]
 [e $U 903  ]
 [e :U 904 ]
-"60
-[; ;user.c: 60: }
+"61
+[; ;user.c: 61: }
 [e :UE 901 ]
 }

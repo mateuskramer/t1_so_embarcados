@@ -25,3 +25,12 @@ uint8_t RR_scheduler()
     
     return prox;
 }
+
+uint8_t priority_scheduler(void)
+{
+    uint8_t prox = r_queue.pos_task_running;
+    
+    
+    
+    return prox;    
+}

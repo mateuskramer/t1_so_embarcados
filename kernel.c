@@ -78,17 +78,24 @@ void os_config()
 
 void os_start()
 {  
-    setup_hardware(); 
+    setup_hardware();
+    scheduler();
+    RESTORE_CONTEXT();
     ENABLE_ALL_INTERRUPTS();
 }
 
-void os_task_change_state(state_t new_state)
+void os_task_change_state(state_t new_state, tcb_t *task_handle)
 {
     DISABLE_ALL_INTERRUPTS();
     
-    SAVE_CONTEXT(new_state);
-    scheduler();
-    RESTORE_CONTEXT();
+    if (task_handle == NULL) {
+        SAVE_CONTEXT(new_state);
+        scheduler();
+        RESTORE_CONTEXT();
+    }
+    else {
+        task_handle->task_state = new_state;
+    }
     
     ENABLE_ALL_INTERRUPTS();
 }
