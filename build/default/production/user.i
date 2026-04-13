@@ -9947,7 +9947,6 @@ TASK idle();
 typedef struct sem {
     int contador;
     uint8_t fila[3];
-    uint8_t qtd_tasks_fila;
     uint8_t pos_input;
     uint8_t pos_output;
 } sem_t;
@@ -9972,7 +9971,6 @@ void config_user()
     __asm("global _LED_1, _LED_2, _LED_3");
 
     sem_init(&s, 0);
-
 }
 
 TASK acionaMotor()
@@ -9999,6 +9997,7 @@ TASK apagaLed()
 TASK LED_1()
 {
     while (1) {
+
         PORTCbits.RC6 = ~PORTCbits.RC6;
         sem_wait(&s);
     }
@@ -10007,6 +10006,8 @@ TASK LED_1()
 TASK LED_2()
 {
     while (1) {
+
+
         PORTCbits.RC7 = ~PORTCbits.RC7;
         sem_post(&s);
 

@@ -124,7 +124,6 @@ typedef uint32_t uint_fast32_t;
 typedef struct sem {
     int contador;
     uint8_t fila[3];
-    uint8_t qtd_tasks_fila;
     uint8_t pos_input;
     uint8_t pos_output;
 } sem_t;
@@ -9957,7 +9956,6 @@ extern ready_queue_t r_queue;
 void sem_init(sem_t *sem, uint8_t valor)
 {
     sem->contador = valor;
-    sem->qtd_tasks_fila = 0;
     sem->pos_input = 0;
     sem->pos_output = 0;
 }
@@ -9969,7 +9967,6 @@ void sem_wait(sem_t *sem)
     sem->contador--;
     if (sem->contador < 0) {
         sem->fila[sem->pos_input] = r_queue.pos_task_running;
-        sem->qtd_tasks_fila++;
         sem->pos_input = (sem->pos_input + 1) % 3;
 
         do { if (r_queue.task_running->task_state == RUNNING) { r_queue.task_running->task_state = WAITING_SEM; r_queue.task_running->BSR_REG = BSR; r_queue.task_running->FSR0H_REG = FSR0H; r_queue.task_running->FSR0L_REG = FSR0L; r_queue.task_running->FSR1H_REG = FSR1H; r_queue.task_running->FSR1L_REG = FSR1L; r_queue.task_running->FSR2H_REG = FSR2H; r_queue.task_running->FSR2L_REG = FSR2L; r_queue.task_running->PCLATH_REG = PCLATH; r_queue.task_running->PCLATU_REG = PCLATU; r_queue.task_running->PRODH_REG = PRODH; r_queue.task_running->PRODL_REG = PRODL; r_queue.task_running->TABLAT_REG = TABLAT; r_queue.task_running->TBLPTRH_REG = TBLPTRH; r_queue.task_running->TBLPTRL_REG = TBLPTRL; r_queue.task_running->TBLPTRU_REG = TBLPTRU; r_queue.task_running->W_REG = WREG; r_queue.task_running->STATUS_REG = STATUS; r_queue.task_running->task_stack.stack_size = 0; while (STKPTR) { r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG = TOSL; r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG = TOSH; r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG = TOSU; r_queue.task_running->task_stack.stack_size += 1; __asm("POP"); } } } while (0);;
@@ -9989,7 +9986,6 @@ void sem_post(sem_t *sem)
 
         r_queue.TASKS[sem->fila[sem->pos_output]].task_state = READY;
         sem->pos_output = (sem->pos_output + 1) % 3;
-        sem->qtd_tasks_fila--;
     }
 
     INTCONbits.GIE = 1;;

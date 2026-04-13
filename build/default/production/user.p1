@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "8 ./sync.h
 [; ;./sync.h: 8: typedef struct sem {
-[s S880 `i 1 `uc -> 3 `i `uc 1 `uc 1 `uc 1 ]
-[n S880 sem contador fila qtd_tasks_fila pos_input pos_output ]
+[s S880 `i 1 `uc -> 3 `i `uc 1 `uc 1 ]
+[n S880 sem contador fila pos_input pos_output ]
 "8513 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8513:     struct {
 [s S411 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -55,8 +55,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "161
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 161: extern volatile ANSELCbits_t ANSELCbits __attribute__((address(0xF3A)));
 [v _ANSELCbits `VS14 ~T0 @X0 0 e@3898 ]
-"17 ./sync.h
-[; ;./sync.h: 17: void sem_init(sem_t *sem, uint8_t valor);
+"16 ./sync.h
+[; ;./sync.h: 16: void sem_init(sem_t *sem, uint8_t valor);
 [v _sem_init `(v ~T0 @X0 0 ef2`*S880`uc ]
 "6839 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6839:     struct {
@@ -93,11 +93,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6905
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6905: extern volatile PORTCbits_t PORTCbits __attribute__((address(0xF82)));
 [v _PORTCbits `VS358 ~T0 @X0 0 e@3970 ]
-"18 ./sync.h
-[; ;./sync.h: 18: void sem_wait(sem_t *sem);
+"17 ./sync.h
+[; ;./sync.h: 17: void sem_wait(sem_t *sem);
 [v _sem_wait `(v ~T0 @X0 0 ef1`*S880 ]
-"19
-[; ;./sync.h: 19: void sem_post(sem_t *sem);
+"18
+[; ;./sync.h: 18: void sem_post(sem_t *sem);
 [v _sem_post `(v ~T0 @X0 0 ef1`*S880 ]
 "7146 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7146:     struct {
@@ -928,86 +928,86 @@ Version 4.0 HI-TECH Software Intermediate Code
 "19
 [; ;user.c: 19:     sem_init(&s, 0);
 [e ( _sem_init (2 , &U _s -> -> 0 `i `uc ]
-"21
-[; ;user.c: 21: }
+"20
+[; ;user.c: 20: }
 [e :UE 881 ]
 }
-"23
-[; ;user.c: 23: TASK acionaMotor()
+"22
+[; ;user.c: 22: TASK acionaMotor()
 [v _acionaMotor `(v ~T0 @X0 1 ef ]
-"24
-[; ;user.c: 24: {
+"23
+[; ;user.c: 23: {
 {
 [e :U _acionaMotor ]
 [f ]
-"25
-[; ;user.c: 25:     while (1) {
+"24
+[; ;user.c: 24:     while (1) {
 [e :U 884 ]
 {
-"27
-[; ;user.c: 27:     }
+"26
+[; ;user.c: 26:     }
 }
 [e :U 883 ]
 [e $U 884  ]
 [e :U 885 ]
-"28
-[; ;user.c: 28: }
+"27
+[; ;user.c: 27: }
 [e :UE 882 ]
 }
-"30
-[; ;user.c: 30: TASK ligaLed()
+"29
+[; ;user.c: 29: TASK ligaLed()
 [v _ligaLed `(v ~T0 @X0 1 ef ]
-"31
-[; ;user.c: 31: {
+"30
+[; ;user.c: 30: {
 {
 [e :U _ligaLed ]
 [f ]
-"32
-[; ;user.c: 32:     while (1) {
+"31
+[; ;user.c: 31:     while (1) {
 [e :U 888 ]
 {
-"34
-[; ;user.c: 34:     }
+"33
+[; ;user.c: 33:     }
 }
 [e :U 887 ]
 [e $U 888  ]
 [e :U 889 ]
-"35
-[; ;user.c: 35: }
+"34
+[; ;user.c: 34: }
 [e :UE 886 ]
 }
-"37
-[; ;user.c: 37: TASK apagaLed()
+"36
+[; ;user.c: 36: TASK apagaLed()
 [v _apagaLed `(v ~T0 @X0 1 ef ]
-"38
-[; ;user.c: 38: {
+"37
+[; ;user.c: 37: {
 {
 [e :U _apagaLed ]
 [f ]
-"39
-[; ;user.c: 39:     while (1) {
+"38
+[; ;user.c: 38:     while (1) {
 [e :U 892 ]
 {
-"41
-[; ;user.c: 41:     }
+"40
+[; ;user.c: 40:     }
 }
 [e :U 891 ]
 [e $U 892  ]
 [e :U 893 ]
-"42
-[; ;user.c: 42: }
+"41
+[; ;user.c: 41: }
 [e :UE 890 ]
 }
-"44
-[; ;user.c: 44: TASK LED_1()
+"43
+[; ;user.c: 43: TASK LED_1()
 [v _LED_1 `(v ~T0 @X0 1 ef ]
-"45
-[; ;user.c: 45: {
+"44
+[; ;user.c: 44: {
 {
 [e :U _LED_1 ]
 [f ]
-"46
-[; ;user.c: 46:     while (1) {
+"45
+[; ;user.c: 45:     while (1) {
 [e :U 896 ]
 {
 "47
@@ -1038,44 +1038,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user.c: 54:     while (1) {
 [e :U 900 ]
 {
-"55
-[; ;user.c: 55:         PORTCbits.RC7 = ~PORTCbits.RC7;
+"57
+[; ;user.c: 57:         PORTCbits.RC7 = ~PORTCbits.RC7;
 [e = . . _PORTCbits 0 7 -> ~ -> . . _PORTCbits 0 7 `i `uc ]
-"56
-[; ;user.c: 56:         sem_post(&s);
-[e ( _sem_post (1 &U _s ]
 "58
-[; ;user.c: 58:     }
+[; ;user.c: 58:         sem_post(&s);
+[e ( _sem_post (1 &U _s ]
+"60
+[; ;user.c: 60:     }
 }
 [e :U 899 ]
 [e $U 900  ]
 [e :U 901 ]
-"59
-[; ;user.c: 59: }
+"61
+[; ;user.c: 61: }
 [e :UE 898 ]
 }
-"61
-[; ;user.c: 61: TASK LED_3()
+"63
+[; ;user.c: 63: TASK LED_3()
 [v _LED_3 `(v ~T0 @X0 1 ef ]
-"62
-[; ;user.c: 62: {
+"64
+[; ;user.c: 64: {
 {
 [e :U _LED_3 ]
 [f ]
-"63
-[; ;user.c: 63:     while (1) {
+"65
+[; ;user.c: 65:     while (1) {
 [e :U 904 ]
 {
-"64
-[; ;user.c: 64:         PORTDbits.RD0 = ~PORTDbits.RD0;
+"66
+[; ;user.c: 66:         PORTDbits.RD0 = ~PORTDbits.RD0;
 [e = . . _PORTDbits 0 0 -> ~ -> . . _PORTDbits 0 0 `i `uc ]
-"67
-[; ;user.c: 67:     }
+"69
+[; ;user.c: 69:     }
 }
 [e :U 903 ]
 [e $U 904  ]
 [e :U 905 ]
-"68
-[; ;user.c: 68: }
+"70
+[; ;user.c: 70: }
 [e :UE 902 ]
 }

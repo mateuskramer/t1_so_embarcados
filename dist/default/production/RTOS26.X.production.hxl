@@ -1,7 +1,7 @@
 ### HEXMate logfile and output summary ###
 
 ### Command-line arguments ###
- C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAsqq4.0\driver_tmp_3.o
+ C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAs4mk.0\driver_tmp_3.o
  -Odist/default/production\RTOS26.X.production.hex
  -logfile=dist/default/production\RTOS26.X.production.hxl
  -addressing=1
@@ -9,9 +9,9 @@
 
 ### Memory Usage ###
  Input file ranges:
-  0h - 3h		(C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAsqq4.0\driver_tmp_3.o)
-  8h - 71Dh		(C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAsqq4.0\driver_tmp_3.o)
-  1000h - 20F4h		(C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAsqq4.0\driver_tmp_3.o)
+  0h - 3h		(C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAs4mk.0\driver_tmp_3.o)
+  8h - 71Dh		(C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAs4mk.0\driver_tmp_3.o)
+  1000h - 20D0h		(C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAs4mk.0\driver_tmp_3.o)
  Unused ranges:
   4h - 7h
   71Eh - FFFh
@@ -19,7 +19,7 @@
 ### Hex Memory Map ###
  Legend:
   -- = Unused memory
-  H1 = Input file             (C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAsqq4.0\driver_tmp_3.o)
+  H1 = Input file             (C:\Users\ANDERS~1.PER\AppData\Local\Temp\xcAs4mk.0\driver_tmp_3.o)
 ----------------------------------------------------------
          | 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 ----------------------------------------------------------
@@ -407,7 +407,4 @@
 000020A0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 000020B0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 000020C0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-000020D0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-000020E0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-000020F0 | H1 H1 H1 H1 H1 -- -- -- -- -- -- -- -- -- -- --
-00002100 | --
+000020D0 | H1
