@@ -9956,8 +9956,30 @@ void sem_init(sem_t *sem, uint8_t valor);
 void sem_wait(sem_t *sem);
 void sem_post(sem_t *sem);
 # 5 "user.c" 2
+# 1 "./com.h" 1
+
+
+
+
+
+
+
+
+typedef struct pipe {
+    char fila_dados[4];
+    uint8_t pos_input;
+    uint8_t pos_output;
+    sem_t s_input;
+    sem_t s_output;
+} pipe_t;
+
+void pipe_init(pipe_t *p);
+void pipe_read(pipe_t *p, char *dado);
+void pipe_write(pipe_t *p, char dado);
+# 6 "user.c" 2
 
 sem_t s;
+pipe_t p;
 
 void config_user()
 {
@@ -9971,6 +9993,7 @@ void config_user()
     __asm("global _LED_1, _LED_2, _LED_3");
 
     sem_init(&s, 0);
+    pipe_init(&p);
 }
 
 TASK acionaMotor()
@@ -9996,10 +10019,13 @@ TASK apagaLed()
 
 TASK LED_1()
 {
+    char acionamento[] = {'L', 'L', 'D', 'L', 'D', 'D'};
+    uint8_t pos = 0;
     while (1) {
-
         PORTCbits.RC6 = ~PORTCbits.RC6;
-        sem_wait(&s);
+        pipe_write(&p, acionamento[pos]);
+        pos = (pos + 1) % 6;
+
     }
 }
 
@@ -10009,15 +10035,20 @@ TASK LED_2()
 
 
         PORTCbits.RC7 = ~PORTCbits.RC7;
-        sem_post(&s);
+
 
     }
 }
 
 TASK LED_3()
 {
+    char dado;
     while (1) {
-        PORTDbits.RD0 = ~PORTDbits.RD0;
+        pipe_read(&p, &dado);
+        if (dado == 'L')
+            PORTDbits.RD0 = 1;
+        else if (dado == 'D')
+            PORTDbits.RD0 = 0;
 
 
     }

@@ -8,14 +8,6 @@ void pipe_init(pipe_t *p)
     sem_init(&p->s_output, 0);
 }
 
-void pipe_read(pipe_t *p, char *dado)
-{
-    sem_wait(&p->s_output);
-    *dado = p->fila_dados[p->pos_output];
-    p->pos_output = (p->pos_output + 1) % PIPE_MAX_SIZE;
-    sem_post(&p->s_input);
-}
-
 void pipe_write(pipe_t *p, char dado)
 {
     sem_wait(&p->s_input);
@@ -24,3 +16,10 @@ void pipe_write(pipe_t *p, char dado)
     sem_post(&p->s_output);
 }
 
+void pipe_read(pipe_t *p, char *dado)
+{
+    sem_wait(&p->s_output);
+    *dado = p->fila_dados[p->pos_output];
+    p->pos_output = (p->pos_output + 1) % PIPE_MAX_SIZE;
+    sem_post(&p->s_input);
+}

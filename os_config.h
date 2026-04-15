@@ -3,7 +3,7 @@
 
 #define MAX_STACK_SIZE      31
 #define MAX_USER_TASKS      3
-#define QUANTUM             50
+#define QUANTUM             5
 #define PIPE_MAX_SIZE       4
 
 #endif	/* OS_CONFIG_H */

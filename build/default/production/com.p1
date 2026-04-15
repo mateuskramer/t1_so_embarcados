@@ -46,61 +46,61 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 7 ]
 }
 "11
-[; ;com.c: 11: void pipe_read(pipe_t *p, char *dado)
-[v _pipe_read `(v ~T0 @X0 1 ef2`*S6`*uc ]
+[; ;com.c: 11: void pipe_write(pipe_t *p, char dado)
+[v _pipe_write `(v ~T0 @X0 1 ef2`*S6`uc ]
 "12
 [; ;com.c: 12: {
 {
-[e :U _pipe_read ]
+[e :U _pipe_write ]
 "11
-[; ;com.c: 11: void pipe_read(pipe_t *p, char *dado)
+[; ;com.c: 11: void pipe_write(pipe_t *p, char dado)
 [v _p `*S6 ~T0 @X0 1 r1 ]
-[v _dado `*uc ~T0 @X0 1 r2 ]
+[v _dado `uc ~T0 @X0 1 r2 ]
 "12
 [; ;com.c: 12: {
 [f ]
 "13
-[; ;com.c: 13:     sem_wait(&p->s_output);
-[e ( _sem_wait (1 &U . *U _p 4 ]
+[; ;com.c: 13:     sem_wait(&p->s_input);
+[e ( _sem_wait (1 &U . *U _p 3 ]
 "14
-[; ;com.c: 14:     *dado = p->fila_dados[p->pos_output];
-[e = *U _dado *U + &U . *U _p 0 * -> . *U _p 2 `ux -> -> # *U &U . *U _p 0 `ui `ux ]
+[; ;com.c: 14:     p->fila_dados[p->pos_input] = dado;
+[e = *U + &U . *U _p 0 * -> . *U _p 1 `ux -> -> # *U &U . *U _p 0 `ui `ux _dado ]
 "15
-[; ;com.c: 15:     p->pos_output = (p->pos_output + 1) % 4;
-[e = . *U _p 2 -> % + -> . *U _p 2 `i -> 1 `i -> 4 `i `uc ]
+[; ;com.c: 15:     p->pos_input = (p->pos_input + 1) % 4;
+[e = . *U _p 1 -> % + -> . *U _p 1 `i -> 1 `i -> 4 `i `uc ]
 "16
-[; ;com.c: 16:     sem_post(&p->s_input);
-[e ( _sem_post (1 &U . *U _p 3 ]
+[; ;com.c: 16:     sem_post(&p->s_output);
+[e ( _sem_post (1 &U . *U _p 4 ]
 "17
 [; ;com.c: 17: }
 [e :UE 8 ]
 }
 "19
-[; ;com.c: 19: void pipe_write(pipe_t *p, char dado)
-[v _pipe_write `(v ~T0 @X0 1 ef2`*S6`uc ]
+[; ;com.c: 19: void pipe_read(pipe_t *p, char *dado)
+[v _pipe_read `(v ~T0 @X0 1 ef2`*S6`*uc ]
 "20
 [; ;com.c: 20: {
 {
-[e :U _pipe_write ]
+[e :U _pipe_read ]
 "19
-[; ;com.c: 19: void pipe_write(pipe_t *p, char dado)
+[; ;com.c: 19: void pipe_read(pipe_t *p, char *dado)
 [v _p `*S6 ~T0 @X0 1 r1 ]
-[v _dado `uc ~T0 @X0 1 r2 ]
+[v _dado `*uc ~T0 @X0 1 r2 ]
 "20
 [; ;com.c: 20: {
 [f ]
 "21
-[; ;com.c: 21:     sem_wait(&p->s_input);
-[e ( _sem_wait (1 &U . *U _p 3 ]
+[; ;com.c: 21:     sem_wait(&p->s_output);
+[e ( _sem_wait (1 &U . *U _p 4 ]
 "22
-[; ;com.c: 22:     p->fila_dados[p->pos_input] = dado;
-[e = *U + &U . *U _p 0 * -> . *U _p 1 `ux -> -> # *U &U . *U _p 0 `ui `ux _dado ]
+[; ;com.c: 22:     *dado = p->fila_dados[p->pos_output];
+[e = *U _dado *U + &U . *U _p 0 * -> . *U _p 2 `ux -> -> # *U &U . *U _p 0 `ui `ux ]
 "23
-[; ;com.c: 23:     p->pos_input = (p->pos_input + 1) % 4;
-[e = . *U _p 1 -> % + -> . *U _p 1 `i -> 1 `i -> 4 `i `uc ]
+[; ;com.c: 23:     p->pos_output = (p->pos_output + 1) % 4;
+[e = . *U _p 2 -> % + -> . *U _p 2 `i -> 1 `i -> 4 `i `uc ]
 "24
-[; ;com.c: 24:     sem_post(&p->s_output);
-[e ( _sem_post (1 &U . *U _p 4 ]
+[; ;com.c: 24:     sem_post(&p->s_input);
+[e ( _sem_post (1 &U . *U _p 3 ]
 "25
 [; ;com.c: 25: }
 [e :UE 9 ]
