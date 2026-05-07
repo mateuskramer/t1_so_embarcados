@@ -129,7 +129,8 @@ typedef void TASK;
 typedef enum {READY = 0,
               WAITING,
               RUNNING,
-              WAITING_SEM
+              WAITING_SEM,
+              WAITING_MUTEX
              } state_t;
 
 typedef void (*f_ptr)(void);
@@ -141,7 +142,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[31];
+    hw_stack_t stack[10];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -177,11 +178,21 @@ typedef struct tcb {
 
 
 typedef struct ready_queue {
-    tcb_t TASKS[3 +1];
+    tcb_t TASKS[4 +1];
     uint8_t size;
     tcb_t *task_running;
     uint8_t pos_task_running;
 } ready_queue_t;
+
+
+typedef struct mutex {
+    uint8_t locked;
+    uint8_t owner_id;
+    uint8_t waiting_queue[4];
+    uint8_t waiting_count;
+    uint8_t pos_input;
+    uint8_t pos_output;
+} mutex_t;
 # 5 "./com.h" 2
 
 # 1 "./sync.h" 1
@@ -192,17 +203,23 @@ typedef struct ready_queue {
 
 
 
+
 typedef struct sem {
     int contador;
-    uint8_t fila[3];
+    uint8_t fila[4];
     uint8_t pos_input;
     uint8_t pos_output;
 } sem_t;
 
-
 void sem_init(sem_t *sem, uint8_t valor);
 void sem_wait(sem_t *sem);
 void sem_post(sem_t *sem);
+
+
+void mutex_init(mutex_t *mutex);
+uint8_t mutex_lock(mutex_t *mutex);
+uint8_t mutex_unlock(mutex_t *mutex);
+uint8_t mutex_trylock(mutex_t *mutex);
 # 7 "./com.h" 2
 
 

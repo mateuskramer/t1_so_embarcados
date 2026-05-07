@@ -9,7 +9,8 @@ typedef void TASK;
 typedef enum {READY = 0,
               WAITING,
               RUNNING,
-              WAITING_SEM
+              WAITING_SEM,
+              WAITING_MUTEX
              } state_t;
 
 typedef void (*f_ptr)(void);
@@ -62,6 +63,17 @@ typedef struct ready_queue {
     tcb_t *task_running;
     uint8_t pos_task_running;
 } ready_queue_t;
+
+// Mutex para sincronização de tarefas
+typedef struct mutex {
+    uint8_t locked;                     // 0 = desbloqueado, 1 = bloqueado
+    uint8_t owner_id;                   // ID da tarefa proprietária (255 = nenhuma)
+    uint8_t waiting_queue[MAX_USER_TASKS];
+    uint8_t waiting_count;              // Número de tarefas aguardando
+    uint8_t pos_input;                  // Posição para inserir na fila
+    uint8_t pos_output;                 // Posição para remover da fila
+} mutex_t;
+
 
 #endif	/* TYPES_H */
 

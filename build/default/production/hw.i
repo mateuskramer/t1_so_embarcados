@@ -9828,6 +9828,8 @@ unsigned char __t3rd16on(void);
 
 void setup_hardware(void);
 void __attribute__((picinterrupt(("")))) ISR(void);
+
+void ext_int_isr_handler(void);
 # 2 "hw.c" 2
 # 1 "./kernel.h" 1
 
@@ -9846,7 +9848,8 @@ typedef void TASK;
 typedef enum {READY = 0,
               WAITING,
               RUNNING,
-              WAITING_SEM
+              WAITING_SEM,
+              WAITING_MUTEX
              } state_t;
 
 typedef void (*f_ptr)(void);
@@ -9858,7 +9861,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[31];
+    hw_stack_t stack[10];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -9894,11 +9897,21 @@ typedef struct tcb {
 
 
 typedef struct ready_queue {
-    tcb_t TASKS[3 +1];
+    tcb_t TASKS[4 +1];
     uint8_t size;
     tcb_t *task_running;
     uint8_t pos_task_running;
 } ready_queue_t;
+
+
+typedef struct mutex {
+    uint8_t locked;
+    uint8_t owner_id;
+    uint8_t waiting_queue[4];
+    uint8_t waiting_count;
+    uint8_t pos_input;
+    uint8_t pos_output;
+} mutex_t;
 # 5 "./kernel.h" 2
 
 
@@ -9928,6 +9941,7 @@ TASK idle();
 void scheduler(void);
 uint8_t RR_scheduler(void);
 uint8_t priority_scheduler(void);
+uint8_t rr_priority_scheduler(void);
 # 4 "hw.c" 2
 
 
@@ -9962,9 +9976,6 @@ void __attribute__((picinterrupt(("")))) ISR(void)
                 }
             }
         }
-
-
-
         rr_quantum--;
         if (rr_quantum == 0) {
             rr_quantum = 5;
@@ -9972,5 +9983,9 @@ void __attribute__((picinterrupt(("")))) ISR(void)
             scheduler();
             do { if (r_queue.task_running->task_state == READY) { r_queue.task_running->task_state = RUNNING; BSR = r_queue.task_running->BSR_REG; FSR0H = r_queue.task_running->FSR0H_REG; FSR0L = r_queue.task_running->FSR0L_REG; FSR1H = r_queue.task_running->FSR1H_REG; FSR1L = r_queue.task_running->FSR1L_REG; FSR2H = r_queue.task_running->FSR2H_REG; FSR2L = r_queue.task_running->FSR2L_REG; PCLATH = r_queue.task_running->PCLATH_REG; PCLATU = r_queue.task_running->PCLATU_REG; PRODH = r_queue.task_running->PRODH_REG; PRODL = r_queue.task_running->PRODL_REG; TABLAT = r_queue.task_running->TABLAT_REG; TBLPTRH = r_queue.task_running->TBLPTRH_REG; TBLPTRL = r_queue.task_running->TBLPTRL_REG; TBLPTRU = r_queue.task_running->TBLPTRU_REG; STATUS = r_queue.task_running->STATUS_REG; WREG = r_queue.task_running->W_REG; STKPTR = 0; if (r_queue.task_running->task_stack.stack_size > 0) { do { __asm("PUSH"); r_queue.task_running->task_stack.stack_size -= 1; TOSL = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSL_REG; TOSH = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSH_REG; TOSU = r_queue.task_running->task_stack.stack[r_queue.task_running->task_stack.stack_size].TOSU_REG; } while (r_queue.task_running->task_stack.stack_size); } else { __asm("PUSH"); TOSL = (uint8_t)((uint24_t)r_queue.task_running->task_ptr & 0xFF); TOSH = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 8) & 0xFF); TOSU = (uint8_t)(((uint24_t)r_queue.task_running->task_ptr >> 16) & 0xFF); } rr_quantum = 5; } } while (0);;
         }
+    }
+
+    if (INTCONbits.INT0IE && INTCONbits.INT0IF) {
+        ext_int_isr_handler();
     }
 }

@@ -3,19 +3,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 "18 ./kernel.h
 [; ;./kernel.h: 18: void os_config(void);
 [v _os_config `(v ~T0 @X0 0 ef ]
-[v F6195 `(v ~T0 @X0 0 tf ]
+[v F6204 `(v ~T0 @X0 0 tf ]
 "16
 [; ;./kernel.h: 16: void os_create_task(uint8_t id, f_ptr func, uint8_t prior);
-[v _os_create_task `(v ~T0 @X0 0 ef3`uc`*F6195`uc ]
-"13 ./user.h
-[; ;./user.h: 13: TASK LED_1(void);
-[v _LED_1 `(v ~T0 @X0 0 ef ]
+[v _os_create_task `(v ~T0 @X0 0 ef3`uc`*F6204`uc ]
+"12 ./user.h
+[; ;./user.h: 12: TASK task_blink1(void);
+[v _task_blink1 `(v ~T0 @X0 0 ef ]
+"13
+[; ;./user.h: 13: TASK task_blink2(void);
+[v _task_blink2 `(v ~T0 @X0 0 ef ]
 "14
-[; ;./user.h: 14: TASK LED_2(void);
-[v _LED_2 `(v ~T0 @X0 0 ef ]
+[; ;./user.h: 14: TASK task_blink3(void);
+[v _task_blink3 `(v ~T0 @X0 0 ef ]
 "15
-[; ;./user.h: 15: TASK LED_3(void);
-[v _LED_3 `(v ~T0 @X0 0 ef ]
+[; ;./user.h: 15: TASK task_blink4(void);
+[v _task_blink4 `(v ~T0 @X0 0 ef ]
 "19 ./kernel.h
 [; ;./kernel.h: 19: void os_start(void);
 [v _os_start `(v ~T0 @X0 0 ef ]
@@ -779,44 +782,45 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 17404: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 [v $root$_main `(v ~T0 @X0 0 e ]
-"8 main.c
-[; ;main.c: 8: int main()
+"4 main.c
+[; ;main.c: 4: int main()
 [v _main `(i ~T0 @X0 1 ef ]
-"9
-[; ;main.c: 9: {
+"5
+[; ;main.c: 5: {
 {
 [e :U _main ]
 [f ]
-"10
-[; ;main.c: 10:     os_config();
+"6
+[; ;main.c: 6:     os_config();
 [e ( _os_config ..  ]
-"16
-[; ;main.c: 16:     os_create_task(2, LED_1, 5);
-[e ( _os_create_task (3 , , -> -> 2 `i `uc &U _LED_1 -> -> 5 `i `uc ]
-"17
-[; ;main.c: 17:     os_create_task(3, LED_2, 5);
-[e ( _os_create_task (3 , , -> -> 3 `i `uc &U _LED_2 -> -> 5 `i `uc ]
-"18
-[; ;main.c: 18:     os_create_task(4, LED_3, 5);
-[e ( _os_create_task (3 , , -> -> 4 `i `uc &U _LED_3 -> -> 5 `i `uc ]
-"20
-[; ;main.c: 20:     os_start();
+"7
+[; ;main.c: 7:     os_create_task(2, task_blink1, 1);
+[e ( _os_create_task (3 , , -> -> 2 `i `uc &U _task_blink1 -> -> 1 `i `uc ]
+"8
+[; ;main.c: 8:     os_create_task(3, task_blink2, 1);
+[e ( _os_create_task (3 , , -> -> 3 `i `uc &U _task_blink2 -> -> 1 `i `uc ]
+"9
+[; ;main.c: 9:     os_create_task(4, task_blink3, 2);
+[e ( _os_create_task (3 , , -> -> 4 `i `uc &U _task_blink3 -> -> 2 `i `uc ]
+"10
+[; ;main.c: 10:     os_create_task(5, task_blink4, 2);
+[e ( _os_create_task (3 , , -> -> 5 `i `uc &U _task_blink4 -> -> 2 `i `uc ]
+"12
+[; ;main.c: 12:     os_start();
 [e ( _os_start ..  ]
-"22
-[; ;main.c: 22:     while (1) {
-[e :U 882 ]
-{
-"24
-[; ;main.c: 24:     }
-}
-[e :U 881 ]
-[e $U 882  ]
+"13
+[; ;main.c: 13:     while (1){};
 [e :U 883 ]
-"26
-[; ;main.c: 26:     return 0;
+{
+}
+[e :U 882 ]
+[e $U 883  ]
+[e :U 884 ]
+"14
+[; ;main.c: 14:     return 0;
 [e ) -> 0 `i ]
-[e $UE 880  ]
-"27
-[; ;main.c: 27: }
-[e :UE 880 ]
+[e $UE 881  ]
+"15
+[; ;main.c: 15: }
+[e :UE 881 ]
 }

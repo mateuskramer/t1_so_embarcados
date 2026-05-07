@@ -7,10 +7,6 @@
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
-
-
-
-
 # 1 "./kernel.h" 1
 
 
@@ -133,7 +129,8 @@ typedef void TASK;
 typedef enum {READY = 0,
               WAITING,
               RUNNING,
-              WAITING_SEM
+              WAITING_SEM,
+              WAITING_MUTEX
              } state_t;
 
 typedef void (*f_ptr)(void);
@@ -145,7 +142,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[31];
+    hw_stack_t stack[10];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -181,11 +178,21 @@ typedef struct tcb {
 
 
 typedef struct ready_queue {
-    tcb_t TASKS[3 +1];
+    tcb_t TASKS[4 +1];
     uint8_t size;
     tcb_t *task_running;
     uint8_t pos_task_running;
 } ready_queue_t;
+
+
+typedef struct mutex {
+    uint8_t locked;
+    uint8_t owner_id;
+    uint8_t waiting_queue[4];
+    uint8_t waiting_count;
+    uint8_t pos_input;
+    uint8_t pos_output;
+} mutex_t;
 # 5 "./kernel.h" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 3
@@ -9921,42 +9928,25 @@ void os_start(void);
 void os_task_change_state(state_t new_state, tcb_t *task_handle);
 
 TASK idle();
-# 6 "main.c" 2
+# 2 "main.c" 2
 # 1 "./user.h" 1
-
-
-
-
-
+# 11 "./user.h"
 void config_user(void);
-
-TASK acionaMotor(void);
-TASK ligaLed(void);
-TASK apagaLed(void);
-
-
-TASK LED_1(void);
-TASK LED_2(void);
-TASK LED_3(void);
-# 7 "main.c" 2
+TASK task_blink1(void);
+TASK task_blink2(void);
+TASK task_blink3(void);
+TASK task_blink4(void);
+# 3 "main.c" 2
 
 int main()
 {
     os_config();
-
-
-
-
-
-    os_create_task(2, LED_1, 5);
-    os_create_task(3, LED_2, 5);
-    os_create_task(4, LED_3, 5);
+    os_create_task(2, task_blink1, 1);
+    os_create_task(3, task_blink2, 1);
+    os_create_task(4, task_blink3, 2);
+    os_create_task(5, task_blink4, 2);
 
     os_start();
-
-    while (1) {
-
-    }
-
+    while (1){};
     return 0;
 }

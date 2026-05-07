@@ -129,7 +129,8 @@ typedef void TASK;
 typedef enum {READY = 0,
               WAITING,
               RUNNING,
-              WAITING_SEM
+              WAITING_SEM,
+              WAITING_MUTEX
              } state_t;
 
 typedef void (*f_ptr)(void);
@@ -141,7 +142,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[31];
+    hw_stack_t stack[10];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -177,24 +178,39 @@ typedef struct tcb {
 
 
 typedef struct ready_queue {
-    tcb_t TASKS[3 +1];
+    tcb_t TASKS[4 +1];
     uint8_t size;
     tcb_t *task_running;
     uint8_t pos_task_running;
 } ready_queue_t;
+
+
+typedef struct mutex {
+    uint8_t locked;
+    uint8_t owner_id;
+    uint8_t waiting_queue[4];
+    uint8_t waiting_count;
+    uint8_t pos_input;
+    uint8_t pos_output;
+} mutex_t;
 # 5 "./user.h" 2
 
+
+
+
+
+
 void config_user(void);
-
-TASK acionaMotor(void);
-TASK ligaLed(void);
-TASK apagaLed(void);
-
-
-TASK LED_1(void);
-TASK LED_2(void);
-TASK LED_3(void);
+TASK task_blink1(void);
+TASK task_blink2(void);
+TASK task_blink3(void);
+TASK task_blink4(void);
 # 2 "user.c" 2
+# 1 "./kernel.h" 1
+
+
+
+
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -9911,13 +9927,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 2 3
-# 3 "user.c" 2
-# 1 "./kernel.h" 1
-
-
-
-
-
+# 6 "./kernel.h" 2
 
 
 extern ready_queue_t r_queue;
@@ -9935,6 +9945,35 @@ void os_start(void);
 void os_task_change_state(state_t new_state, tcb_t *task_handle);
 
 TASK idle();
+# 3 "user.c" 2
+# 1 "./io.h" 1
+
+
+
+
+
+
+void adc_config(void);
+void adc_on(void);
+uint16_t adc_read(void);
+
+void pwm_config(uint8_t period);
+void pwm_on(void);
+void pwm_off(void);
+void pwm_set_duty(uint16_t duty);
+
+
+
+typedef enum {
+    EXT_INT_RISING = 0,
+    EXT_INT_FALLING = 1
+} ext_int_edge_t;
+
+typedef void (*ext_int_callback_t)(void);
+
+void ext_int_config(ext_int_edge_t edge, ext_int_callback_t callback);
+void ext_int_enable(void);
+void ext_int_disable(void);
 # 4 "user.c" 2
 # 1 "./sync.h" 1
 
@@ -9944,112 +9983,76 @@ TASK idle();
 
 
 
+
 typedef struct sem {
     int contador;
-    uint8_t fila[3];
+    uint8_t fila[4];
     uint8_t pos_input;
     uint8_t pos_output;
 } sem_t;
 
-
 void sem_init(sem_t *sem, uint8_t valor);
 void sem_wait(sem_t *sem);
 void sem_post(sem_t *sem);
+
+
+void mutex_init(mutex_t *mutex);
+uint8_t mutex_lock(mutex_t *mutex);
+uint8_t mutex_unlock(mutex_t *mutex);
+uint8_t mutex_trylock(mutex_t *mutex);
 # 5 "user.c" 2
-# 1 "./com.h" 1
 
 
+static mutex_t adc_mutex;
 
-
-
-
-
-
-typedef struct pipe {
-    char fila_dados[4];
-    uint8_t pos_input;
-    uint8_t pos_output;
-    sem_t s_input;
-    sem_t s_output;
-} pipe_t;
-
-void pipe_init(pipe_t *p);
-void pipe_read(pipe_t *p, char *dado);
-void pipe_write(pipe_t *p, char dado);
-# 6 "user.c" 2
-
-sem_t s;
-pipe_t p;
-
-void config_user()
+void config_user(void)
 {
-    TRISCbits.RC6 = 0;
-    TRISCbits.RC7 = 0;
-    TRISDbits.RD0 = 0;
-    ANSELDbits.ANSD0 = 0;
-    ANSELCbits.ANSC6 = 0;
-    ANSELCbits.ANSC7 = 0;
+    __asm("global _task_blink1, _task_blink2, _task_blink3, _task_blink4");
 
-    __asm("global _LED_1, _LED_2, _LED_3");
+    TRISCbits.RC1 = 0; LATCbits.LATC1 = 0;
+    TRISCbits.RC2 = 0; LATCbits.LATC2 = 0;
+    TRISCbits.RC3 = 0; LATCbits.LATC3 = 0;
+    TRISCbits.RC4 = 0; LATCbits.LATC4 = 0;
 
-    sem_init(&s, 0);
-    pipe_init(&p);
+    adc_config();
+    adc_on();
+
+    pwm_config(99);
+    pwm_on();
+
+    mutex_init(&adc_mutex);
 }
 
-TASK acionaMotor()
+TASK task_blink1(void)
 {
-    while (1) {
+    while (1) { LATCbits.LATC1 ^= 1; }
+}
 
+TASK task_blink2(void)
+{
+    while (1) { LATCbits.LATC2 ^= 1; }
+}
+
+TASK task_blink3(void)
+{
+    while (1)
+    {
+        mutex_lock(&adc_mutex);
+        uint16_t adc = adc_read();
+        mutex_unlock(&adc_mutex);
+
+        LATCbits.LATC3 = (adc > 511) ? 1 : 0;
     }
 }
 
-TASK ligaLed()
+TASK task_blink4(void)
 {
-    while (1) {
+    while (1)
+    {
+        mutex_lock(&adc_mutex);
+        uint16_t adc = adc_read();
+        mutex_unlock(&adc_mutex);
 
-    }
-}
-
-TASK apagaLed()
-{
-    while (1) {
-
-    }
-}
-
-TASK LED_1()
-{
-    char acionamento[] = {'L', 'L', 'D', 'L', 'D', 'D'};
-    uint8_t pos = 0;
-    while (1) {
-        PORTCbits.RC6 = ~PORTCbits.RC6;
-        pipe_write(&p, acionamento[pos]);
-        pos = (pos + 1) % 6;
-
-    }
-}
-
-TASK LED_2()
-{
-    while (1) {
-
-
-        PORTCbits.RC7 = ~PORTCbits.RC7;
-
-
-    }
-}
-
-TASK LED_3()
-{
-    char dado;
-    while (1) {
-        pipe_read(&p, &dado);
-        if (dado == 'L')
-            PORTDbits.RD0 = 1;
-        else if (dado == 'D')
-            PORTDbits.RD0 = 0;
-
-
+        pwm_set_duty(adc);
     }
 }

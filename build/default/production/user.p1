@@ -1,146 +1,65 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"8 ./sync.h
-[; ;./sync.h: 8: typedef struct sem {
-[s S880 `i 1 `uc -> 3 `i `uc 1 `uc 1 ]
-[n S880 sem contador fila pos_input pos_output ]
-"9 ./com.h
-[; ;./com.h: 9: typedef struct pipe {
-[s S881 `uc -> 4 `i `uc 1 `uc 1 `S880 1 `S880 1 ]
-[n S881 pipe fila_dados pos_input pos_output s_input s_output ]
+"68 ./types.h
+[; ;./types.h: 68: typedef struct mutex {
+[s S5 `uc 1 `uc 1 `uc -> 4 `i `uc 1 `uc 1 `uc 1 ]
+[n S5 mutex locked owner_id waiting_queue waiting_count pos_input pos_output ]
 "8513 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8513:     struct {
-[s S411 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S411 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
+[s S412 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S412 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
 "8523
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8523:     struct {
-[s S412 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S412 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+[s S413 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S413 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
 "8512
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8512: typedef union {
-[u S410 `S411 1 `S412 1 ]
-[n S410 . . . ]
+[u S411 `S412 1 `S413 1 ]
+[n S411 . . . ]
 "8534
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8534: extern volatile TRISCbits_t TRISCbits __attribute__((address(0xF94)));
-[v _TRISCbits `VS410 ~T0 @X0 0 e@3988 ]
-"8735
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8735:     struct {
-[s S417 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S417 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
-"8745
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8745:     struct {
-[s S418 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S418 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"8734
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8734: typedef union {
-[u S416 `S417 1 `S418 1 ]
-[n S416 . . . ]
-"8756
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8756: extern volatile TRISDbits_t TRISDbits __attribute__((address(0xF95)));
-[v _TRISDbits `VS416 ~T0 @X0 0 e@3989 ]
-"202
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 202:     struct {
-[s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S17 . ANSD0 ANSD1 ANSD2 ANSD3 ANSD4 ANSD5 ANSD6 ANSD7 ]
-"201
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 201: typedef union {
-[u S16 `S17 1 ]
-[n S16 . . ]
-"213
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 213: extern volatile ANSELDbits_t ANSELDbits __attribute__((address(0xF3B)));
-[v _ANSELDbits `VS16 ~T0 @X0 0 e@3899 ]
-"151
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 151:     struct {
-[s S15 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S15 . . ANSC2 ANSC3 ANSC4 ANSC5 ANSC6 ANSC7 ]
-"150
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 150: typedef union {
-[u S14 `S15 1 ]
-[n S14 . . ]
-"161
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 161: extern volatile ANSELCbits_t ANSELCbits __attribute__((address(0xF3A)));
-[v _ANSELCbits `VS14 ~T0 @X0 0 e@3898 ]
-"16 ./sync.h
-[; ;./sync.h: 16: void sem_init(sem_t *sem, uint8_t valor);
-[v _sem_init `(v ~T0 @X0 0 ef2`*S880`uc ]
-"17 ./com.h
-[; ;./com.h: 17: void pipe_init(pipe_t *p);
-[v _pipe_init `(v ~T0 @X0 0 ef1`*S881 ]
-"6839 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6839:     struct {
-[s S359 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S359 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
-"6849
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6849:     struct {
-[s S360 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S360 . T1OSO T1OSI T5CKI SCK SDI SDO TX RX ]
-"6859
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6859:     struct {
-[s S361 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S361 . P2B P2A P1A SCL SDA . CK DT ]
-"6869
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6869:     struct {
-[s S362 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S362 . T1CKI CCP2 CCP1 SCK1 SDI1 SDO1 TX1 RX1 ]
-"6879
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6879:     struct {
-[s S363 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S363 . T3CKI . CTPLS SCL1 SDA1 . CK1 DT1 ]
-"6889
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6889:     struct {
-[s S364 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S364 . T3G . AN14 AN15 AN16 AN17 AN18 AN19 ]
-"6899
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6899:     struct {
-[s S365 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S365 . . PA2 PA1 ]
-"6838
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6838: typedef union {
-[u S358 `S359 1 `S360 1 `S361 1 `S362 1 `S363 1 `S364 1 `S365 1 ]
-[n S358 . . . . . . . . ]
-"6905
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 6905: extern volatile PORTCbits_t PORTCbits __attribute__((address(0xF82)));
-[v _PORTCbits `VS358 ~T0 @X0 0 e@3970 ]
-"19 ./com.h
-[; ;./com.h: 19: void pipe_write(pipe_t *p, char dado);
-[v _pipe_write `(v ~T0 @X0 0 ef2`*S881`uc ]
-"18
-[; ;./com.h: 18: void pipe_read(pipe_t *p, char *dado);
-[v _pipe_read `(v ~T0 @X0 0 ef2`*S881`*uc ]
-"7146 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7146:     struct {
-[s S367 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S367 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"7156
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7156:     struct {
-[s S368 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S368 . . P2B P2C P2D P1B P1C P1D ]
-"7165
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7165:     struct {
-[s S369 :1 `uc 1 :1 `uc 1 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S369 . . CCP4 . TX2 RX2 ]
-"7172
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7172:     struct {
-[s S370 :3 `uc 1 :1 `uc 1 ]
-[n S370 . . NOT_SS2 ]
-"7176
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7176:     struct {
-[s S371 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S371 . SCK2 SDI2 . nSS2 SDO2 . CK2 DT2 ]
-"7186
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7186:     struct {
-[s S372 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S372 . SCL2 SDA2 . SS2 ]
-"7192
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7192:     struct {
-[s S373 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S373 . AN20 AN21 AN22 AN23 AN24 AN25 AN26 AN27 ]
-"7145
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7145: typedef union {
-[u S366 `S367 1 `S368 1 `S369 1 `S370 1 `S371 1 `S372 1 `S373 1 ]
-[n S366 . . . . . . . . ]
-"7203
-[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7203: extern volatile PORTDbits_t PORTDbits __attribute__((address(0xF83)));
-[v _PORTDbits `VS366 ~T0 @X0 0 e@3971 ]
+[v _TRISCbits `VS411 ~T0 @X0 0 e@3988 ]
+"7788
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7788:     struct {
+[s S391 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S391 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 LATC6 LATC7 ]
+"7798
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7798:     struct {
+[s S392 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S392 . LC0 LC1 LC2 LC3 LC4 LC5 LC6 LC7 ]
+"7787
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7787: typedef union {
+[u S390 `S391 1 `S392 1 ]
+[n S390 . . . ]
+"7809
+[; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 7809: extern volatile LATCbits_t LATCbits __attribute__((address(0xF8B)));
+[v _LATCbits `VS390 ~T0 @X0 0 e@3979 ]
+"7 ./io.h
+[; ;./io.h: 7: void adc_config(void);
+[v _adc_config `(v ~T0 @X0 0 ef ]
+"8
+[; ;./io.h: 8: void adc_on(void);
+[v _adc_on `(v ~T0 @X0 0 ef ]
+"11
+[; ;./io.h: 11: void pwm_config(uint8_t period);
+[v _pwm_config `(v ~T0 @X0 0 ef1`uc ]
+"12
+[; ;./io.h: 12: void pwm_on(void);
+[v _pwm_on `(v ~T0 @X0 0 ef ]
+"21 ./sync.h
+[; ;./sync.h: 21: void mutex_init(mutex_t *mutex);
+[v _mutex_init `(v ~T0 @X0 0 ef1`*S5 ]
+"22
+[; ;./sync.h: 22: uint8_t mutex_lock(mutex_t *mutex);
+[v _mutex_lock `(uc ~T0 @X0 0 ef1`*S5 ]
+"9 ./io.h
+[; ;./io.h: 9: uint16_t adc_read(void);
+[v _adc_read `(us ~T0 @X0 0 ef ]
+"23 ./sync.h
+[; ;./sync.h: 23: uint8_t mutex_unlock(mutex_t *mutex);
+[v _mutex_unlock `(uc ~T0 @X0 0 ef1`*S5 ]
+"14 ./io.h
+[; ;./io.h: 14: void pwm_set_duty(uint16_t duty);
+[v _pwm_set_duty `(v ~T0 @X0 0 ef1`us ]
 "52 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 52: __asm("ANSELA equ 0F38h");
 [; <" ANSELA equ 0F38h ;# ">
@@ -901,64 +820,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 17404: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 "7 user.c
-[; ;user.c: 7: sem_t s;
-[v _s `S880 ~T0 @X0 1 e ]
-"8
-[; ;user.c: 8: pipe_t p;
-[v _p `S881 ~T0 @X0 1 e ]
-"10
-[; ;user.c: 10: void config_user()
+[; ;user.c: 7: static mutex_t adc_mutex;
+[v _adc_mutex `S5 ~T0 @X0 1 s ]
+"9
+[; ;user.c: 9: void config_user(void)
 [v _config_user `(v ~T0 @X0 1 ef ]
-"11
-[; ;user.c: 11: {
+"10
+[; ;user.c: 10: {
 {
 [e :U _config_user ]
 [f ]
-"12
-[; ;user.c: 12:     TRISCbits.RC6 = 0;
-[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
+"11
+[; ;user.c: 11:     __asm("global _task_blink1, _task_blink2, _task_blink3, _task_blink4");
+[; <" global _task_blink1, _task_blink2, _task_blink3, _task_blink4 ;# ">
 "13
-[; ;user.c: 13:     TRISCbits.RC7 = 0;
-[e = . . _TRISCbits 1 7 -> -> 0 `i `uc ]
+[; ;user.c: 13:     TRISCbits.RC1 = 0; LATCbits.LATC1 = 0;
+[e = . . _TRISCbits 1 1 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
 "14
-[; ;user.c: 14:     TRISDbits.RD0 = 0;
-[e = . . _TRISDbits 1 0 -> -> 0 `i `uc ]
+[; ;user.c: 14:     TRISCbits.RC2 = 0; LATCbits.LATC2 = 0;
+[e = . . _TRISCbits 1 2 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
 "15
-[; ;user.c: 15:     ANSELDbits.ANSD0 = 0;
-[e = . . _ANSELDbits 0 0 -> -> 0 `i `uc ]
+[; ;user.c: 15:     TRISCbits.RC3 = 0; LATCbits.LATC3 = 0;
+[e = . . _TRISCbits 1 3 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
 "16
-[; ;user.c: 16:     ANSELCbits.ANSC6 = 0;
-[e = . . _ANSELCbits 0 5 -> -> 0 `i `uc ]
-"17
-[; ;user.c: 17:     ANSELCbits.ANSC7 = 0;
-[e = . . _ANSELCbits 0 6 -> -> 0 `i `uc ]
+[; ;user.c: 16:     TRISCbits.RC4 = 0; LATCbits.LATC4 = 0;
+[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+"18
+[; ;user.c: 18:     adc_config();
+[e ( _adc_config ..  ]
 "19
-[; ;user.c: 19:     __asm("global _LED_1, _LED_2, _LED_3");
-[; <" global _LED_1, _LED_2, _LED_3 ;# ">
+[; ;user.c: 19:     adc_on();
+[e ( _adc_on ..  ]
 "21
-[; ;user.c: 21:     sem_init(&s, 0);
-[e ( _sem_init (2 , &U _s -> -> 0 `i `uc ]
+[; ;user.c: 21:     pwm_config(99);
+[e ( _pwm_config (1 -> -> 99 `i `uc ]
 "22
-[; ;user.c: 22:     pipe_init(&p);
-[e ( _pipe_init (1 &U _p ]
-"23
-[; ;user.c: 23: }
+[; ;user.c: 22:     pwm_on();
+[e ( _pwm_on ..  ]
+"24
+[; ;user.c: 24:     mutex_init(&adc_mutex);
+[e ( _mutex_init (1 &U _adc_mutex ]
+"25
+[; ;user.c: 25: }
 [e :UE 882 ]
 }
-"25
-[; ;user.c: 25: TASK acionaMotor()
-[v _acionaMotor `(v ~T0 @X0 1 ef ]
-"26
-[; ;user.c: 26: {
-{
-[e :U _acionaMotor ]
-[f ]
 "27
-[; ;user.c: 27:     while (1) {
+[; ;user.c: 27: TASK task_blink1(void)
+[v _task_blink1 `(v ~T0 @X0 1 ef ]
+"28
+[; ;user.c: 28: {
+{
+[e :U _task_blink1 ]
+[f ]
+"29
+[; ;user.c: 29:     while (1) { LATCbits.LATC1 ^= 1; }
 [e :U 885 ]
 {
-"29
-[; ;user.c: 29:     }
+[e =^ . . _LATCbits 0 1 -> -> 1 `i `Vuc ]
 }
 [e :U 884 ]
 [e $U 885  ]
@@ -968,165 +890,97 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 883 ]
 }
 "32
-[; ;user.c: 32: TASK ligaLed()
-[v _ligaLed `(v ~T0 @X0 1 ef ]
+[; ;user.c: 32: TASK task_blink2(void)
+[v _task_blink2 `(v ~T0 @X0 1 ef ]
 "33
 [; ;user.c: 33: {
 {
-[e :U _ligaLed ]
+[e :U _task_blink2 ]
 [f ]
 "34
-[; ;user.c: 34:     while (1) {
+[; ;user.c: 34:     while (1) { LATCbits.LATC2 ^= 1; }
 [e :U 889 ]
 {
-"36
-[; ;user.c: 36:     }
+[e =^ . . _LATCbits 0 2 -> -> 1 `i `Vuc ]
 }
 [e :U 888 ]
 [e $U 889  ]
 [e :U 890 ]
-"37
-[; ;user.c: 37: }
+"35
+[; ;user.c: 35: }
 [e :UE 887 ]
 }
-"39
-[; ;user.c: 39: TASK apagaLed()
-[v _apagaLed `(v ~T0 @X0 1 ef ]
-"40
-[; ;user.c: 40: {
+"37
+[; ;user.c: 37: TASK task_blink3(void)
+[v _task_blink3 `(v ~T0 @X0 1 ef ]
+"38
+[; ;user.c: 38: {
 {
-[e :U _apagaLed ]
+[e :U _task_blink3 ]
 [f ]
-"41
-[; ;user.c: 41:     while (1) {
+"39
+[; ;user.c: 39:     while (1)
 [e :U 893 ]
+"40
+[; ;user.c: 40:     {
 {
+"41
+[; ;user.c: 41:         mutex_lock(&adc_mutex);
+[e ( _mutex_lock (1 &U _adc_mutex ]
+"42
+[; ;user.c: 42:         uint16_t adc = adc_read();
+[v _adc `us ~T0 @X0 1 a ]
+[e = _adc ( _adc_read ..  ]
 "43
-[; ;user.c: 43:     }
+[; ;user.c: 43:         mutex_unlock(&adc_mutex);
+[e ( _mutex_unlock (1 &U _adc_mutex ]
+"45
+[; ;user.c: 45:         LATCbits.LATC3 = (adc > 511) ? 1 : 0;
+[e = . . _LATCbits 0 3 -> ? > -> _adc `ui -> -> 511 `i `ui : -> 1 `i -> 0 `i `uc ]
+"46
+[; ;user.c: 46:     }
 }
 [e :U 892 ]
 [e $U 893  ]
 [e :U 894 ]
-"44
-[; ;user.c: 44: }
+"47
+[; ;user.c: 47: }
 [e :UE 891 ]
 }
-"46
-[; ;user.c: 46: TASK LED_1()
-[v _LED_1 `(v ~T0 @X0 1 ef ]
-"47
-[; ;user.c: 47: {
-{
-[e :U _LED_1 ]
-[f ]
-[v F6249 `uc ~T0 @X0 -> 6 `i s ]
-[i F6249
-:U ..
-"48
-[; ;user.c: 48:     char acionamento[] = {'L', 'L', 'D', 'L', 'D', 'D'};
--> -> 76 `ui `uc
--> -> 76 `ui `uc
--> -> 68 `ui `uc
--> -> 76 `ui `uc
--> -> 68 `ui `uc
--> -> 68 `ui `uc
-..
-]
-[v _acionamento `uc ~T0 @X0 -> 6 `i a ]
-[e = _acionamento F6249 ]
 "49
-[; ;user.c: 49:     uint8_t pos = 0;
-[v _pos `uc ~T0 @X0 1 a ]
-[e = _pos -> -> 0 `i `uc ]
+[; ;user.c: 49: TASK task_blink4(void)
+[v _task_blink4 `(v ~T0 @X0 1 ef ]
 "50
-[; ;user.c: 50:     while (1) {
-[e :U 897 ]
+[; ;user.c: 50: {
 {
+[e :U _task_blink4 ]
+[f ]
 "51
-[; ;user.c: 51:         PORTCbits.RC6 = ~PORTCbits.RC6;
-[e = . . _PORTCbits 0 6 -> ~ -> . . _PORTCbits 0 6 `i `uc ]
+[; ;user.c: 51:     while (1)
+[e :U 897 ]
 "52
-[; ;user.c: 52:         pipe_write(&p, acionamento[pos]);
-[e ( _pipe_write (2 , &U _p *U + &U _acionamento * -> _pos `ux -> -> # *U &U _acionamento `ui `ux ]
+[; ;user.c: 52:     {
+{
 "53
-[; ;user.c: 53:         pos = (pos + 1) % 6;
-[e = _pos -> % + -> _pos `i -> 1 `i -> 6 `i `uc ]
+[; ;user.c: 53:         mutex_lock(&adc_mutex);
+[e ( _mutex_lock (1 &U _adc_mutex ]
+"54
+[; ;user.c: 54:         uint16_t adc = adc_read();
+[v _adc `us ~T0 @X0 1 a ]
+[e = _adc ( _adc_read ..  ]
 "55
-[; ;user.c: 55:     }
+[; ;user.c: 55:         mutex_unlock(&adc_mutex);
+[e ( _mutex_unlock (1 &U _adc_mutex ]
+"57
+[; ;user.c: 57:         pwm_set_duty(adc);
+[e ( _pwm_set_duty (1 _adc ]
+"58
+[; ;user.c: 58:     }
 }
 [e :U 896 ]
 [e $U 897  ]
 [e :U 898 ]
-"56
-[; ;user.c: 56: }
-[e :UE 895 ]
-}
-"58
-[; ;user.c: 58: TASK LED_2()
-[v _LED_2 `(v ~T0 @X0 1 ef ]
 "59
-[; ;user.c: 59: {
-{
-[e :U _LED_2 ]
-[f ]
-"60
-[; ;user.c: 60:     while (1) {
-[e :U 901 ]
-{
-"63
-[; ;user.c: 63:         PORTCbits.RC7 = ~PORTCbits.RC7;
-[e = . . _PORTCbits 0 7 -> ~ -> . . _PORTCbits 0 7 `i `uc ]
-"66
-[; ;user.c: 66:     }
-}
-[e :U 900 ]
-[e $U 901  ]
-[e :U 902 ]
-"67
-[; ;user.c: 67: }
-[e :UE 899 ]
-}
-"69
-[; ;user.c: 69: TASK LED_3()
-[v _LED_3 `(v ~T0 @X0 1 ef ]
-"70
-[; ;user.c: 70: {
-{
-[e :U _LED_3 ]
-[f ]
-"71
-[; ;user.c: 71:     char dado;
-[v _dado `uc ~T0 @X0 1 a ]
-"72
-[; ;user.c: 72:     while (1) {
-[e :U 905 ]
-{
-"73
-[; ;user.c: 73:         pipe_read(&p, &dado);
-[e ( _pipe_read (2 , &U _p &U _dado ]
-"74
-[; ;user.c: 74:         if (dado == 'L')
-[e $ ! == -> _dado `ui -> 76 `ui 907  ]
-"75
-[; ;user.c: 75:             PORTDbits.RD0 = 1;
-[e = . . _PORTDbits 0 0 -> -> 1 `i `uc ]
-[e $U 908  ]
-"76
-[; ;user.c: 76:         else if (dado == 'D')
-[e :U 907 ]
-[e $ ! == -> _dado `ui -> 68 `ui 909  ]
-"77
-[; ;user.c: 77:             PORTDbits.RD0 = 0;
-[e = . . _PORTDbits 0 0 -> -> 0 `i `uc ]
-[e :U 909 ]
-[e :U 908 ]
-"80
-[; ;user.c: 80:     }
-}
-[e :U 904 ]
-[e $U 905  ]
-[e :U 906 ]
-"81
-[; ;user.c: 81: }
-[e :UE 903 ]
+[; ;user.c: 59: }
+[e :UE 895 ]
 }

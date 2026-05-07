@@ -3,6 +3,8 @@
 #include "user.h"
 #include "hw.h"
 
+asm("global _idle");
+
 // Fila de aptos
 ready_queue_t r_queue;
 
@@ -71,8 +73,7 @@ void os_config()
     
     // Criar a tarefa idle
     os_create_task(1, idle, 0);
-    asm("global _idle");
-    
+
     config_user();   
 }
 

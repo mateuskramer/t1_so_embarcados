@@ -129,7 +129,8 @@ typedef void TASK;
 typedef enum {READY = 0,
               WAITING,
               RUNNING,
-              WAITING_SEM
+              WAITING_SEM,
+              WAITING_MUTEX
              } state_t;
 
 typedef void (*f_ptr)(void);
@@ -141,7 +142,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[31];
+    hw_stack_t stack[10];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -177,11 +178,21 @@ typedef struct tcb {
 
 
 typedef struct ready_queue {
-    tcb_t TASKS[3 +1];
+    tcb_t TASKS[4 +1];
     uint8_t size;
     tcb_t *task_running;
     uint8_t pos_task_running;
 } ready_queue_t;
+
+
+typedef struct mutex {
+    uint8_t locked;
+    uint8_t owner_id;
+    uint8_t waiting_queue[4];
+    uint8_t waiting_count;
+    uint8_t pos_input;
+    uint8_t pos_output;
+} mutex_t;
 # 5 "./kernel.h" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.h" 3
@@ -9927,23 +9938,15 @@ TASK idle();
 void scheduler(void);
 uint8_t RR_scheduler(void);
 uint8_t priority_scheduler(void);
+uint8_t rr_priority_scheduler(void);
 # 3 "kernel.c" 2
 # 1 "./user.h" 1
-
-
-
-
-
+# 11 "./user.h"
 void config_user(void);
-
-TASK acionaMotor(void);
-TASK ligaLed(void);
-TASK apagaLed(void);
-
-
-TASK LED_1(void);
-TASK LED_2(void);
-TASK LED_3(void);
+TASK task_blink1(void);
+TASK task_blink2(void);
+TASK task_blink3(void);
+TASK task_blink4(void);
 # 4 "kernel.c" 2
 # 1 "./hw.h" 1
 
@@ -9953,7 +9956,11 @@ TASK LED_3(void);
 
 void setup_hardware(void);
 void __attribute__((picinterrupt(("")))) ISR(void);
+
+void ext_int_isr_handler(void);
 # 5 "kernel.c" 2
+
+__asm("global _idle");
 
 
 ready_queue_t r_queue;
@@ -10023,7 +10030,6 @@ void os_config()
 
 
     os_create_task(1, idle, 0);
-    __asm("global _idle");
 
     config_user();
 }

@@ -4,5 +4,5 @@ user.h  \
 types.h  \
 os_config.h  \
 kernel.h  \
-sync.h  \
-com.h 
+io.h  \
+sync.h 

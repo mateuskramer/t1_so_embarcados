@@ -1,82 +1,59 @@
 #include "user.h"
-#include <xc.h>
 #include "kernel.h"
+#include "io.h"
 #include "sync.h"
-#include "com.h"
+#include <xc.h>
 
-sem_t s;
-pipe_t p;
+static mutex_t adc_mutex;
 
-void config_user()
+void config_user(void)
 {
-    TRISCbits.RC6       = 0;
-    TRISCbits.RC7       = 0;
-    TRISDbits.RD0       = 0;
-    ANSELDbits.ANSD0    = 0;
-    ANSELCbits.ANSC6    = 0;
-    ANSELCbits.ANSC7    = 0;
-    
-    asm("global _LED_1, _LED_2, _LED_3");
-    
-    sem_init(&s, 0);    
-    pipe_init(&p);
+    asm("global _task_blink1, _task_blink2, _task_blink3, _task_blink4");
+
+    TRISCbits.RC1 = 0;  LATCbits.LATC1 = 0;
+    TRISCbits.RC2 = 0;  LATCbits.LATC2 = 0;
+    TRISCbits.RC3 = 0;  LATCbits.LATC3 = 0;
+    TRISCbits.RC4 = 0;  LATCbits.LATC4 = 0;
+
+    adc_config();
+    adc_on();
+
+    pwm_config(99);
+    pwm_on();
+
+    mutex_init(&adc_mutex);
 }
 
-TASK acionaMotor()
+TASK task_blink1(void)
 {
-    while (1) {
-        
+    while (1) { LATCbits.LATC1 ^= 1; }
+}
+
+TASK task_blink2(void)
+{
+    while (1) { LATCbits.LATC2 ^= 1; }
+}
+
+TASK task_blink3(void)
+{
+    while (1)
+    {
+        mutex_lock(&adc_mutex);
+        uint16_t adc = adc_read();
+        mutex_unlock(&adc_mutex);
+
+        LATCbits.LATC3 = (adc > 511) ? 1 : 0;
     }
 }
 
-TASK ligaLed()
+TASK task_blink4(void)
 {
-    while (1) {
-        
-    }    
-}
+    while (1)
+    {
+        mutex_lock(&adc_mutex);
+        uint16_t adc = adc_read();
+        mutex_unlock(&adc_mutex);
 
-TASK apagaLed()
-{
-    while (1) {
-        
-    }    
-}
-
-TASK LED_1()
-{
-    //char *acionamento = SRAMAlloc(6);
-    char acionamento[] = {'L', 'L', 'D', 'L', 'D', 'D'};
-    uint8_t pos = 0;
-    while (1) {        
-        PORTCbits.RC6 = ~PORTCbits.RC6;
-        pipe_write(&p, acionamento[pos]);
-        pos = (pos + 1) % 6;
-        //os_delay(5);
-    }    
-}
-
-TASK LED_2()
-{
-    while (1) {
-        
-        //sem_post(&controle_leitura);
-        PORTCbits.RC7 = ~PORTCbits.RC7;
-        //sem_post(&s);
-        //os_delay(5);
-    }    
-}
-
-TASK LED_3()
-{
-    char dado;
-    while (1) {
-        pipe_read(&p, &dado);
-        if (dado == 'L')
-            PORTDbits.RD0 = 1;
-        else if (dado == 'D')
-            PORTDbits.RD0 = 0;
-        //os_delay(1);
-        //os_task_change_state(WAITING, NULL);
-    }    
+        pwm_set_duty(adc);
+    }
 }
