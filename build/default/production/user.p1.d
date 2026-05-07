@@ -5,4 +5,5 @@ types.h  \
 os_config.h  \
 kernel.h  \
 io.h  \
-sync.h 
+sync.h  \
+com.h 

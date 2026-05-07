@@ -10001,9 +10001,31 @@ uint8_t mutex_lock(mutex_t *mutex);
 uint8_t mutex_unlock(mutex_t *mutex);
 uint8_t mutex_trylock(mutex_t *mutex);
 # 5 "user.c" 2
+# 1 "./com.h" 1
+
+
+
+
+
+
+
+
+typedef struct pipe {
+    char fila_dados[4];
+    uint8_t pos_input;
+    uint8_t pos_output;
+    sem_t s_input;
+    sem_t s_output;
+} pipe_t;
+
+void pipe_init(pipe_t *p);
+void pipe_read(pipe_t *p, char *dado);
+void pipe_write(pipe_t *p, char dado);
+# 6 "user.c" 2
 
 
 static mutex_t adc_mutex;
+static pipe_t adc_pipe;
 
 void config_user(void)
 {
@@ -10021,6 +10043,7 @@ void config_user(void)
     pwm_on();
 
     mutex_init(&adc_mutex);
+    pipe_init(&adc_pipe);
 }
 
 TASK task_blink1(void)
@@ -10033,6 +10056,7 @@ TASK task_blink2(void)
     while (1) { LATCbits.LATC2 ^= 1; }
 }
 
+
 TASK task_blink3(void)
 {
     while (1)
@@ -10041,18 +10065,17 @@ TASK task_blink3(void)
         uint16_t adc = adc_read();
         mutex_unlock(&adc_mutex);
 
-        LATCbits.LATC3 = (adc > 511) ? 1 : 0;
+        pipe_write(&adc_pipe, (char)(adc >> 2));
     }
 }
+
 
 TASK task_blink4(void)
 {
     while (1)
     {
-        mutex_lock(&adc_mutex);
-        uint16_t adc = adc_read();
-        mutex_unlock(&adc_mutex);
-
-        pwm_set_duty(adc);
+        char dado;
+        pipe_read(&adc_pipe, &dado);
+        pwm_set_duty((uint16_t)((uint8_t)dado * 4));
     }
 }

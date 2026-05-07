@@ -2,9 +2,11 @@
 #include "kernel.h"
 #include "io.h"
 #include "sync.h"
+#include "com.h"
 #include <xc.h>
 
 static mutex_t adc_mutex;
+static pipe_t  adc_pipe;
 
 void config_user(void)
 {
@@ -22,6 +24,7 @@ void config_user(void)
     pwm_on();
 
     mutex_init(&adc_mutex);
+    pipe_init(&adc_pipe);
 }
 
 TASK task_blink1(void)
@@ -34,6 +37,7 @@ TASK task_blink2(void)
     while (1) { LATCbits.LATC2 ^= 1; }
 }
 
+/* Produtora: le ADC e envia para o pipe */
 TASK task_blink3(void)
 {
     while (1)
@@ -42,18 +46,17 @@ TASK task_blink3(void)
         uint16_t adc = adc_read();
         mutex_unlock(&adc_mutex);
 
-        LATCbits.LATC3 = (adc > 511) ? 1 : 0;
+        pipe_write(&adc_pipe, (char)(adc >> 2));  /* escala 0-1023 para 0-255 */
     }
 }
 
+/* Consumidora: recebe do pipe e ajusta PWM */
 TASK task_blink4(void)
 {
     while (1)
     {
-        mutex_lock(&adc_mutex);
-        uint16_t adc = adc_read();
-        mutex_unlock(&adc_mutex);
-
-        pwm_set_duty(adc);
+        char dado;
+        pipe_read(&adc_pipe, &dado);
+        pwm_set_duty((uint16_t)((uint8_t)dado * 4));  /* escala 0-255 para 0-1020 */
     }
 }
