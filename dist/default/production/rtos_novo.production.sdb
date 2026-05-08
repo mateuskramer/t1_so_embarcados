@@ -24,7 +24,7 @@ WAITING_MUTEX 4
 EXT_INT_RISING 0
 EXT_INT_FALLING 1
 ]
-"16 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"19 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [e E37 . `uc
 READY 0
 WAITING 1
@@ -32,7 +32,7 @@ RUNNING 2
 WAITING_SEM 3
 WAITING_MUTEX 4
 ]
-"51
+"57
 [e E6230 . `uc
 EXT_INT_RISING 0
 EXT_INT_FALLING 1
@@ -155,7 +155,11 @@ WAITING_MUTEX 4
 [v _idle idle `(v  1 e 1 0 ]
 "4 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\main.c
 [v _main main `(i  1 e 2 0 ]
-"195 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\mem.c
+"29 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\mem.c
+[v _SRAMalloc SRAMalloc `(*.39uc  1 e 2 0 ]
+"151
+[v _SRAMInitHeap SRAMInitHeap `(v  1 e 1 0 ]
+"195
 [v __SRAMmerge _SRAMmerge `(uc  1 e 1 0 ]
 "10 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\scheduler.c
 [v _scheduler scheduler `(v  1 e 1 0 ]
@@ -177,17 +181,17 @@ WAITING_MUTEX 4
 [v _mutex_lock mutex_lock `(uc  1 e 1 0 ]
 "94
 [v _mutex_unlock mutex_unlock `(uc  1 e 1 0 ]
-"12 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"15 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _on_int0 on_int0 `(v  1 s 1 on_int0 ]
-"33
+"36
 [v _config_user config_user `(v  1 e 1 0 ]
-"56
+"62
 [v _task_monitor task_monitor `(v  1 e 1 0 ]
-"75
+"81
 [v _task_alarm task_alarm `(v  1 e 1 0 ]
-"88
+"94
 [v _task_producer task_producer `(v  1 e 1 0 ]
-"101
+"107
 [v _task_consumer task_consumer `(v  1 e 1 0 ]
 "136 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo/mem.h
 [v __uDynamicHeap _uDynamicHeap `[512]uc  1 e 512 0 ]
@@ -452,7 +456,7 @@ WAITING_MUTEX 4
 [v _ADCON0bits ADCON0bits `VES764  1 e 1 @4034 ]
 "13734
 [v _ADRES ADRES `VEus  1 e 2 @4035 ]
-[s S1616 . 1 `uc 1 T0PS 1 0 :3:0 
+[s S1609 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -460,12 +464,12 @@ WAITING_MUTEX 4
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "16147
-[s S1623 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S1616 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S1627 . 1 `S1616 1 . 1 0 `S1623 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES1627  1 e 1 @4053 ]
+[u S1620 . 1 `S1609 1 . 1 0 `S1616 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES1620  1 e 1 @4053 ]
 "16197
 [v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
 "16244
@@ -564,13 +568,13 @@ WAITING_MUTEX 4
 [s S95 ready_queue 199 `[5]S71 1 TASKS 195 0 `uc 1 size 1 195 `*.39S71 1 task_running 2 196 `uc 1 pos_task_running 1 198 ]
 [v _r_queue r_queue `S95  1 e 199 0 ]
 [s S611 mutex 9 `uc 1 locked 1 0 `uc 1 owner_id 1 1 `[4]uc 1 waiting_queue 4 2 `uc 1 waiting_count 1 6 `uc 1 pos_input 1 7 `uc 1 pos_output 1 8 ]
-"8 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"11 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _adc_mutex adc_mutex `S611  1 s 9 adc_mutex ]
 [s S512 sem 8 `i 1 contador 2 0 `[4]uc 1 fila 4 2 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
-"9
+"12
 [s S675 pipe 22 `[4]uc 1 fila_dados 4 0 `uc 1 pos_input 1 4 `uc 1 pos_output 1 5 `S512 1 s_input 8 6 `S512 1 s_output 8 14 ]
-[v _adc_pipe adc_pipe `S675  1 s 22 adc_pipe ]
-"10
+[v _adc_pipe adc_pipe `*.39S675  1 s 2 adc_pipe ]
+"13
 [v _alarm_sem alarm_sem `S512  1 s 8 alarm_sem ]
 "4 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\main.c
 [v _main main `(i  1 e 2 0 ]
@@ -606,11 +610,11 @@ WAITING_MUTEX 4
 [v ___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v ___awmod@sign sign `uc  1 a 1 111 ]
-[v ___awmod@counter counter `uc  1 a 1 110 ]
+[v ___awmod@sign sign `uc  1 a 1 5 ]
+[v ___awmod@counter counter `uc  1 a 1 4 ]
 "7
-[v ___awmod@dividend dividend `i  1 p 2 106 ]
-[v ___awmod@divisor divisor `i  1 p 2 108 ]
+[v ___awmod@dividend dividend `i  1 p 2 0 ]
+[v ___awmod@divisor divisor `i  1 p 2 2 ]
 "34
 } 0
 "68 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\kernel.c
@@ -626,19 +630,19 @@ WAITING_MUTEX 4
 "26
 [s S68 sw_stack 16 `[5]S64 1 stack 15 0 `uc 1 stack_size 1 15 ]
 [s S71 tcb 39 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S68 1 task_stack 16 23 ]
-[v os_create_task@new_task new_task `S71  1 a 39 110 ]
+[v os_create_task@new_task new_task `S71  1 a 39 4 ]
 "24
 [v os_create_task@id id `uc  1 p 1 wreg ]
-[v os_create_task@func func `*.37(v  1 p 2 106 ]
-[v os_create_task@prior prior `uc  1 p 1 108 ]
+[v os_create_task@func func `*.37(v  1 p 2 0 ]
+[v os_create_task@prior prior `uc  1 p 1 2 ]
 "28
-[v os_create_task@id id `uc  1 p 1 109 ]
+[v os_create_task@id id `uc  1 p 1 3 ]
 "55
 } 1
-"33 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"36 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _config_user config_user `(v  1 e 1 0 ]
 {
-"53
+"59
 } 0
 "46 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\io.c
 [v _pwm_on pwm_on `(v  1 e 1 0 ]
@@ -651,7 +655,7 @@ WAITING_MUTEX 4
 [v pwm_config@period period `uc  1 p 1 wreg ]
 [v pwm_config@period period `uc  1 p 1 wreg ]
 "35
-[v pwm_config@period period `uc  1 p 1 106 ]
+[v pwm_config@period period `uc  1 p 1 0 ]
 "44
 } 1
 "3 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\com.c
@@ -659,22 +663,22 @@ WAITING_MUTEX 4
 {
 [s S512 sem 8 `i 1 contador 2 0 `[4]uc 1 fila 4 2 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
 [s S675 pipe 22 `[4]uc 1 fila_dados 4 0 `uc 1 pos_input 1 4 `uc 1 pos_output 1 5 `S512 1 s_input 8 6 `S512 1 s_output 8 14 ]
-[v pipe_init@p p `*.30S675  1 p 1 110 ]
+[v pipe_init@p p `*.39S675  1 p 2 5 ]
 "9
 } 0
 "9 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\sync.c
 [v _sem_init sem_init `(v  1 e 1 0 ]
 {
 [s S512 sem 8 `i 1 contador 2 0 `[4]uc 1 fila 4 2 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
-[v sem_init@sem sem `*.30S512  1 p 1 106 ]
-[v sem_init@valor valor `uc  1 p 1 107 ]
+[v sem_init@sem sem `*.39S512  1 p 2 0 ]
+[v sem_init@valor valor `uc  1 p 1 2 ]
 "14
 } 0
 "52
 [v _mutex_init mutex_init `(v  1 e 1 0 ]
 {
 [s S611 mutex 9 `uc 1 locked 1 0 `uc 1 owner_id 1 1 `[4]uc 1 waiting_queue 4 2 `uc 1 waiting_count 1 6 `uc 1 pos_input 1 7 `uc 1 pos_output 1 8 ]
-[v mutex_init@mutex mutex `*.30S611  1 p 1 106 ]
+[v mutex_init@mutex mutex `*.30S611  1 p 1 0 ]
 "59
 } 0
 "98 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\io.c
@@ -687,9 +691,9 @@ WAITING_MUTEX 4
 {
 [v ext_int_config@edge edge `E6149  1 p 1 wreg ]
 [v ext_int_config@edge edge `E6149  1 p 1 wreg ]
-[v ext_int_config@callback callback `*.37(v  1 p 2 106 ]
+[v ext_int_config@callback callback `*.37(v  1 p 2 0 ]
 "84
-[v ext_int_config@edge edge `E6149  1 p 1 109 ]
+[v ext_int_config@edge edge `E6149  1 p 1 3 ]
 "96
 } 1
 "15
@@ -702,25 +706,73 @@ WAITING_MUTEX 4
 {
 "13
 } 0
+"29 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\mem.c
+[v _SRAMalloc SRAMalloc `(*.39uc  1 e 2 0 ]
+{
+[v SRAMalloc@nBytes nBytes `uc  1 p 1 wreg ]
+[s S1451 _BITS 1 `uc 1 count 1 0 :7:0 
+`uc 1 alloc 1 0 :1:7 
+]
+"31
+[u S1454 _SALLOC 1 `uc 1 byte 1 0 `S1451 1 bits 1 0 ]
+[v SRAMalloc@pHeap pHeap `*.39S1454  1 a 2 17 ]
+"32
+[v SRAMalloc@temp temp `*.39S1454  1 a 2 12 ]
+"33
+[v SRAMalloc@segHeader segHeader `S1454  1 a 1 15 ]
+"34
+[v SRAMalloc@segLen segLen `uc  1 a 1 14 ]
+"29
+[v SRAMalloc@nBytes nBytes `uc  1 p 1 wreg ]
+"37
+[v SRAMalloc@nBytes nBytes `uc  1 p 1 16 ]
+"101
+} 1
+"195
+[v __SRAMmerge _SRAMmerge `(uc  1 e 1 0 ]
+{
+[s S1451 _BITS 1 `uc 1 count 1 0 :7:0 
+`uc 1 alloc 1 0 :1:7 
+]
+"197
+[u S1454 _SALLOC 1 `uc 1 byte 1 0 `S1451 1 bits 1 0 ]
+[v __SRAMmerge@pSegB pSegB `*.39S1454  1 a 2 4 ]
+"198
+[v __SRAMmerge@uSegB uSegB `S1454  1 a 1 7 ]
+[v __SRAMmerge@uSegA uSegA `S1454  1 a 1 6 ]
+[v __SRAMmerge@uSum uSum `S1454  1 a 1 3 ]
+"195
+[v __SRAMmerge@pSegA pSegA `*.39S1454  1 p 2 0 ]
+"239
+} 0
+"151
+[v _SRAMInitHeap SRAMInitHeap `(v  1 e 1 0 ]
+{
+"154
+[v SRAMInitHeap@count count `ui  1 a 2 2 ]
+"153
+[v SRAMInitHeap@pHeap pHeap `*.39uc  1 a 2 0 ]
+"174
+} 0
 "105 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\kernel.c
 [v _idle idle `(v  1 e 1 0 ]
 {
 "112
 } 0
-"56 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"62 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _task_monitor task_monitor `(v  1 e 1 0 ]
 {
-"63
+"69
 [v task_monitor@blink blink `uc  1 s 1 blink ]
-"64
+"70
 [v task_monitor@d d `VEus  1 s 2 d ]
-"72
+"78
 } 0
 "16 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\sync.c
 [v _sem_wait sem_wait `(v  1 e 1 0 ]
 {
 [s S512 sem 8 `i 1 contador 2 0 `[4]uc 1 fila 4 2 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
-[v sem_wait@sem sem `*.30S512  1 p 1 93 ]
+[v sem_wait@sem sem `*.39S512  1 p 2 119 ]
 "31
 } 0
 "10 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\scheduler.c
@@ -737,25 +789,25 @@ WAITING_MUTEX 4
 [v i1___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v i1___awmod@sign sign `uc  1 a 1 66 ]
-[v i1___awmod@counter counter `uc  1 a 1 65 ]
+[v i1___awmod@sign sign `uc  1 a 1 116 ]
+[v i1___awmod@counter counter `uc  1 a 1 115 ]
 "7
-[v i1___awmod@dividend dividend `i  1 p 2 87 ]
-[v i1___awmod@divisor divisor `i  1 p 2 89 ]
+[v i1___awmod@dividend dividend `i  1 p 2 111 ]
+[v i1___awmod@divisor divisor `i  1 p 2 113 ]
 "34
 } 0
-"75 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"81 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _task_alarm task_alarm `(v  1 e 1 0 ]
 {
-"78
-[v task_alarm@adc adc `us  1 a 2 49 ]
-"85
+"84
+[v task_alarm@adc adc `us  1 a 2 25 ]
+"91
 } 0
 "33 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\sync.c
 [v _sem_post sem_post `(v  1 e 1 0 ]
 {
 [s S512 sem 8 `i 1 contador 2 0 `[4]uc 1 fila 4 2 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
-[v sem_post@sem sem `*.30S512  1 p 1 87 ]
+[v sem_post@sem sem `*.39S512  1 p 2 111 ]
 "45
 } 0
 "88 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\kernel.c
@@ -766,62 +818,62 @@ WAITING_MUTEX 4
 [s S64 hw_stack 3 `uc 1 TOSL_REG 1 0 `uc 1 TOSH_REG 1 1 `uc 1 TOSU_REG 1 2 ]
 [s S68 sw_stack 16 `[5]S64 1 stack 15 0 `uc 1 stack_size 1 15 ]
 [s S71 tcb 39 `uc 1 task_id 1 0 `E37 1 task_state 1 1 `*.37(v 1 task_ptr 2 2 `uc 1 task_delay 1 4 `uc 1 task_priority 1 5 `uc 1 W_REG 1 6 `uc 1 STATUS_REG 1 7 `uc 1 BSR_REG 1 8 `uc 1 PRODL_REG 1 9 `uc 1 PRODH_REG 1 10 `uc 1 FSR0L_REG 1 11 `uc 1 FSR0H_REG 1 12 `uc 1 FSR1L_REG 1 13 `uc 1 FSR1H_REG 1 14 `uc 1 FSR2L_REG 1 15 `uc 1 FSR2H_REG 1 16 `uc 1 TABLAT_REG 1 17 `uc 1 TBLPTRL_REG 1 18 `uc 1 TBLPTRH_REG 1 19 `uc 1 TBLPTRU_REG 1 20 `uc 1 PCLATH_REG 1 21 `uc 1 PCLATU_REG 1 22 `S68 1 task_stack 16 23 ]
-[v os_task_change_state@task_handle task_handle `*.39S71  1 p 2 38 ]
+[v os_task_change_state@task_handle task_handle `*.39S71  1 p 2 14 ]
 "90
-[v os_task_change_state@new_state new_state `E37  1 p 1 47 ]
+[v os_task_change_state@new_state new_state `E37  1 p 1 23 ]
 "102
 } 1
 "94 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\sync.c
 [v _mutex_unlock mutex_unlock `(uc  1 e 1 0 ]
 {
 "106
-[v mutex_unlock@next_owner next_owner `uc  1 a 1 53 ]
+[v mutex_unlock@next_owner next_owner `uc  1 a 1 28 ]
 [s S611 mutex 9 `uc 1 locked 1 0 `uc 1 owner_id 1 1 `[4]uc 1 waiting_queue 4 2 `uc 1 waiting_count 1 6 `uc 1 pos_input 1 7 `uc 1 pos_output 1 8 ]
 "94
-[v mutex_unlock@mutex mutex `*.30S611  1 p 1 51 ]
+[v mutex_unlock@mutex mutex `*.30S611  1 p 1 26 ]
 "122
 } 0
 "62
 [v _mutex_lock mutex_lock `(uc  1 e 1 0 ]
 {
 [s S611 mutex 9 `uc 1 locked 1 0 `uc 1 owner_id 1 1 `[4]uc 1 waiting_queue 4 2 `uc 1 waiting_count 1 6 `uc 1 pos_input 1 7 `uc 1 pos_output 1 8 ]
-[v mutex_lock@mutex mutex `*.30S611  1 p 1 53 ]
+[v mutex_lock@mutex mutex `*.30S611  1 p 1 26 ]
 "91
 } 0
 "20 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\io.c
 [v _adc_read adc_read `(us  1 e 2 0 ]
 {
 "22
-[v adc_read@dados_adc dados_adc `us  1 a 2 53 ]
+[v adc_read@dados_adc dados_adc `us  1 a 2 28 ]
 "27
 } 0
-"88 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"94 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _task_producer task_producer `(v  1 e 1 0 ]
 {
-"93
-[v task_producer@adc adc `us  1 a 2 63 ]
-"98
+"99
+[v task_producer@adc adc `us  1 a 2 109 ]
+"104
 } 0
 "11 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\com.c
 [v _pipe_write pipe_write `(v  1 e 1 0 ]
 {
 [s S512 sem 8 `i 1 contador 2 0 `[4]uc 1 fila 4 2 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
 [s S675 pipe 22 `[4]uc 1 fila_dados 4 0 `uc 1 pos_input 1 4 `uc 1 pos_output 1 5 `S512 1 s_input 8 6 `S512 1 s_output 8 14 ]
-[v pipe_write@p p `*.30S675  1 p 1 53 ]
-[v pipe_write@dado dado `uc  1 p 1 54 ]
+[v pipe_write@p p `*.39S675  1 p 2 26 ]
+[v pipe_write@dado dado `uc  1 p 1 28 ]
 "17
 } 0
-"101 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"107 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _task_consumer task_consumer `(v  1 e 1 0 ]
 {
-"105
-[v task_consumer@dado dado `uc  1 a 1 105 ]
-"109
+"111
+[v task_consumer@dado dado `uc  1 a 1 133 ]
+"115
 } 0
 "60 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\io.c
 [v _pwm_set_duty pwm_set_duty `(v  1 e 1 0 ]
 {
-[v pwm_set_duty@duty duty `us  1 p 2 87 ]
+[v pwm_set_duty@duty duty `us  1 p 2 111 ]
 "75
 } 0
 "19 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\com.c
@@ -829,8 +881,8 @@ WAITING_MUTEX 4
 {
 [s S512 sem 8 `i 1 contador 2 0 `[4]uc 1 fila 4 2 `uc 1 pos_input 1 6 `uc 1 pos_output 1 7 ]
 [s S675 pipe 22 `[4]uc 1 fila_dados 4 0 `uc 1 pos_input 1 4 `uc 1 pos_output 1 5 `S512 1 s_input 8 6 `S512 1 s_output 8 14 ]
-[v pipe_read@p p `*.30S675  1 p 1 101 ]
-[v pipe_read@dado dado `*.39uc  1 p 2 102 ]
+[v pipe_read@p p `*.39S675  1 p 2 128 ]
+[v pipe_read@dado dado `*.39uc  1 p 2 130 ]
 "25
 } 0
 "23 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\hw.c
@@ -866,10 +918,10 @@ WAITING_MUTEX 4
 {
 "119
 } 0
-"12 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
+"15 C:\Users\ACER\Desktop\UFSC\SO_embarcados\trabalho1\rtos_novo\user.c
 [v _on_int0 on_int0 `(v  1 s 1 on_int0 ]
 {
-"14
+"17
 [v on_int0@i i `uc  1 s 1 i ]
-"31
+"34
 } 0

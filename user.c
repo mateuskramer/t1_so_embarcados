@@ -5,8 +5,11 @@
 #include "com.h"
 #include <xc.h>
 
+extern unsigned char *SRAMalloc(unsigned char nBytes);
+extern void SRAMInitHeap(void);
+
 static mutex_t adc_mutex;
-static pipe_t  adc_pipe;
+static pipe_t *adc_pipe;
 static sem_t   alarm_sem;
 
 static void on_int0(void)
@@ -44,8 +47,11 @@ void config_user(void)
     pwm_config(99);
     pwm_on();
 
+    SRAMInitHeap();
+    adc_pipe = (pipe_t *)SRAMalloc(sizeof(pipe_t));
+
     mutex_init(&adc_mutex);
-    pipe_init(&adc_pipe);
+    pipe_init(adc_pipe);
     sem_init(&alarm_sem, 0);
 
     ext_int_config(EXT_INT_RISING, on_int0);
@@ -93,7 +99,7 @@ TASK task_producer(void)
         uint16_t adc = adc_read();
         mutex_unlock(&adc_mutex);
 
-        pipe_write(&adc_pipe, (char)(adc >> 2));
+        pipe_write(adc_pipe, (char)(adc >> 2));
     }
 }
 
@@ -103,7 +109,7 @@ TASK task_consumer(void)
     while (1)
     {
         char dado;
-        pipe_read(&adc_pipe, &dado);
+        pipe_read(adc_pipe, &dado);
         pwm_set_duty((uint16_t)((uint8_t)dado * 4));
     }
 }
