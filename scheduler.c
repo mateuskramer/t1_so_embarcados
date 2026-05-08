@@ -36,12 +36,12 @@ uint8_t RR_scheduler()
 uint8_t priority_scheduler(void)
 {
     uint8_t prox = r_queue.pos_task_running;
-    
+
     while (r_queue.TASKS[prox].task_state != READY)
         prox = (prox + 1) % r_queue.size;
-    
+
     uint8_t current_task = r_queue.TASKS[prox].task_priority;
-    
+
     for(uint8_t i = 1; i < r_queue.size;i++){
         if(r_queue.TASKS[i].task_state == READY && 
            r_queue.TASKS[i].task_priority > current_task){
@@ -55,33 +55,32 @@ uint8_t priority_scheduler(void)
 
 uint8_t rr_priority_scheduler(void)
 {
-    // Encontrar a maior prioridade entre tarefas READY
-    uint8_t max_priority = 0;
-    for (uint8_t i = 0; i < r_queue.size; i++) {
+    static uint8_t max_priority, prox, tentativas, i;
+
+    max_priority = 0;
+    for (i = 0; i < r_queue.size; i++) {
         if (r_queue.TASKS[i].task_state == READY && r_queue.TASKS[i].task_ptr != idle) {
             if (r_queue.TASKS[i].task_priority > max_priority) {
                 max_priority = r_queue.TASKS[i].task_priority;
             }
         }
     }
-    
-    // Agora, entre as tarefas com max_priority, usar Round-Robin
-    uint8_t prox = r_queue.pos_task_running;
-    uint8_t tentativas = 0;
-    
+
+    prox = r_queue.pos_task_running;
+    tentativas = 0;
+
     do {
         prox = (prox + 1) % r_queue.size;
         tentativas++;
         if (tentativas >= r_queue.size) {
-            // Se não encontrou nenhuma, retornar a primeira READY com max_priority
-            for (uint8_t i = 0; i < r_queue.size; i++) {
+            for (i = 0; i < r_queue.size; i++) {
                 if (r_queue.TASKS[i].task_state == READY && r_queue.TASKS[i].task_priority == max_priority && r_queue.TASKS[i].task_ptr != idle) {
                     return i;
                 }
             }
-            return 0; // idle
+            return 0;
         }
     } while (!(r_queue.TASKS[prox].task_state == READY && r_queue.TASKS[prox].task_priority == max_priority && r_queue.TASKS[prox].task_ptr != idle));
-    
+
     return prox;
 }

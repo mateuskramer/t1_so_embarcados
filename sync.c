@@ -103,7 +103,6 @@ uint8_t mutex_unlock(mutex_t *mutex)
     
     // Verifica se tem tarefas na fila de espera
     if (mutex->waiting_count > 0) {
-        // Transfere propriedade para a próxima tarefa da fila
         uint8_t next_owner = mutex->waiting_queue[mutex->pos_output];
         mutex->pos_output = (mutex->pos_output + 1) % MAX_USER_TASKS;
         mutex->waiting_count--;

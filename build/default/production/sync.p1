@@ -33,7 +33,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S1 hw_stack TOSL_REG TOSH_REG TOSU_REG ]
 "24
 [; ;./types.h: 24: typedef struct sw_stack {
-[s S2 `S1 -> 10 `i `uc 1 ]
+[s S2 `S1 -> 5 `i `uc 1 ]
 [n S2 sw_stack stack stack_size ]
 "29
 [; ;./types.h: 29: typedef struct tcb {
@@ -1316,96 +1316,96 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;sync.c: 105:     if (mutex->waiting_count > 0) {
 [e $ ! > -> . *U _mutex 3 `i -> 0 `i 925  ]
 {
-"107
-[; ;sync.c: 107:         uint8_t next_owner = mutex->waiting_queue[mutex->pos_output];
+"106
+[; ;sync.c: 106:         uint8_t next_owner = mutex->waiting_queue[mutex->pos_output];
 [v _next_owner `uc ~T0 @X0 1 a ]
 [e = _next_owner *U + &U . *U _mutex 2 * -> . *U _mutex 5 `ux -> -> # *U &U . *U _mutex 2 `ui `ux ]
-"108
-[; ;sync.c: 108:         mutex->pos_output = (mutex->pos_output + 1) % 4;
+"107
+[; ;sync.c: 107:         mutex->pos_output = (mutex->pos_output + 1) % 4;
 [e = . *U _mutex 5 -> % + -> . *U _mutex 5 `i -> 1 `i -> 4 `i `uc ]
-"109
-[; ;sync.c: 109:         mutex->waiting_count--;
+"108
+[; ;sync.c: 108:         mutex->waiting_count--;
 [e -- . *U _mutex 3 -> -> 1 `i `uc ]
-"112
-[; ;sync.c: 112:         r_queue.TASKS[next_owner].task_state = READY;
+"111
+[; ;sync.c: 111:         r_queue.TASKS[next_owner].task_state = READY;
 [e = . *U + &U . _r_queue 0 * -> _next_owner `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 . `E37 0 ]
-"113
-[; ;sync.c: 113:         mutex->owner_id = next_owner;
+"112
+[; ;sync.c: 112:         mutex->owner_id = next_owner;
 [e = . *U _mutex 1 _next_owner ]
-"114
-[; ;sync.c: 114:     }
+"113
+[; ;sync.c: 113:     }
 }
 [e $U 926  ]
-"115
-[; ;sync.c: 115:     else {
+"114
+[; ;sync.c: 114:     else {
 [e :U 925 ]
 {
-"117
-[; ;sync.c: 117:         mutex->locked = 0;
+"116
+[; ;sync.c: 116:         mutex->locked = 0;
 [e = . *U _mutex 0 -> -> 0 `i `uc ]
-"118
-[; ;sync.c: 118:         mutex->owner_id = 255;
+"117
+[; ;sync.c: 117:         mutex->owner_id = 255;
 [e = . *U _mutex 1 -> -> 255 `i `uc ]
-"119
-[; ;sync.c: 119:     }
+"118
+[; ;sync.c: 118:     }
 }
 [e :U 926 ]
-"121
-[; ;sync.c: 121:     INTCONbits.GIE = 1;;
+"120
+[; ;sync.c: 120:     INTCONbits.GIE = 1;;
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"122
-[; ;sync.c: 122:     return 0;
+"121
+[; ;sync.c: 121:     return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 923  ]
-"123
-[; ;sync.c: 123: }
+"122
+[; ;sync.c: 122: }
 [e :UE 923 ]
 }
-"126
-[; ;sync.c: 126: uint8_t mutex_trylock(mutex_t *mutex)
+"125
+[; ;sync.c: 125: uint8_t mutex_trylock(mutex_t *mutex)
 [v _mutex_trylock `(uc ~T0 @X0 1 ef1`*S5 ]
-"127
-[; ;sync.c: 127: {
+"126
+[; ;sync.c: 126: {
 {
 [e :U _mutex_trylock ]
-"126
-[; ;sync.c: 126: uint8_t mutex_trylock(mutex_t *mutex)
+"125
+[; ;sync.c: 125: uint8_t mutex_trylock(mutex_t *mutex)
 [v _mutex `*S5 ~T0 @X0 1 r1 ]
-"127
-[; ;sync.c: 127: {
+"126
+[; ;sync.c: 126: {
 [f ]
-"128
-[; ;sync.c: 128:     INTCONbits.GIE = 0;;
+"127
+[; ;sync.c: 127:     INTCONbits.GIE = 0;;
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-"130
-[; ;sync.c: 130:     if (mutex->locked == 0) {
+"129
+[; ;sync.c: 129:     if (mutex->locked == 0) {
 [e $ ! == -> . *U _mutex 0 `i -> 0 `i 928  ]
 {
-"131
-[; ;sync.c: 131:         mutex->locked = 1;
+"130
+[; ;sync.c: 130:         mutex->locked = 1;
 [e = . *U _mutex 0 -> -> 1 `i `uc ]
-"132
-[; ;sync.c: 132:         mutex->owner_id = r_queue.pos_task_running;
+"131
+[; ;sync.c: 131:         mutex->owner_id = r_queue.pos_task_running;
 [e = . *U _mutex 1 . _r_queue 3 ]
-"133
-[; ;sync.c: 133:         INTCONbits.GIE = 1;;
+"132
+[; ;sync.c: 132:         INTCONbits.GIE = 1;;
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"134
-[; ;sync.c: 134:         return 0;
+"133
+[; ;sync.c: 133:         return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 927  ]
-"135
-[; ;sync.c: 135:     }
+"134
+[; ;sync.c: 134:     }
 }
 [e :U 928 ]
-"137
-[; ;sync.c: 137:     INTCONbits.GIE = 1;;
+"136
+[; ;sync.c: 136:     INTCONbits.GIE = 1;;
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"138
-[; ;sync.c: 138:     return 1;
+"137
+[; ;sync.c: 137:     return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 927  ]
-"139
-[; ;sync.c: 139: }
+"138
+[; ;sync.c: 138: }
 [e :UE 927 ]
 }

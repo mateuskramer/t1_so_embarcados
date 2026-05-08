@@ -11,8 +11,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./com.h: 9: typedef struct pipe {
 [s S882 `uc -> 4 `i `uc 1 `uc 1 `S881 1 `S881 1 ]
 [n S882 pipe fila_dados pos_input pos_output s_input s_output ]
-"15 user.c
-[; ;user.c: 15:         if (r_queue.TASKS[i].task_id == 3) {
+"16 user.c
+[; ;user.c: 16:         if (r_queue.TASKS[i].task_id == 3) {
 [c E37 0 1 2 3 4 .. ]
 [n E37 . READY WAITING RUNNING WAITING_SEM WAITING_MUTEX  ]
 [v F59 `(v ~T0 @X0 0 tf ]
@@ -22,7 +22,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n S1 hw_stack TOSL_REG TOSH_REG TOSU_REG ]
 "24
 [; ;./types.h: 24: typedef struct sw_stack {
-[s S2 `S1 -> 10 `i `uc 1 ]
+[s S2 `S1 -> 5 `i `uc 1 ]
 [n S2 sw_stack stack stack_size ]
 "29
 [; ;./types.h: 29: typedef struct tcb {
@@ -86,8 +86,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17 ./com.h
 [; ;./com.h: 17: void pipe_init(pipe_t *p);
 [v _pipe_init `(v ~T0 @X0 0 ef1`*S882 ]
-"50 user.c
-[; ;user.c: 50:     ext_int_config(EXT_INT_RISING, on_int0);
+"16 ./sync.h
+[; ;./sync.h: 16: void sem_init(sem_t *sem, uint8_t valor);
+[v _sem_init `(v ~T0 @X0 0 ef2`*S881`uc ]
+"51 user.c
+[; ;user.c: 51:     ext_int_config(EXT_INT_RISING, on_int0);
 [c E6230 0 1 .. ]
 [n E6230 . EXT_INT_RISING EXT_INT_FALLING  ]
 [v F6237 `(v ~T0 @X0 0 tf ]
@@ -97,7 +100,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "26
 [; ;./io.h: 26: void ext_int_enable(void);
 [v _ext_int_enable `(v ~T0 @X0 0 ef ]
-"22 ./sync.h
+"17 ./sync.h
+[; ;./sync.h: 17: void sem_wait(sem_t *sem);
+[v _sem_wait `(v ~T0 @X0 0 ef1`*S881 ]
+"22
 [; ;./sync.h: 22: uint8_t mutex_lock(mutex_t *mutex);
 [v _mutex_lock `(uc ~T0 @X0 0 ef1`*S5 ]
 "9 ./io.h
@@ -106,6 +112,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23 ./sync.h
 [; ;./sync.h: 23: uint8_t mutex_unlock(mutex_t *mutex);
 [v _mutex_unlock `(uc ~T0 @X0 0 ef1`*S5 ]
+"18
+[; ;./sync.h: 18: void sem_post(sem_t *sem);
+[v _sem_post `(v ~T0 @X0 0 ef1`*S881 ]
 "20 ./kernel.h
 [; ;./kernel.h: 20: void os_task_change_state(state_t new_state, tcb_t *task_handle);
 [v _os_task_change_state `(v ~T0 @X0 0 ef2`E37`*S3 ]
@@ -883,97 +892,96 @@ Version 4.0 HI-TECH Software Intermediate Code
 "9
 [; ;user.c: 9: static pipe_t adc_pipe;
 [v _adc_pipe `S882 ~T0 @X0 1 s ]
-"11
-[; ;user.c: 11: static void on_int0(void)
-[v _on_int0 `(v ~T0 @X0 1 sf ]
+"10
+[; ;user.c: 10: static sem_t alarm_sem;
+[v _alarm_sem `S881 ~T0 @X0 1 s ]
 "12
-[; ;user.c: 12: {
+[; ;user.c: 12: static void on_int0(void)
+[v _on_int0 `(v ~T0 @X0 1 sf ]
+"13
+[; ;user.c: 13: {
 {
 [e :U _on_int0 ]
 [f ]
-"13
-[; ;user.c: 13:     uint8_t i;
-[v _i `uc ~T0 @X0 1 a ]
 "14
-[; ;user.c: 14:     for (i = 0; i < r_queue.size; i++) {
+[; ;user.c: 14:     static uint8_t i;
+[v F6283 `uc ~T0 @X0 1 s i ]
+"15
+[; ;user.c: 15:     for (i = 0; i < r_queue.size; i++) {
 {
-[e = _i -> -> 0 `i `uc ]
+[e = F6283 -> -> 0 `i `uc ]
 [e $U 887  ]
 [e :U 884 ]
 {
-"15
-[; ;user.c: 15:         if (r_queue.TASKS[i].task_id == 3) {
-[e $ ! == -> . *U + &U . _r_queue 0 * -> _i `ux -> -> # *U &U . _r_queue 0 `ui `ux 0 `i -> 3 `i 888  ]
-{
 "16
-[; ;user.c: 16:             r_queue.TASKS[i].task_stack.stack_size = 0;
-[e = . . *U + &U . _r_queue 0 * -> _i `ux -> -> # *U &U . _r_queue 0 `ui `ux 22 1 -> -> 0 `i `uc ]
+[; ;user.c: 16:         if (r_queue.TASKS[i].task_id == 3) {
+[e $ ! == -> . *U + &U . _r_queue 0 * -> F6283 `ux -> -> # *U &U . _r_queue 0 `ui `ux 0 `i -> 3 `i 888  ]
+{
 "17
-[; ;user.c: 17:             r_queue.TASKS[i].task_state = READY;
-[e = . *U + &U . _r_queue 0 * -> _i `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 . `E37 0 ]
+[; ;user.c: 17:             r_queue.TASKS[i].task_stack.stack_size = 0;
+[e = . . *U + &U . _r_queue 0 * -> F6283 `ux -> -> # *U &U . _r_queue 0 `ui `ux 22 1 -> -> 0 `i `uc ]
 "18
-[; ;user.c: 18:             return;
-[e $UE 883  ]
+[; ;user.c: 18:             r_queue.TASKS[i].task_state = READY;
+[e = . *U + &U . _r_queue 0 * -> F6283 `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 . `E37 0 ]
 "19
-[; ;user.c: 19:         }
+[; ;user.c: 19:             return;
+[e $UE 883  ]
+"20
+[; ;user.c: 20:         }
 }
 [e :U 888 ]
-"20
-[; ;user.c: 20:     }
+"21
+[; ;user.c: 21:     }
 }
-[e ++ _i -> -> 1 `i `uc ]
+[e ++ F6283 -> -> 1 `i `uc ]
 [e :U 887 ]
-[e $ < -> _i `i -> . _r_queue 1 `i 884  ]
+[e $ < -> F6283 `i -> . _r_queue 1 `i 884  ]
 [e :U 885 ]
 }
-"21
-[; ;user.c: 21:     if (r_queue.size <= 4) {
+"22
+[; ;user.c: 22:     if (r_queue.size <= 4) {
 [e $ ! <= -> . _r_queue 1 `i -> 4 `i 889  ]
 {
-"22
-[; ;user.c: 22:         r_queue.TASKS[r_queue.size].task_id = 3;
-[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 0 -> -> 3 `i `uc ]
 "23
-[; ;user.c: 23:         r_queue.TASKS[r_queue.size].task_delay = 0;
-[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 3 -> -> 0 `i `uc ]
+[; ;user.c: 23:         r_queue.TASKS[r_queue.size].task_id = 3;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 0 -> -> 3 `i `uc ]
 "24
-[; ;user.c: 24:         r_queue.TASKS[r_queue.size].task_priority = 2;
-[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 4 -> -> 2 `i `uc ]
+[; ;user.c: 24:         r_queue.TASKS[r_queue.size].task_delay = 0;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 3 -> -> 0 `i `uc ]
 "25
-[; ;user.c: 25:         r_queue.TASKS[r_queue.size].task_ptr = task_alarm;
-[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 2 &U _task_alarm ]
+[; ;user.c: 25:         r_queue.TASKS[r_queue.size].task_priority = 2;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 4 -> -> 2 `i `uc ]
 "26
-[; ;user.c: 26:         r_queue.TASKS[r_queue.size].task_state = READY;
-[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 . `E37 0 ]
+[; ;user.c: 26:         r_queue.TASKS[r_queue.size].task_ptr = task_alarm;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 2 &U _task_alarm ]
 "27
-[; ;user.c: 27:         r_queue.TASKS[r_queue.size].task_stack.stack_size = 0;
-[e = . . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 22 1 -> -> 0 `i `uc ]
+[; ;user.c: 27:         r_queue.TASKS[r_queue.size].task_state = READY;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 . `E37 0 ]
 "28
-[; ;user.c: 28:         r_queue.size++;
-[e ++ . _r_queue 1 -> -> 1 `i `uc ]
+[; ;user.c: 28:         r_queue.TASKS[r_queue.size].task_stack.stack_size = 0;
+[e = . . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 22 1 -> -> 0 `i `uc ]
 "29
-[; ;user.c: 29:     }
+[; ;user.c: 29:         r_queue.size++;
+[e ++ . _r_queue 1 -> -> 1 `i `uc ]
+"30
+[; ;user.c: 30:     }
 }
 [e :U 889 ]
-"30
-[; ;user.c: 30: }
+"31
+[; ;user.c: 31: }
 [e :UE 883 ]
 }
-"32
-[; ;user.c: 32: void config_user(void)
-[v _config_user `(v ~T0 @X0 1 ef ]
 "33
-[; ;user.c: 33: {
+[; ;user.c: 33: void config_user(void)
+[v _config_user `(v ~T0 @X0 1 ef ]
+"34
+[; ;user.c: 34: {
 {
 [e :U _config_user ]
 [f ]
-"34
-[; ;user.c: 34:     __asm("global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0");
+"35
+[; ;user.c: 35:     __asm("global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0");
 [; <" global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0 ;# ">
-"36
-[; ;user.c: 36:     TRISCbits.RC1 = 0; LATCbits.LATC1 = 0;
-[e = . . _TRISCbits 1 1 -> -> 0 `i `uc ]
-[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
 "37
 [; ;user.c: 37:     TRISCbits.RC2 = 0; LATCbits.LATC2 = 0;
 [e = . . _TRISCbits 1 2 -> -> 0 `i `uc ]
@@ -1004,132 +1012,184 @@ Version 4.0 HI-TECH Software Intermediate Code
 "48
 [; ;user.c: 48:     pipe_init(&adc_pipe);
 [e ( _pipe_init (1 &U _adc_pipe ]
-"50
-[; ;user.c: 50:     ext_int_config(EXT_INT_RISING, on_int0);
-[e ( _ext_int_config (2 , . `E6230 0 &U _on_int0 ]
+"49
+[; ;user.c: 49:     sem_init(&alarm_sem, 0);
+[e ( _sem_init (2 , &U _alarm_sem -> -> 0 `i `uc ]
 "51
-[; ;user.c: 51:     ext_int_enable();
-[e ( _ext_int_enable ..  ]
+[; ;user.c: 51:     ext_int_config(EXT_INT_RISING, on_int0);
+[e ( _ext_int_config (2 , . `E6230 0 &U _on_int0 ]
 "52
-[; ;user.c: 52: }
+[; ;user.c: 52:     ext_int_enable();
+[e ( _ext_int_enable ..  ]
+"53
+[; ;user.c: 53: }
 [e :UE 890 ]
 }
-"55
-[; ;user.c: 55: TASK task_monitor(void)
-[v _task_monitor `(v ~T0 @X0 1 ef ]
 "56
-[; ;user.c: 56: {
+[; ;user.c: 56: TASK task_monitor(void)
+[v _task_monitor `(v ~T0 @X0 1 ef ]
+"57
+[; ;user.c: 57: {
 {
 [e :U _task_monitor ]
 [f ]
-"57
-[; ;user.c: 57:     while (1) { LATCbits.LATC1 ^= 1; }
+"58
+[; ;user.c: 58:     while (1)
 [e :U 893 ]
+"59
+[; ;user.c: 59:     {
 {
-[e =^ . . _LATCbits 0 1 -> -> 1 `i `Vuc ]
+"60
+[; ;user.c: 60:         sem_wait(&alarm_sem);
+[e ( _sem_wait (1 &U _alarm_sem ]
+"63
+[; ;user.c: 63:         static uint8_t blink;
+[v F6290 `uc ~T0 @X0 1 s blink ]
+"64
+[; ;user.c: 64:         static volatile uint16_t d;
+[v F6291 `Vus ~T0 @X0 1 s d ]
+"65
+[; ;user.c: 65:         for (blink = 0; blink < 6; blink++)
+{
+[e = F6290 -> -> 0 `i `uc ]
+[e $ < -> F6290 `i -> 6 `i 895  ]
+[e $U 896  ]
+[e :U 895 ]
+"66
+[; ;user.c: 66:         {
+{
+"67
+[; ;user.c: 67:             LATCbits.LATC4 ^= 1;
+[e =^ . . _LATCbits 0 4 -> -> 1 `i `Vuc ]
+"68
+[; ;user.c: 68:             for (d = 0; d < 40000; d++);
+{
+[e = F6291 -> -> 0 `i `us ]
+[e $ < -> F6291 `l -> 40000 `l 898  ]
+[e $U 899  ]
+[e :U 898 ]
+[e ++ F6291 -> -> 1 `i `Vus ]
+[e $ < -> F6291 `l -> 40000 `l 898  ]
+[e :U 899 ]
+}
+"69
+[; ;user.c: 69:         }
+}
+[e ++ F6290 -> -> 1 `i `uc ]
+[e $ < -> F6290 `i -> 6 `i 895  ]
+[e :U 896 ]
+}
+"70
+[; ;user.c: 70:         LATCbits.LATC4 = 0;
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+"71
+[; ;user.c: 71:     }
 }
 [e :U 892 ]
 [e $U 893  ]
 [e :U 894 ]
-"58
-[; ;user.c: 58: }
+"72
+[; ;user.c: 72: }
 [e :UE 891 ]
 }
-"61
-[; ;user.c: 61: TASK task_alarm(void)
+"75
+[; ;user.c: 75: TASK task_alarm(void)
 [v _task_alarm `(v ~T0 @X0 1 ef ]
-"62
-[; ;user.c: 62: {
+"76
+[; ;user.c: 76: {
 {
 [e :U _task_alarm ]
 [f ]
-"63
-[; ;user.c: 63:     mutex_lock(&adc_mutex);
-[e ( _mutex_lock (1 &U _adc_mutex ]
-"64
-[; ;user.c: 64:     uint16_t adc = adc_read();
-[v _adc `us ~T0 @X0 1 a ]
-[e = _adc ( _adc_read ..  ]
-"65
-[; ;user.c: 65:     mutex_unlock(&adc_mutex);
-[e ( _mutex_unlock (1 &U _adc_mutex ]
-"67
-[; ;user.c: 67:     LATCbits.LATC3 = (adc > 512) ? 1 : 0;
-[e = . . _LATCbits 0 3 -> ? > -> _adc `ui -> -> 512 `i `ui : -> 1 `i -> 0 `i `uc ]
-"69
-[; ;user.c: 69:     os_task_change_state(WAITING, ((void*)0));
-[e ( _os_task_change_state (2 , . `E37 1 -> -> -> 0 `i `*v `*S3 ]
-"70
-[; ;user.c: 70: }
-[e :UE 895 ]
-}
-"73
-[; ;user.c: 73: TASK task_producer(void)
-[v _task_producer `(v ~T0 @X0 1 ef ]
-"74
-[; ;user.c: 74: {
-{
-[e :U _task_producer ]
-[f ]
-"75
-[; ;user.c: 75:     while (1)
-[e :U 898 ]
-"76
-[; ;user.c: 76:     {
-{
 "77
-[; ;user.c: 77:         mutex_lock(&adc_mutex);
+[; ;user.c: 77:     mutex_lock(&adc_mutex);
 [e ( _mutex_lock (1 &U _adc_mutex ]
 "78
-[; ;user.c: 78:         uint16_t adc = adc_read();
+[; ;user.c: 78:     uint16_t adc = adc_read();
 [v _adc `us ~T0 @X0 1 a ]
 [e = _adc ( _adc_read ..  ]
 "79
-[; ;user.c: 79:         mutex_unlock(&adc_mutex);
+[; ;user.c: 79:     mutex_unlock(&adc_mutex);
 [e ( _mutex_unlock (1 &U _adc_mutex ]
 "81
-[; ;user.c: 81:         pipe_write(&adc_pipe, (char)(adc >> 2));
-[e ( _pipe_write (2 , &U _adc_pipe -> >> -> _adc `ui -> 2 `i `uc ]
+[; ;user.c: 81:     LATCbits.LATC3 = (adc > 512) ? 1 : 0;
+[e = . . _LATCbits 0 3 -> ? > -> _adc `ui -> -> 512 `i `ui : -> 1 `i -> 0 `i `uc ]
 "82
-[; ;user.c: 82:     }
+[; ;user.c: 82:     sem_post(&alarm_sem);
+[e ( _sem_post (1 &U _alarm_sem ]
+"84
+[; ;user.c: 84:     os_task_change_state(WAITING, ((void*)0));
+[e ( _os_task_change_state (2 , . `E37 1 -> -> -> 0 `i `*v `*S3 ]
+"85
+[; ;user.c: 85: }
+[e :UE 901 ]
 }
-[e :U 897 ]
-[e $U 898  ]
-[e :U 899 ]
-"83
-[; ;user.c: 83: }
-[e :UE 896 ]
+"88
+[; ;user.c: 88: TASK task_producer(void)
+[v _task_producer `(v ~T0 @X0 1 ef ]
+"89
+[; ;user.c: 89: {
+{
+[e :U _task_producer ]
+[f ]
+"90
+[; ;user.c: 90:     while (1)
+[e :U 904 ]
+"91
+[; ;user.c: 91:     {
+{
+"92
+[; ;user.c: 92:         mutex_lock(&adc_mutex);
+[e ( _mutex_lock (1 &U _adc_mutex ]
+"93
+[; ;user.c: 93:         uint16_t adc = adc_read();
+[v _adc `us ~T0 @X0 1 a ]
+[e = _adc ( _adc_read ..  ]
+"94
+[; ;user.c: 94:         mutex_unlock(&adc_mutex);
+[e ( _mutex_unlock (1 &U _adc_mutex ]
+"96
+[; ;user.c: 96:         pipe_write(&adc_pipe, (char)(adc >> 2));
+[e ( _pipe_write (2 , &U _adc_pipe -> >> -> _adc `ui -> 2 `i `uc ]
+"97
+[; ;user.c: 97:     }
 }
-"86
-[; ;user.c: 86: TASK task_consumer(void)
+[e :U 903 ]
+[e $U 904  ]
+[e :U 905 ]
+"98
+[; ;user.c: 98: }
+[e :UE 902 ]
+}
+"101
+[; ;user.c: 101: TASK task_consumer(void)
 [v _task_consumer `(v ~T0 @X0 1 ef ]
-"87
-[; ;user.c: 87: {
+"102
+[; ;user.c: 102: {
 {
 [e :U _task_consumer ]
 [f ]
-"88
-[; ;user.c: 88:     while (1)
-[e :U 902 ]
-"89
-[; ;user.c: 89:     {
+"103
+[; ;user.c: 103:     while (1)
+[e :U 908 ]
+"104
+[; ;user.c: 104:     {
 {
-"90
-[; ;user.c: 90:         char dado;
+"105
+[; ;user.c: 105:         char dado;
 [v _dado `uc ~T0 @X0 1 a ]
-"91
-[; ;user.c: 91:         pipe_read(&adc_pipe, &dado);
+"106
+[; ;user.c: 106:         pipe_read(&adc_pipe, &dado);
 [e ( _pipe_read (2 , &U _adc_pipe &U _dado ]
-"92
-[; ;user.c: 92:         pwm_set_duty((uint16_t)((uint8_t)dado * 4));
+"107
+[; ;user.c: 107:         pwm_set_duty((uint16_t)((uint8_t)dado * 4));
 [e ( _pwm_set_duty (1 -> * -> -> _dado `uc `i -> 4 `i `us ]
-"93
-[; ;user.c: 93:     }
+"108
+[; ;user.c: 108:     }
 }
-[e :U 901 ]
-[e $U 902  ]
-[e :U 903 ]
-"94
-[; ;user.c: 94: }
-[e :UE 900 ]
+[e :U 907 ]
+[e $U 908  ]
+[e :U 909 ]
+"109
+[; ;user.c: 109: }
+[e :UE 906 ]
 }

@@ -142,7 +142,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[10];
+    hw_stack_t stack[5];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -9941,7 +9941,7 @@ TASK task_consumer(void);
 int main()
 {
     os_config();
-    os_create_task(2, task_monitor, 1);
+    os_create_task(2, task_monitor, 2);
     os_create_task(4, task_producer, 2);
     os_create_task(5, task_consumer, 2);
 

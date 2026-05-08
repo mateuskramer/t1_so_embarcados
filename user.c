@@ -7,10 +7,11 @@
 
 static mutex_t adc_mutex;
 static pipe_t  adc_pipe;
+static sem_t   alarm_sem;
 
 static void on_int0(void)
 {
-    uint8_t i;
+    static uint8_t i;
     for (i = 0; i < r_queue.size; i++) {
         if (r_queue.TASKS[i].task_id == ID_ALARM) {
             r_queue.TASKS[i].task_stack.stack_size = 0;
@@ -33,7 +34,6 @@ void config_user(void)
 {
     asm("global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0");
 
-    TRISCbits.RC1 = 0;  LATCbits.LATC1 = 0;
     TRISCbits.RC2 = 0;  LATCbits.LATC2 = 0;
     TRISCbits.RC3 = 0;  LATCbits.LATC3 = 0;
     TRISCbits.RC4 = 0;  LATCbits.LATC4 = 0;
@@ -46,15 +46,29 @@ void config_user(void)
 
     mutex_init(&adc_mutex);
     pipe_init(&adc_pipe);
+    sem_init(&alarm_sem, 0);
 
     ext_int_config(EXT_INT_RISING, on_int0);
     ext_int_enable();
 }
 
-/* Heartbeat: pisca RC1 para indicar que o sistema esta vivo */
+/* Luz de alerta: bloqueia no semaforo, pisca RC4 quando alarme dispara */
 TASK task_monitor(void)
 {
-    while (1) { LATCbits.LATC1 ^= 1; }
+    while (1)
+    {
+        sem_wait(&alarm_sem);
+
+        /* pisca RC4 rapidamente 6 vezes */
+        static uint8_t blink;
+        static volatile uint16_t d;
+        for (blink = 0; blink < 6; blink++)
+        {
+            LATCbits.LATC4 ^= 1;
+            for (d = 0; d < 40000; d++);
+        }
+        LATCbits.LATC4 = 0;
+    }
 }
 
 /* One-shot: criada/reativada pelo INT0, executa uma vez e dorme */
@@ -65,6 +79,7 @@ TASK task_alarm(void)
     mutex_unlock(&adc_mutex);
 
     LATCbits.LATC3 = (adc > 512) ? 1 : 0;
+    sem_post(&alarm_sem);
 
     os_task_change_state(WAITING, NULL);
 }

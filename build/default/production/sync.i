@@ -144,7 +144,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[10];
+    hw_stack_t stack[5];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -10068,7 +10068,6 @@ uint8_t mutex_unlock(mutex_t *mutex)
 
 
     if (mutex->waiting_count > 0) {
-
         uint8_t next_owner = mutex->waiting_queue[mutex->pos_output];
         mutex->pos_output = (mutex->pos_output + 1) % 4;
         mutex->waiting_count--;

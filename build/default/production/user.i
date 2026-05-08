@@ -142,7 +142,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[10];
+    hw_stack_t stack[5];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -10026,10 +10026,11 @@ void pipe_write(pipe_t *p, char dado);
 
 static mutex_t adc_mutex;
 static pipe_t adc_pipe;
+static sem_t alarm_sem;
 
 static void on_int0(void)
 {
-    uint8_t i;
+    static uint8_t i;
     for (i = 0; i < r_queue.size; i++) {
         if (r_queue.TASKS[i].task_id == 3) {
             r_queue.TASKS[i].task_stack.stack_size = 0;
@@ -10052,7 +10053,6 @@ void config_user(void)
 {
     __asm("global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0");
 
-    TRISCbits.RC1 = 0; LATCbits.LATC1 = 0;
     TRISCbits.RC2 = 0; LATCbits.LATC2 = 0;
     TRISCbits.RC3 = 0; LATCbits.LATC3 = 0;
     TRISCbits.RC4 = 0; LATCbits.LATC4 = 0;
@@ -10065,6 +10065,7 @@ void config_user(void)
 
     mutex_init(&adc_mutex);
     pipe_init(&adc_pipe);
+    sem_init(&alarm_sem, 0);
 
     ext_int_config(EXT_INT_RISING, on_int0);
     ext_int_enable();
@@ -10073,7 +10074,20 @@ void config_user(void)
 
 TASK task_monitor(void)
 {
-    while (1) { LATCbits.LATC1 ^= 1; }
+    while (1)
+    {
+        sem_wait(&alarm_sem);
+
+
+        static uint8_t blink;
+        static volatile uint16_t d;
+        for (blink = 0; blink < 6; blink++)
+        {
+            LATCbits.LATC4 ^= 1;
+            for (d = 0; d < 40000; d++);
+        }
+        LATCbits.LATC4 = 0;
+    }
 }
 
 
@@ -10084,6 +10098,7 @@ TASK task_alarm(void)
     mutex_unlock(&adc_mutex);
 
     LATCbits.LATC3 = (adc > 512) ? 1 : 0;
+    sem_post(&alarm_sem);
 
     os_task_change_state(WAITING, ((void*)0));
 }

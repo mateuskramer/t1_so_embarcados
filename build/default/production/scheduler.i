@@ -149,7 +149,7 @@ typedef struct hw_stack {
 } hw_stack_t;
 
 typedef struct sw_stack {
-    hw_stack_t stack[10];
+    hw_stack_t stack[5];
     uint8_t stack_size;
 } sw_stack_t;
 
@@ -9995,9 +9995,10 @@ uint8_t priority_scheduler(void)
 
 uint8_t rr_priority_scheduler(void)
 {
+    static uint8_t max_priority, prox, tentativas, i;
 
-    uint8_t max_priority = 0;
-    for (uint8_t i = 0; i < r_queue.size; i++) {
+    max_priority = 0;
+    for (i = 0; i < r_queue.size; i++) {
         if (r_queue.TASKS[i].task_state == READY && r_queue.TASKS[i].task_ptr != idle) {
             if (r_queue.TASKS[i].task_priority > max_priority) {
                 max_priority = r_queue.TASKS[i].task_priority;
@@ -10005,16 +10006,14 @@ uint8_t rr_priority_scheduler(void)
         }
     }
 
-
-    uint8_t prox = r_queue.pos_task_running;
-    uint8_t tentativas = 0;
+    prox = r_queue.pos_task_running;
+    tentativas = 0;
 
     do {
         prox = (prox + 1) % r_queue.size;
         tentativas++;
         if (tentativas >= r_queue.size) {
-
-            for (uint8_t i = 0; i < r_queue.size; i++) {
+            for (i = 0; i < r_queue.size; i++) {
                 if (r_queue.TASKS[i].task_state == READY && r_queue.TASKS[i].task_priority == max_priority && r_queue.TASKS[i].task_ptr != idle) {
                     return i;
                 }
