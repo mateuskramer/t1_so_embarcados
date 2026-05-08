@@ -3,15 +3,15 @@
 
 #include "types.h"
 
-#define ID_BLINK1  2
-#define ID_BLINK2  3
-#define ID_BLINK3  4
-#define ID_BLINK4  5
+#define ID_MONITOR   2
+#define ID_ALARM     3
+#define ID_PRODUCER  4
+#define ID_CONSUMER  5
 
 void config_user(void);
-TASK task_blink1(void);
-TASK task_blink2(void);
-TASK task_blink3(void);
-TASK task_blink4(void);
+TASK task_monitor(void);
+TASK task_alarm(void);
+TASK task_producer(void);
+TASK task_consumer(void);
 
 #endif /* USER_H */

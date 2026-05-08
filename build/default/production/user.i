@@ -201,10 +201,10 @@ typedef struct mutex {
 
 
 void config_user(void);
-TASK task_blink1(void);
-TASK task_blink2(void);
-TASK task_blink3(void);
-TASK task_blink4(void);
+TASK task_monitor(void);
+TASK task_alarm(void);
+TASK task_producer(void);
+TASK task_consumer(void);
 # 2 "user.c" 2
 # 1 "./kernel.h" 1
 
@@ -10027,9 +10027,30 @@ void pipe_write(pipe_t *p, char dado);
 static mutex_t adc_mutex;
 static pipe_t adc_pipe;
 
+static void on_int0(void)
+{
+    uint8_t i;
+    for (i = 0; i < r_queue.size; i++) {
+        if (r_queue.TASKS[i].task_id == 3) {
+            r_queue.TASKS[i].task_stack.stack_size = 0;
+            r_queue.TASKS[i].task_state = READY;
+            return;
+        }
+    }
+    if (r_queue.size <= 4) {
+        r_queue.TASKS[r_queue.size].task_id = 3;
+        r_queue.TASKS[r_queue.size].task_delay = 0;
+        r_queue.TASKS[r_queue.size].task_priority = 2;
+        r_queue.TASKS[r_queue.size].task_ptr = task_alarm;
+        r_queue.TASKS[r_queue.size].task_state = READY;
+        r_queue.TASKS[r_queue.size].task_stack.stack_size = 0;
+        r_queue.size++;
+    }
+}
+
 void config_user(void)
 {
-    __asm("global _task_blink1, _task_blink2, _task_blink3, _task_blink4");
+    __asm("global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0");
 
     TRISCbits.RC1 = 0; LATCbits.LATC1 = 0;
     TRISCbits.RC2 = 0; LATCbits.LATC2 = 0;
@@ -10044,20 +10065,31 @@ void config_user(void)
 
     mutex_init(&adc_mutex);
     pipe_init(&adc_pipe);
+
+    ext_int_config(EXT_INT_RISING, on_int0);
+    ext_int_enable();
 }
 
-TASK task_blink1(void)
+
+TASK task_monitor(void)
 {
     while (1) { LATCbits.LATC1 ^= 1; }
 }
 
-TASK task_blink2(void)
+
+TASK task_alarm(void)
 {
-    while (1) { LATCbits.LATC2 ^= 1; }
+    mutex_lock(&adc_mutex);
+    uint16_t adc = adc_read();
+    mutex_unlock(&adc_mutex);
+
+    LATCbits.LATC3 = (adc > 512) ? 1 : 0;
+
+    os_task_change_state(WAITING, ((void*)0));
 }
 
 
-TASK task_blink3(void)
+TASK task_producer(void)
 {
     while (1)
     {
@@ -10070,7 +10102,7 @@ TASK task_blink3(void)
 }
 
 
-TASK task_blink4(void)
+TASK task_consumer(void)
 {
     while (1)
     {

@@ -9932,19 +9932,18 @@ TASK idle();
 # 1 "./user.h" 1
 # 11 "./user.h"
 void config_user(void);
-TASK task_blink1(void);
-TASK task_blink2(void);
-TASK task_blink3(void);
-TASK task_blink4(void);
+TASK task_monitor(void);
+TASK task_alarm(void);
+TASK task_producer(void);
+TASK task_consumer(void);
 # 3 "main.c" 2
 
 int main()
 {
     os_config();
-    os_create_task(2, task_blink1, 1);
-    os_create_task(3, task_blink2, 1);
-    os_create_task(4, task_blink3, 2);
-    os_create_task(5, task_blink4, 2);
+    os_create_task(2, task_monitor, 1);
+    os_create_task(4, task_producer, 2);
+    os_create_task(5, task_consumer, 2);
 
     os_start();
     while (1){};

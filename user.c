@@ -8,9 +8,30 @@
 static mutex_t adc_mutex;
 static pipe_t  adc_pipe;
 
+static void on_int0(void)
+{
+    uint8_t i;
+    for (i = 0; i < r_queue.size; i++) {
+        if (r_queue.TASKS[i].task_id == ID_ALARM) {
+            r_queue.TASKS[i].task_stack.stack_size = 0;
+            r_queue.TASKS[i].task_state = READY;
+            return;
+        }
+    }
+    if (r_queue.size <= MAX_USER_TASKS) {
+        r_queue.TASKS[r_queue.size].task_id               = ID_ALARM;
+        r_queue.TASKS[r_queue.size].task_delay             = 0;
+        r_queue.TASKS[r_queue.size].task_priority          = 2;
+        r_queue.TASKS[r_queue.size].task_ptr               = task_alarm;
+        r_queue.TASKS[r_queue.size].task_state             = READY;
+        r_queue.TASKS[r_queue.size].task_stack.stack_size  = 0;
+        r_queue.size++;
+    }
+}
+
 void config_user(void)
 {
-    asm("global _task_blink1, _task_blink2, _task_blink3, _task_blink4");
+    asm("global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0");
 
     TRISCbits.RC1 = 0;  LATCbits.LATC1 = 0;
     TRISCbits.RC2 = 0;  LATCbits.LATC2 = 0;
@@ -25,20 +46,31 @@ void config_user(void)
 
     mutex_init(&adc_mutex);
     pipe_init(&adc_pipe);
+
+    ext_int_config(EXT_INT_RISING, on_int0);
+    ext_int_enable();
 }
 
-TASK task_blink1(void)
+/* Heartbeat: pisca RC1 para indicar que o sistema esta vivo */
+TASK task_monitor(void)
 {
     while (1) { LATCbits.LATC1 ^= 1; }
 }
 
-TASK task_blink2(void)
+/* One-shot: criada/reativada pelo INT0, executa uma vez e dorme */
+TASK task_alarm(void)
 {
-    while (1) { LATCbits.LATC2 ^= 1; }
+    mutex_lock(&adc_mutex);
+    uint16_t adc = adc_read();
+    mutex_unlock(&adc_mutex);
+
+    LATCbits.LATC3 = (adc > 512) ? 1 : 0;
+
+    os_task_change_state(WAITING, NULL);
 }
 
 /* Produtora: le ADC e envia para o pipe */
-TASK task_blink3(void)
+TASK task_producer(void)
 {
     while (1)
     {
@@ -46,17 +78,17 @@ TASK task_blink3(void)
         uint16_t adc = adc_read();
         mutex_unlock(&adc_mutex);
 
-        pipe_write(&adc_pipe, (char)(adc >> 2));  /* escala 0-1023 para 0-255 */
+        pipe_write(&adc_pipe, (char)(adc >> 2));
     }
 }
 
 /* Consumidora: recebe do pipe e ajusta PWM */
-TASK task_blink4(void)
+TASK task_consumer(void)
 {
     while (1)
     {
         char dado;
         pipe_read(&adc_pipe, &dado);
-        pwm_set_duty((uint16_t)((uint8_t)dado * 4));  /* escala 0-255 para 0-1020 */
+        pwm_set_duty((uint16_t)((uint8_t)dado * 4));
     }
 }

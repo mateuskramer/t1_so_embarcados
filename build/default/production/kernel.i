@@ -9943,10 +9943,10 @@ uint8_t rr_priority_scheduler(void);
 # 1 "./user.h" 1
 # 11 "./user.h"
 void config_user(void);
-TASK task_blink1(void);
-TASK task_blink2(void);
-TASK task_blink3(void);
-TASK task_blink4(void);
+TASK task_monitor(void);
+TASK task_alarm(void);
+TASK task_producer(void);
+TASK task_consumer(void);
 # 4 "kernel.c" 2
 # 1 "./hw.h" 1
 

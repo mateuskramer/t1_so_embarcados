@@ -22,16 +22,21 @@ void setup_hardware(void)
 
 void __interrupt() ISR(void)
 {
+    /* INT0 verificado ANTES do contexto do Timer0 para evitar
+     * que o RESTORE_CONTEXT corrumpa os registradores antes do check */
+    if (INTCONbits.INT0IE && INTCONbits.INT0IF) {
+        ext_int_isr_handler();
+    }
+
     if (INTCONbits.TMR0IF) {
         INTCONbits.TMR0IF = 0;
-        
-        // Verifica se tem tarefa com delay > 0
+
         for (int i = 0; i < r_queue.size; i++) {
             if (r_queue.TASKS[i].task_delay > 0) {
                 r_queue.TASKS[i].task_delay--;
                 if (r_queue.TASKS[i].task_delay == 0) {
                     r_queue.TASKS[i].task_state = READY;
-                }                
+                }
             }
         }
         rr_quantum--;
@@ -41,9 +46,5 @@ void __interrupt() ISR(void)
             scheduler();
             RESTORE_CONTEXT();
         }
-    }
-    
-    if (INTCONbits.INT0IE && INTCONbits.INT0IF) {
-        ext_int_isr_handler();  
     }
 }

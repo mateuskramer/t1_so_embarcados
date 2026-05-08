@@ -112,8 +112,8 @@ void ext_int_disable(void)
  */
 void ext_int_isr_handler(void)
 {
-    INTCONbits.INT0IF = 0;           /* Limpa flag na ISR              */
+    INTCONbits.INT0IF = 0;
     if (ext_int_user_callback != 0) {
-        ext_int_user_callback();     /* Executa callback do usu�rio    */
+        ext_int_user_callback();
     }
 }

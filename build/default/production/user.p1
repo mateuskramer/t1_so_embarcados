@@ -11,6 +11,33 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;./com.h: 9: typedef struct pipe {
 [s S882 `uc -> 4 `i `uc 1 `uc 1 `S881 1 `S881 1 ]
 [n S882 pipe fila_dados pos_input pos_output s_input s_output ]
+"15 user.c
+[; ;user.c: 15:         if (r_queue.TASKS[i].task_id == 3) {
+[c E37 0 1 2 3 4 .. ]
+[n E37 . READY WAITING RUNNING WAITING_SEM WAITING_MUTEX  ]
+[v F59 `(v ~T0 @X0 0 tf ]
+"18 ./types.h
+[; ;./types.h: 18: typedef struct hw_stack {
+[s S1 `uc 1 `uc 1 `uc 1 ]
+[n S1 hw_stack TOSL_REG TOSH_REG TOSU_REG ]
+"24
+[; ;./types.h: 24: typedef struct sw_stack {
+[s S2 `S1 -> 10 `i `uc 1 ]
+[n S2 sw_stack stack stack_size ]
+"29
+[; ;./types.h: 29: typedef struct tcb {
+[s S3 `uc 1 `E37 1 `*F59 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `S2 1 ]
+[n S3 tcb task_id task_state task_ptr task_delay task_priority W_REG STATUS_REG BSR_REG PRODL_REG PRODH_REG FSR0L_REG FSR0H_REG FSR1L_REG FSR1H_REG FSR2L_REG FSR2H_REG TABLAT_REG TBLPTRL_REG TBLPTRH_REG TBLPTRU_REG PCLATH_REG PCLATU_REG task_stack ]
+"60
+[; ;./types.h: 60: typedef struct ready_queue {
+[s S4 `S3 -> 5 `i `uc 1 `*S3 1 `uc 1 ]
+[n S4 ready_queue TASKS size task_running pos_task_running ]
+"8 ./kernel.h
+[; ;./kernel.h: 8: extern ready_queue_t r_queue;
+[v _r_queue `S4 ~T0 @X0 0 e ]
+"13 ./user.h
+[; ;./user.h: 13: TASK task_alarm(void);
+[v _task_alarm `(v ~T0 @X0 0 ef ]
 "8513 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/PIC18F-K_DFP/1.15.303/xc8\pic\include\proc/pic18f46k22.h: 8513:     struct {
 [s S412 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -59,6 +86,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17 ./com.h
 [; ;./com.h: 17: void pipe_init(pipe_t *p);
 [v _pipe_init `(v ~T0 @X0 0 ef1`*S882 ]
+"50 user.c
+[; ;user.c: 50:     ext_int_config(EXT_INT_RISING, on_int0);
+[c E6230 0 1 .. ]
+[n E6230 . EXT_INT_RISING EXT_INT_FALLING  ]
+[v F6237 `(v ~T0 @X0 0 tf ]
+"25 ./io.h
+[; ;./io.h: 25: void ext_int_config(ext_int_edge_t edge, ext_int_callback_t callback);
+[v _ext_int_config `(v ~T0 @X0 0 ef2`E6230`*F6237 ]
+"26
+[; ;./io.h: 26: void ext_int_enable(void);
+[v _ext_int_enable `(v ~T0 @X0 0 ef ]
 "22 ./sync.h
 [; ;./sync.h: 22: uint8_t mutex_lock(mutex_t *mutex);
 [v _mutex_lock `(uc ~T0 @X0 0 ef1`*S5 ]
@@ -68,6 +106,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23 ./sync.h
 [; ;./sync.h: 23: uint8_t mutex_unlock(mutex_t *mutex);
 [v _mutex_unlock `(uc ~T0 @X0 0 ef1`*S5 ]
+"20 ./kernel.h
+[; ;./kernel.h: 20: void os_task_change_state(state_t new_state, tcb_t *task_handle);
+[v _os_task_change_state `(v ~T0 @X0 0 ef2`E37`*S3 ]
 "19 ./com.h
 [; ;./com.h: 19: void pipe_write(pipe_t *p, char dado);
 [v _pipe_write `(v ~T0 @X0 0 ef2`*S882`uc ]
@@ -843,163 +884,252 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user.c: 9: static pipe_t adc_pipe;
 [v _adc_pipe `S882 ~T0 @X0 1 s ]
 "11
-[; ;user.c: 11: void config_user(void)
-[v _config_user `(v ~T0 @X0 1 ef ]
+[; ;user.c: 11: static void on_int0(void)
+[v _on_int0 `(v ~T0 @X0 1 sf ]
 "12
 [; ;user.c: 12: {
 {
-[e :U _config_user ]
+[e :U _on_int0 ]
 [f ]
 "13
-[; ;user.c: 13:     __asm("global _task_blink1, _task_blink2, _task_blink3, _task_blink4");
-[; <" global _task_blink1, _task_blink2, _task_blink3, _task_blink4 ;# ">
+[; ;user.c: 13:     uint8_t i;
+[v _i `uc ~T0 @X0 1 a ]
+"14
+[; ;user.c: 14:     for (i = 0; i < r_queue.size; i++) {
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 887  ]
+[e :U 884 ]
+{
 "15
-[; ;user.c: 15:     TRISCbits.RC1 = 0; LATCbits.LATC1 = 0;
-[e = . . _TRISCbits 1 1 -> -> 0 `i `uc ]
-[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+[; ;user.c: 15:         if (r_queue.TASKS[i].task_id == 3) {
+[e $ ! == -> . *U + &U . _r_queue 0 * -> _i `ux -> -> # *U &U . _r_queue 0 `ui `ux 0 `i -> 3 `i 888  ]
+{
 "16
-[; ;user.c: 16:     TRISCbits.RC2 = 0; LATCbits.LATC2 = 0;
-[e = . . _TRISCbits 1 2 -> -> 0 `i `uc ]
-[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;user.c: 16:             r_queue.TASKS[i].task_stack.stack_size = 0;
+[e = . . *U + &U . _r_queue 0 * -> _i `ux -> -> # *U &U . _r_queue 0 `ui `ux 22 1 -> -> 0 `i `uc ]
 "17
-[; ;user.c: 17:     TRISCbits.RC3 = 0; LATCbits.LATC3 = 0;
-[e = . . _TRISCbits 1 3 -> -> 0 `i `uc ]
-[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+[; ;user.c: 17:             r_queue.TASKS[i].task_state = READY;
+[e = . *U + &U . _r_queue 0 * -> _i `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 . `E37 0 ]
 "18
-[; ;user.c: 18:     TRISCbits.RC4 = 0; LATCbits.LATC4 = 0;
-[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
-[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+[; ;user.c: 18:             return;
+[e $UE 883  ]
+"19
+[; ;user.c: 19:         }
+}
+[e :U 888 ]
 "20
-[; ;user.c: 20:     adc_config();
-[e ( _adc_config ..  ]
+[; ;user.c: 20:     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 887 ]
+[e $ < -> _i `i -> . _r_queue 1 `i 884  ]
+[e :U 885 ]
+}
 "21
-[; ;user.c: 21:     adc_on();
-[e ( _adc_on ..  ]
+[; ;user.c: 21:     if (r_queue.size <= 4) {
+[e $ ! <= -> . _r_queue 1 `i -> 4 `i 889  ]
+{
+"22
+[; ;user.c: 22:         r_queue.TASKS[r_queue.size].task_id = 3;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 0 -> -> 3 `i `uc ]
 "23
-[; ;user.c: 23:     pwm_config(99);
-[e ( _pwm_config (1 -> -> 99 `i `uc ]
+[; ;user.c: 23:         r_queue.TASKS[r_queue.size].task_delay = 0;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 3 -> -> 0 `i `uc ]
 "24
-[; ;user.c: 24:     pwm_on();
-[e ( _pwm_on ..  ]
+[; ;user.c: 24:         r_queue.TASKS[r_queue.size].task_priority = 2;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 4 -> -> 2 `i `uc ]
+"25
+[; ;user.c: 25:         r_queue.TASKS[r_queue.size].task_ptr = task_alarm;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 2 &U _task_alarm ]
 "26
-[; ;user.c: 26:     mutex_init(&adc_mutex);
-[e ( _mutex_init (1 &U _adc_mutex ]
+[; ;user.c: 26:         r_queue.TASKS[r_queue.size].task_state = READY;
+[e = . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 1 . `E37 0 ]
 "27
-[; ;user.c: 27:     pipe_init(&adc_pipe);
-[e ( _pipe_init (1 &U _adc_pipe ]
+[; ;user.c: 27:         r_queue.TASKS[r_queue.size].task_stack.stack_size = 0;
+[e = . . *U + &U . _r_queue 0 * -> . _r_queue 1 `ux -> -> # *U &U . _r_queue 0 `ui `ux 22 1 -> -> 0 `i `uc ]
 "28
-[; ;user.c: 28: }
+[; ;user.c: 28:         r_queue.size++;
+[e ++ . _r_queue 1 -> -> 1 `i `uc ]
+"29
+[; ;user.c: 29:     }
+}
+[e :U 889 ]
+"30
+[; ;user.c: 30: }
 [e :UE 883 ]
 }
-"30
-[; ;user.c: 30: TASK task_blink1(void)
-[v _task_blink1 `(v ~T0 @X0 1 ef ]
-"31
-[; ;user.c: 31: {
-{
-[e :U _task_blink1 ]
-[f ]
 "32
-[; ;user.c: 32:     while (1) { LATCbits.LATC1 ^= 1; }
-[e :U 886 ]
+[; ;user.c: 32: void config_user(void)
+[v _config_user `(v ~T0 @X0 1 ef ]
+"33
+[; ;user.c: 33: {
+{
+[e :U _config_user ]
+[f ]
+"34
+[; ;user.c: 34:     __asm("global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0");
+[; <" global _task_monitor, _task_alarm, _task_producer, _task_consumer, _on_int0 ;# ">
+"36
+[; ;user.c: 36:     TRISCbits.RC1 = 0; LATCbits.LATC1 = 0;
+[e = . . _TRISCbits 1 1 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
+"37
+[; ;user.c: 37:     TRISCbits.RC2 = 0; LATCbits.LATC2 = 0;
+[e = . . _TRISCbits 1 2 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+"38
+[; ;user.c: 38:     TRISCbits.RC3 = 0; LATCbits.LATC3 = 0;
+[e = . . _TRISCbits 1 3 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
+"39
+[; ;user.c: 39:     TRISCbits.RC4 = 0; LATCbits.LATC4 = 0;
+[e = . . _TRISCbits 1 4 -> -> 0 `i `uc ]
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+"41
+[; ;user.c: 41:     adc_config();
+[e ( _adc_config ..  ]
+"42
+[; ;user.c: 42:     adc_on();
+[e ( _adc_on ..  ]
+"44
+[; ;user.c: 44:     pwm_config(99);
+[e ( _pwm_config (1 -> -> 99 `i `uc ]
+"45
+[; ;user.c: 45:     pwm_on();
+[e ( _pwm_on ..  ]
+"47
+[; ;user.c: 47:     mutex_init(&adc_mutex);
+[e ( _mutex_init (1 &U _adc_mutex ]
+"48
+[; ;user.c: 48:     pipe_init(&adc_pipe);
+[e ( _pipe_init (1 &U _adc_pipe ]
+"50
+[; ;user.c: 50:     ext_int_config(EXT_INT_RISING, on_int0);
+[e ( _ext_int_config (2 , . `E6230 0 &U _on_int0 ]
+"51
+[; ;user.c: 51:     ext_int_enable();
+[e ( _ext_int_enable ..  ]
+"52
+[; ;user.c: 52: }
+[e :UE 890 ]
+}
+"55
+[; ;user.c: 55: TASK task_monitor(void)
+[v _task_monitor `(v ~T0 @X0 1 ef ]
+"56
+[; ;user.c: 56: {
+{
+[e :U _task_monitor ]
+[f ]
+"57
+[; ;user.c: 57:     while (1) { LATCbits.LATC1 ^= 1; }
+[e :U 893 ]
 {
 [e =^ . . _LATCbits 0 1 -> -> 1 `i `Vuc ]
 }
-[e :U 885 ]
-[e $U 886  ]
-[e :U 887 ]
-"33
-[; ;user.c: 33: }
-[e :UE 884 ]
-}
-"35
-[; ;user.c: 35: TASK task_blink2(void)
-[v _task_blink2 `(v ~T0 @X0 1 ef ]
-"36
-[; ;user.c: 36: {
-{
-[e :U _task_blink2 ]
-[f ]
-"37
-[; ;user.c: 37:     while (1) { LATCbits.LATC2 ^= 1; }
-[e :U 890 ]
-{
-[e =^ . . _LATCbits 0 2 -> -> 1 `i `Vuc ]
-}
-[e :U 889 ]
-[e $U 890  ]
-[e :U 891 ]
-"38
-[; ;user.c: 38: }
-[e :UE 888 ]
-}
-"41
-[; ;user.c: 41: TASK task_blink3(void)
-[v _task_blink3 `(v ~T0 @X0 1 ef ]
-"42
-[; ;user.c: 42: {
-{
-[e :U _task_blink3 ]
-[f ]
-"43
-[; ;user.c: 43:     while (1)
+[e :U 892 ]
+[e $U 893  ]
 [e :U 894 ]
-"44
-[; ;user.c: 44:     {
+"58
+[; ;user.c: 58: }
+[e :UE 891 ]
+}
+"61
+[; ;user.c: 61: TASK task_alarm(void)
+[v _task_alarm `(v ~T0 @X0 1 ef ]
+"62
+[; ;user.c: 62: {
 {
-"45
-[; ;user.c: 45:         mutex_lock(&adc_mutex);
+[e :U _task_alarm ]
+[f ]
+"63
+[; ;user.c: 63:     mutex_lock(&adc_mutex);
 [e ( _mutex_lock (1 &U _adc_mutex ]
-"46
-[; ;user.c: 46:         uint16_t adc = adc_read();
+"64
+[; ;user.c: 64:     uint16_t adc = adc_read();
 [v _adc `us ~T0 @X0 1 a ]
 [e = _adc ( _adc_read ..  ]
-"47
-[; ;user.c: 47:         mutex_unlock(&adc_mutex);
+"65
+[; ;user.c: 65:     mutex_unlock(&adc_mutex);
 [e ( _mutex_unlock (1 &U _adc_mutex ]
-"49
-[; ;user.c: 49:         pipe_write(&adc_pipe, (char)(adc >> 2));
-[e ( _pipe_write (2 , &U _adc_pipe -> >> -> _adc `ui -> 2 `i `uc ]
-"50
-[; ;user.c: 50:     }
+"67
+[; ;user.c: 67:     LATCbits.LATC3 = (adc > 512) ? 1 : 0;
+[e = . . _LATCbits 0 3 -> ? > -> _adc `ui -> -> 512 `i `ui : -> 1 `i -> 0 `i `uc ]
+"69
+[; ;user.c: 69:     os_task_change_state(WAITING, ((void*)0));
+[e ( _os_task_change_state (2 , . `E37 1 -> -> -> 0 `i `*v `*S3 ]
+"70
+[; ;user.c: 70: }
+[e :UE 895 ]
 }
-[e :U 893 ]
-[e $U 894  ]
-[e :U 895 ]
-"51
-[; ;user.c: 51: }
-[e :UE 892 ]
-}
-"54
-[; ;user.c: 54: TASK task_blink4(void)
-[v _task_blink4 `(v ~T0 @X0 1 ef ]
-"55
-[; ;user.c: 55: {
+"73
+[; ;user.c: 73: TASK task_producer(void)
+[v _task_producer `(v ~T0 @X0 1 ef ]
+"74
+[; ;user.c: 74: {
 {
-[e :U _task_blink4 ]
+[e :U _task_producer ]
 [f ]
-"56
-[; ;user.c: 56:     while (1)
+"75
+[; ;user.c: 75:     while (1)
 [e :U 898 ]
-"57
-[; ;user.c: 57:     {
+"76
+[; ;user.c: 76:     {
 {
-"58
-[; ;user.c: 58:         char dado;
-[v _dado `uc ~T0 @X0 1 a ]
-"59
-[; ;user.c: 59:         pipe_read(&adc_pipe, &dado);
-[e ( _pipe_read (2 , &U _adc_pipe &U _dado ]
-"60
-[; ;user.c: 60:         pwm_set_duty((uint16_t)((uint8_t)dado * 4));
-[e ( _pwm_set_duty (1 -> * -> -> _dado `uc `i -> 4 `i `us ]
-"61
-[; ;user.c: 61:     }
+"77
+[; ;user.c: 77:         mutex_lock(&adc_mutex);
+[e ( _mutex_lock (1 &U _adc_mutex ]
+"78
+[; ;user.c: 78:         uint16_t adc = adc_read();
+[v _adc `us ~T0 @X0 1 a ]
+[e = _adc ( _adc_read ..  ]
+"79
+[; ;user.c: 79:         mutex_unlock(&adc_mutex);
+[e ( _mutex_unlock (1 &U _adc_mutex ]
+"81
+[; ;user.c: 81:         pipe_write(&adc_pipe, (char)(adc >> 2));
+[e ( _pipe_write (2 , &U _adc_pipe -> >> -> _adc `ui -> 2 `i `uc ]
+"82
+[; ;user.c: 82:     }
 }
 [e :U 897 ]
 [e $U 898  ]
 [e :U 899 ]
-"62
-[; ;user.c: 62: }
+"83
+[; ;user.c: 83: }
 [e :UE 896 ]
+}
+"86
+[; ;user.c: 86: TASK task_consumer(void)
+[v _task_consumer `(v ~T0 @X0 1 ef ]
+"87
+[; ;user.c: 87: {
+{
+[e :U _task_consumer ]
+[f ]
+"88
+[; ;user.c: 88:     while (1)
+[e :U 902 ]
+"89
+[; ;user.c: 89:     {
+{
+"90
+[; ;user.c: 90:         char dado;
+[v _dado `uc ~T0 @X0 1 a ]
+"91
+[; ;user.c: 91:         pipe_read(&adc_pipe, &dado);
+[e ( _pipe_read (2 , &U _adc_pipe &U _dado ]
+"92
+[; ;user.c: 92:         pwm_set_duty((uint16_t)((uint8_t)dado * 4));
+[e ( _pwm_set_duty (1 -> * -> -> _dado `uc `i -> 4 `i `us ]
+"93
+[; ;user.c: 93:     }
+}
+[e :U 901 ]
+[e $U 902  ]
+[e :U 903 ]
+"94
+[; ;user.c: 94: }
+[e :UE 900 ]
 }
